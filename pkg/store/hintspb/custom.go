@@ -3,22 +3,25 @@
 
 package hintspb
 
-import "github.com/oklog/ulid"
+import (
+	"github.com/oklog/ulid"
+	"google.golang.org/protobuf/types/known/durationpb"
+)
 
 func (m *SeriesResponseHints) AddQueriedBlock(id ulid.ULID) {
-	m.QueriedBlocks = append(m.QueriedBlocks, Block{
+	m.QueriedBlocks = append(m.QueriedBlocks, &Block{
 		Id: id.String(),
 	})
 }
 
 func (m *LabelNamesResponseHints) AddQueriedBlock(id ulid.ULID) {
-	m.QueriedBlocks = append(m.QueriedBlocks, Block{
+	m.QueriedBlocks = append(m.QueriedBlocks, &Block{
 		Id: id.String(),
 	})
 }
 
 func (m *LabelValuesResponseHints) AddQueriedBlock(id ulid.ULID) {
-	m.QueriedBlocks = append(m.QueriedBlocks, Block{
+	m.QueriedBlocks = append(m.QueriedBlocks, &Block{
 		Id: id.String(),
 	})
 }
@@ -48,6 +51,6 @@ func (m *QueryStats) Merge(other *QueryStats) {
 	m.ChunksTouched += other.ChunksTouched
 	m.ChunksTouchedSizeSum += other.ChunksTouchedSizeSum
 
-	m.GetAllDuration += other.GetAllDuration
-	m.MergeDuration += other.MergeDuration
+	m.GetAllDuration = durationpb.New(m.GetAllDuration.AsDuration() + other.GetAllDuration.AsDuration())
+	m.MergeDuration = durationpb.New(m.MergeDuration.AsDuration() + other.MergeDuration.AsDuration())
 }

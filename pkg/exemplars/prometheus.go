@@ -17,6 +17,7 @@ import (
 
 // Prometheus implements exemplarspb.Exemplars gRPC that allows to fetch exemplars from Prometheus.
 type Prometheus struct {
+	exemplarspb.UnimplementedExemplarsServer
 	base   *url.URL
 	client *promclient.Client
 

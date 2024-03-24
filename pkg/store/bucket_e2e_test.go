@@ -242,7 +242,7 @@ func testBucketStore_e2e(t *testing.T, ctx context.Context, s *storeSuite) {
 	// TODO(bwplotka): Add those test cases to TSDB querier_test.go as well, there are no tests for matching.
 	for i, tcase := range []struct {
 		req              *storepb.SeriesRequest
-		expected         [][]labelpb.ZLabel
+		expected         [][]labelpb.Label
 		expectedChunkLen int
 	}{
 		{

@@ -651,7 +651,7 @@ func testReceiveQuorum(t *testing.T, hashringAlgo HashringAlgorithm, withConsist
 			// Test that each time series is stored
 			// the correct amount of times in each fake DB.
 			for _, ts := range tc.wreq.Timeseries {
-				lset := labelpb.ZLabelsToPromLabels(ts.Labels)
+				lset := labelpb.ProtobufLabelsToPromLabels(ts.Labels)
 				for j, a := range tc.appendables {
 					if withConsistencyDelay {
 						var expected int
@@ -938,7 +938,7 @@ func (a *tsOverrideAppender) GetRef(lset labels.Labels, hash uint64) (storage.Se
 // serializeSeriesWithOneSample returns marshaled and compressed remote write requests like it would
 // be sent to Thanos receive.
 // It has one sample and allow passing multiple series, in same manner as typical Prometheus would batch it.
-func serializeSeriesWithOneSample(t testing.TB, series [][]labelpb.ZLabel) []byte {
+func serializeSeriesWithOneSample(t testing.TB, series [][]labelpb.Label) []byte {
 	r := &prompb.WriteRequest{Timeseries: make([]prompb.TimeSeries, 0, len(series))}
 
 	for _, s := range series {
@@ -1013,9 +1013,9 @@ func benchmarkHandlerMultiTSDBReceiveRemoteWrite(b testutil.TB) {
 		{
 			name: "typical labels under 1KB, 500 of them",
 			writeRequest: serializeSeriesWithOneSample(b, func() [][]labelpb.ZLabel {
-				series := make([][]labelpb.ZLabel, 500)
+				series := make([][]labelpb.Label, 500)
 				for s := 0; s < len(series); s++ {
-					lbls := make([]labelpb.ZLabel, 10)
+					lbls := make([]labelpb.Label, 10)
 					for i := 0; i < len(lbls); i++ {
 						// Label ~20B name, 50B value.
 						lbls[i] = labelpb.ZLabel{Name: fmt.Sprintf("abcdefghijabcdefghijabcdefghij%d", i), Value: fmt.Sprintf("abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij%d", i)}
@@ -1028,9 +1028,9 @@ func benchmarkHandlerMultiTSDBReceiveRemoteWrite(b testutil.TB) {
 		{
 			name: "typical labels under 1KB, 5000 of them",
 			writeRequest: serializeSeriesWithOneSample(b, func() [][]labelpb.ZLabel {
-				series := make([][]labelpb.ZLabel, 5000)
+				series := make([][]labelpb.Label, 5000)
 				for s := 0; s < len(series); s++ {
-					lbls := make([]labelpb.ZLabel, 10)
+					lbls := make([]labelpb.Label, 10)
 					for i := 0; i < len(lbls); i++ {
 						// Label ~20B name, 50B value.
 						lbls[i] = labelpb.ZLabel{Name: fmt.Sprintf("abcdefghijabcdefghijabcdefghij%d", i), Value: fmt.Sprintf("abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij%d", i)}
@@ -1043,9 +1043,9 @@ func benchmarkHandlerMultiTSDBReceiveRemoteWrite(b testutil.TB) {
 		{
 			name: "typical labels under 1KB, 20000 of them",
 			writeRequest: serializeSeriesWithOneSample(b, func() [][]labelpb.ZLabel {
-				series := make([][]labelpb.ZLabel, 20000)
+				series := make([][]labelpb.Label, 20000)
 				for s := 0; s < len(series); s++ {
-					lbls := make([]labelpb.ZLabel, 10)
+					lbls := make([]labelpb.Label, 10)
 					for i := 0; i < len(lbls); i++ {
 						// Label ~20B name, 50B value.
 						lbls[i] = labelpb.ZLabel{Name: fmt.Sprintf("abcdefghijabcdefghijabcdefghij%d", i), Value: fmt.Sprintf("abcdefghijabcdefghijabcdefghijabcdefghijabcdefghij%d", i)}
@@ -1058,7 +1058,7 @@ func benchmarkHandlerMultiTSDBReceiveRemoteWrite(b testutil.TB) {
 		{
 			name: "extremely large label value 10MB, 10 of them",
 			writeRequest: serializeSeriesWithOneSample(b, func() [][]labelpb.ZLabel {
-				series := make([][]labelpb.ZLabel, 10)
+				series := make([][]labelpb.Label, 10)
 				for s := 0; s < len(series); s++ {
 					lbl := &strings.Builder{}
 					lbl.Grow(1024 * 1024 * 10) // 10MB.
@@ -1698,7 +1698,7 @@ func TestHandlerFlippingHashrings(t *testing.T) {
 			err := h.handleRequest(ctx, 0, "test", &prompb.WriteRequest{
 				Timeseries: []prompb.TimeSeries{
 					{
-						Labels: labelpb.ZLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
+						Labels: labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
 						Samples: []prompb.Sample{
 							{
 								Timestamp: time.Now().Unix(),

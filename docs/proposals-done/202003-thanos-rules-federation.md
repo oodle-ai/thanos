@@ -230,7 +230,7 @@ The current fields in `InfoResponse` connected to Store APIs are deprecated and 
 ```diff
 message InfoResponse {
   // Deprecated. Use label_sets instead.
-  repeated Label labels = 1 [(gogoproto.nullable) = false];
+  repeated Label labels = 1;
 +  // Deprecated. Will be removed in favor of StoreInfoResponse in the future.
   int64 min_time = 2;
 +  // Deprecated. Will be removed in favor of StoreInfoResponse in the future.
@@ -239,7 +239,7 @@ message InfoResponse {
 +  Type type  = 4;
   // label_sets is an unsorted list of `LabelSet`s.
 +  // Deprecated. Will be removed in favor of StoreInfoResponse in the future.
-  repeated LabelSet label_sets = 5 [(gogoproto.nullable) = false];
+  repeated LabelSet label_sets = 5;
 +
 +  StoreInfoResponse store = 6;
 +  RulesInfoResponse rules = 7;

@@ -227,7 +227,7 @@ func (c labelsCodec) DecodeResponse(ctx context.Context, r *http.Response, req q
 			return nil, httpgrpc.Errorf(http.StatusInternalServerError, "error decoding response: %v", err)
 		}
 		for h, hv := range r.Header {
-			resp.Headers = append(resp.Headers, &ResponseHeader{Name: h, Values: hv})
+			resp.RespHeaders = append(resp.RespHeaders, &ResponseHeader{Name: h, Values: hv})
 		}
 		return &resp, nil
 	case *ThanosSeriesRequest:
@@ -236,7 +236,7 @@ func (c labelsCodec) DecodeResponse(ctx context.Context, r *http.Response, req q
 			return nil, httpgrpc.Errorf(http.StatusInternalServerError, "error decoding response: %v", err)
 		}
 		for h, hv := range r.Header {
-			resp.Headers = append(resp.Headers, &ResponseHeader{Name: h, Values: hv})
+			resp.RespHeaders = append(resp.RespHeaders, &ResponseHeader{Name: h, Values: hv})
 		}
 		return &resp, nil
 	default:

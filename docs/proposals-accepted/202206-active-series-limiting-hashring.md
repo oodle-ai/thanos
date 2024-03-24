@@ -156,7 +156,7 @@ service Limit {
 }
 
 message SeriesRefMap {
- map<ZLabelSet, uint64> series_ref_map = 1 [(gogoproto.nullable) = false];
+ map<ZLabelSet, uint64> series_ref_map = 1;
 }
 ```
 

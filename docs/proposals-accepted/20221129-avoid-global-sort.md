@@ -150,10 +150,10 @@ We could make Store API response fully replica aware. This means that series res
 
 ```protobuf
 message Series {
-  repeated Label labels          = 1 [(gogoproto.nullable) = false, (gogoproto.customtype) = "github.com/thanos-io/thanos/pkg/store/labelpb.ZLabel"];
-  repeated Label replica_labels  = 3 [(gogoproto.nullable) = false, (gogoproto.customtype) = "github.com/thanos-io/thanos/pkg/store/labelpb.ZLabel"]; // Added.
+  repeated Label labels          = 1;
+  repeated Label replica_labels  = 3; // Added.
 
-  repeated AggrChunk chunks  = 2 [(gogoproto.nullable) = false];
+  repeated AggrChunk chunks  = 2;
 }
 ```
 

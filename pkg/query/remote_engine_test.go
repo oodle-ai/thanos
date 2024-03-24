@@ -188,7 +188,7 @@ func TestRemoteEngine_MinT(t *testing.T) {
 
 func zLabelSetFromStrings(ss ...string) labelpb.ZLabelSet {
 	return labelpb.ZLabelSet{
-		Labels: labelpb.ZLabelsFromPromLabels(labels.FromStrings(ss...)),
+		Labels: labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings(ss...)),
 	}
 }
 

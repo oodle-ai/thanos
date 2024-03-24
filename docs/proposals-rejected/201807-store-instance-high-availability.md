@@ -39,7 +39,7 @@ For example;
 +++ after	2018-07-02 15:49:13.000000000 +0100
 @@ -1,5 +1,6 @@
  message InfoResponse {
-   repeated Label labels = 1 [(gogoproto.nullable) = false];
+   repeated Label labels = 1;
    int64 min_time        = 2;
    int64 max_time        = 3;
 +  string store_group_id = 4;

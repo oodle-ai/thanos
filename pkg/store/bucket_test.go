@@ -2185,7 +2185,7 @@ func TestSeries_SeriesSortedWithoutReplicaLabels(t *testing.T) {
 
 			var response []labels.Labels
 			for _, respSeries := range srv.SeriesSet {
-				promLabels := labelpb.ZLabelsToPromLabels(respSeries.Labels)
+				promLabels := labelpb.ProtobufLabelsToPromLabels(respSeries.Labels)
 				response = append(response, promLabels)
 			}
 

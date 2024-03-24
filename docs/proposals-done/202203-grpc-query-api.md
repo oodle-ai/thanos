@@ -58,7 +58,7 @@ message QueryRequest {
 
   repeated string replica_labels = 5;
 
-  repeated StoreMatchers storeMatchers = 6 [(gogoproto.nullable) = false];
+  repeated StoreMatchers storeMatchers = 6;
 
   bool enableDedup = 7;
   bool enablePartialResponse = 8;
@@ -88,7 +88,7 @@ message QueryRangeRequest {
 
   repeated string replica_labels = 7;
 
-  repeated StoreMatchers storeMatchers = 8 [(gogoproto.nullable) = false];
+  repeated StoreMatchers storeMatchers = 8;
 
   bool enableDedup = 9;
   bool enablePartialResponse = 10;

@@ -339,7 +339,7 @@ func runReceive(
 
 		infoSrv := info.NewInfoServer(
 			component.Receive.String(),
-			info.WithLabelSetFunc(func() []labelpb.ZLabelSet { return proxy.LabelSet() }),
+			info.WithLabelSetFunc(func() []*labelpb.ZLabelSet { return proxy.LabelSet() }),
 			info.WithStoreInfoFunc(func() *infopb.StoreInfo {
 				if httpProbe.IsReady() {
 					minTime, maxTime := proxy.TimeRange()

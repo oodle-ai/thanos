@@ -381,7 +381,7 @@ func TestKetamaHashringReplicationConsistencyWithAZs(t *testing.T) {
 func TestKetamaHashringEvenAZSpread(t *testing.T) {
 	tenant := "default-tenant"
 	ts := &prompb.TimeSeries{
-		Labels:  labelpb.ZLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
+		Labels:  labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
 		Samples: []prompb.Sample{{Value: 1, Timestamp: 0}},
 	}
 
@@ -554,7 +554,7 @@ func TestKetamaHashringEvenNodeSpread(t *testing.T) {
 			nodeSpread := make(map[string]int)
 			for i := 0; i < int(tt.numSeries); i++ {
 				ts := &prompb.TimeSeries{
-					Labels:  labelpb.ZLabelsFromPromLabels(labels.FromStrings("foo", fmt.Sprintf("%d", i))),
+					Labels:  labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings("foo", fmt.Sprintf("%d", i))),
 					Samples: []prompb.Sample{{Value: 1, Timestamp: 0}},
 				}
 				for j := 0; j < int(tt.replicas); j++ {
@@ -610,8 +610,8 @@ func makeSeries() []prompb.TimeSeries {
 
 func findSeries(initialAssignments map[string][]prompb.TimeSeries, node string, newSeries prompb.TimeSeries) bool {
 	for _, oldSeries := range initialAssignments[node] {
-		l1 := labelpb.ZLabelsToPromLabels(newSeries.Labels)
-		l2 := labelpb.ZLabelsToPromLabels(oldSeries.Labels)
+		l1 := labelpb.ProtobufLabelsToPromLabels(newSeries.Labels)
+		l2 := labelpb.ProtobufLabelsToPromLabels(oldSeries.Labels)
 		if labels.Equal(l1, l2) {
 			return true
 		}

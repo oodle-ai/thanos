@@ -116,7 +116,7 @@ func (r *remoteEngine) MinT() int64 {
 			highestMintByLabelSet = make(map[uint64]int64)
 		)
 		for _, lset := range r.infosWithoutReplicaLabels() {
-			key, _ := labelpb.ZLabelsToPromLabels(lset.Labels.Labels).HashWithoutLabels(hashBuf)
+			key, _ := labelpb.ProtobufLabelsToPromLabels(lset.Labels.Labels).HashWithoutLabels(hashBuf)
 			lsetMinT, ok := highestMintByLabelSet[key]
 			if !ok {
 				highestMintByLabelSet[key] = lset.MinTime
@@ -174,7 +174,7 @@ func (r *remoteEngine) infosWithoutReplicaLabels() infopb.TSDBInfos {
 		infos = append(infos, infopb.NewTSDBInfo(
 			info.MinTime,
 			info.MaxTime,
-			labelpb.ZLabelsFromPromLabels(builder.Labels())),
+			labelpb.ProtobufLabelsFromPromLabels(builder.Labels())),
 		)
 	}
 

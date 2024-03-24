@@ -34,7 +34,7 @@ func (s *ShardMatcher) Close() {
 	}
 }
 
-func (s *ShardMatcher) MatchesZLabels(zLabels []labelpb.ZLabel) bool {
+func (s *ShardMatcher) MatchesZLabels(zLabels []*labelpb.Label) bool {
 	// Match all series when query is not sharded
 	if s == nil || !s.isSharded {
 		return true
@@ -55,10 +55,10 @@ func (s *ShardMatcher) MatchesZLabels(zLabels []labelpb.ZLabel) bool {
 }
 
 func (s *ShardMatcher) MatchesLabels(lbls labels.Labels) bool {
-	return s.MatchesZLabels(labelpb.ZLabelsFromPromLabels(lbls))
+	return s.MatchesZLabels(labelpb.ProtobufLabelsFromPromLabels(lbls))
 }
 
-func shardByLabel(labelSet map[string]struct{}, zlabel labelpb.ZLabel, groupingBy bool) bool {
+func shardByLabel(labelSet map[string]struct{}, zlabel *labelpb.Label, groupingBy bool) bool {
 	_, shardHasLabel := labelSet[zlabel.Name]
 	if groupingBy && shardHasLabel {
 		return true

@@ -6,6 +6,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"google.golang.org/grpc/encoding"
 	"io"
 	"os"
 	"os/signal"
@@ -20,6 +21,7 @@ import (
 	"github.com/oklog/run"
 	"github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
+	vtgrpc "github.com/planetscale/vtprotobuf/codec/grpc"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/collectors"
 	"github.com/prometheus/common/version"
@@ -30,6 +32,10 @@ import (
 	"github.com/thanos-io/thanos/pkg/logging"
 	"github.com/thanos-io/thanos/pkg/tracing/client"
 )
+
+func init() {
+	encoding.RegisterCodec(vtgrpc.Codec{})
+}
 
 func main() {
 	// We use mmaped resources in most of the components so hardcode PanicOnFault to true. This allows us to recover (if we can e.g if queries

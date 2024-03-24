@@ -382,7 +382,7 @@ func TestWriter(t *testing.T) {
 			gr := a.(storage.GetRef)
 
 			for _, ts := range testData.expectedIngested {
-				l := labelpb.ZLabelsToPromLabels(ts.Labels)
+				l := labelpb.ProtobufLabelsToPromLabels(ts.Labels)
 				ref, _ := gr.GetRef(l, l.Hash())
 				testutil.Assert(t, ref != 0, fmt.Sprintf("appender should have reference to series %v", ts))
 			}
@@ -490,7 +490,7 @@ func benchmarkWriter(b *testing.B, labelsNum int, seriesNum int, generateHistogr
 // reflected in the benchmark, but should still capture the performance of receive writer.
 func generateLabelsAndSeries(numLabels int, numSeries int, generateHistograms bool) []prompb.TimeSeries {
 	// Generate some labels first.
-	l := make([]labelpb.ZLabel, 0, numLabels)
+	l := make([]labelpb.Label, 0, numLabels)
 	l = append(l, labelpb.ZLabel{Name: "__name__", Value: "test"})
 	for i := 0; i < numLabels; i++ {
 		l = append(l, labelpb.ZLabel{Name: fmt.Sprintf("label_%s", string(rune('a'+i))), Value: fmt.Sprintf("%d", i)})

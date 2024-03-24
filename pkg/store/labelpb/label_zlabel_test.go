@@ -27,10 +27,10 @@ var testLsetMap = map[string]string{
 }
 
 func TestLabelsToPromLabels_LabelsToPromLabels(t *testing.T) {
-	testutil.Equals(t, labels.FromMap(testLsetMap), ZLabelsToPromLabels(ZLabelsFromPromLabels(labels.FromMap(testLsetMap))))
+	testutil.Equals(t, labels.FromMap(testLsetMap), ProtobufLabelsToPromLabels(ProtobufLabelsFromPromLabels(labels.FromMap(testLsetMap))))
 
 	lset := labels.FromMap(testLsetMap)
-	zlset := ZLabelsFromPromLabels(lset)
+	zlset := ProtobufLabelsFromPromLabels(lset)
 	for i := range zlset {
 		if zlset[i].Name != "a" {
 			continue
@@ -46,13 +46,13 @@ func TestLabelsToPromLabels_LabelsToPromLabels(t *testing.T) {
 }
 
 func TestLabelMarshal_Unmarshal(t *testing.T) {
-	l := ZLabelsFromPromLabels(labels.FromStrings("aaaaaaa", "bbbbb"))[0]
+	l := ProtobufLabelsFromPromLabels(labels.FromStrings("aaaaaaa", "bbbbb"))[0]
 	b, err := (&l).Marshal()
 	testutil.Ok(t, err)
 
 	l2 := &ZLabel{}
 	testutil.Ok(t, l2.Unmarshal(b))
-	testutil.Equals(t, labels.FromStrings("aaaaaaa", "bbbbb"), ZLabelsToPromLabels([]ZLabel{*l2}))
+	testutil.Equals(t, labels.FromStrings("aaaaaaa", "bbbbb"), ProtobufLabelsToPromLabels([]ZLabel{*l2}))
 }
 
 func TestValidateLabels(t *testing.T) {
@@ -293,7 +293,7 @@ var ret labels.Labels
 func benchmarkTransformWithAndWithoutCopy(b *testing.B, num int) {
 	const fmtLbl = "%07daaaaaaaaaabbbbbbbbbbccccccccccdddddddddd"
 
-	b.Run("ZLabelsToPromLabels", func(b *testing.B) {
+	b.Run("ProtobufLabelsToPromLabels", func(b *testing.B) {
 		b.ReportAllocs()
 		lbls := make([]ZLabel, num)
 		for i := 0; i < num; i++ {
@@ -302,10 +302,10 @@ func benchmarkTransformWithAndWithoutCopy(b *testing.B, num int) {
 		b.ResetTimer()
 
 		for i := 0; i < b.N; i++ {
-			ret = ZLabelsToPromLabels(lbls)
+			ret = ProtobufLabelsToPromLabels(lbls)
 		}
 	})
-	b.Run("ZLabelsToPromLabelsWithRealloc", func(b *testing.B) {
+	b.Run("ProtobufLabelsToPromLabelsWithRealloc", func(b *testing.B) {
 		b.ReportAllocs()
 		lbls := make([]ZLabel, num)
 		for i := 0; i < num; i++ {
@@ -315,7 +315,7 @@ func benchmarkTransformWithAndWithoutCopy(b *testing.B, num int) {
 
 		for i := 0; i < b.N; i++ {
 			ReAllocZLabelsStrings(&lbls, true)
-			ret = ZLabelsToPromLabels(lbls)
+			ret = ProtobufLabelsToPromLabels(lbls)
 		}
 	})
 }
@@ -323,7 +323,7 @@ func benchmarkTransformWithAndWithoutCopy(b *testing.B, num int) {
 func TestSortZLabelSets(t *testing.T) {
 	expectedResult := ZLabelSets{
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":    "grpc_client_handled_total",
 					"cluster":     "test",
@@ -333,7 +333,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":    "grpc_client_handled_total",
 					"cluster":     "test",
@@ -343,7 +343,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":  "grpc_client_handled_total",
 					"cluster":   "test",
@@ -357,7 +357,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":  "grpc_client_handled_total",
 					"cluster":   "test",
@@ -371,7 +371,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":    "grpc_server_handled_total",
 					"cluster":     "test",
@@ -381,7 +381,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__": "up",
 					"instance": "localhost:10908",
@@ -392,7 +392,7 @@ func TestSortZLabelSets(t *testing.T) {
 
 	list := ZLabelSets{
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__": "up",
 					"instance": "localhost:10908",
@@ -400,7 +400,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":    "grpc_server_handled_total",
 					"cluster":     "test",
@@ -410,7 +410,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":    "grpc_client_handled_total",
 					"cluster":     "test",
@@ -420,7 +420,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":    "grpc_client_handled_total",
 					"cluster":     "test",
@@ -430,7 +430,7 @@ func TestSortZLabelSets(t *testing.T) {
 			),
 		},
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"__name__":  "grpc_client_handled_total",
 					"cluster":   "test",
@@ -445,7 +445,7 @@ func TestSortZLabelSets(t *testing.T) {
 		},
 		// This label set is the same as the previous one, which should correctly return 0 in Less() function.
 		{
-			Labels: ZLabelsFromPromLabels(
+			Labels: ProtobufLabelsFromPromLabels(
 				labels.FromMap(map[string]string{
 					"cluster":   "test",
 					"__name__":  "grpc_client_handled_total",

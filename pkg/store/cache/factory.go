@@ -14,7 +14,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/cacheutil"
+	"github.com/oodle-ai/thanos/pkg/cacheutil"
 )
 
 type IndexCacheProvider string

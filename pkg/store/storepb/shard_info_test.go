@@ -9,8 +9,8 @@ import (
 
 	"github.com/alecthomas/units"
 
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 	"github.com/prometheus/prometheus/model/labels"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
 )
 
 func TestShardInfo_MatchesSeries(t *testing.T) {

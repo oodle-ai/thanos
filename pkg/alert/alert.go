@@ -28,8 +28,8 @@ import (
 	"github.com/prometheus/prometheus/notifier"
 	"go.uber.org/atomic"
 
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 const (
@@ -268,7 +268,7 @@ func toAPILabels(lbls labels.Labels) models.LabelSet {
 }
 
 // Send an alert batch to all given Alertmanager clients.
-// TODO(bwplotka): https://github.com/thanos-io/thanos/issues/660.
+// TODO(bwplotka): https://github.com/oodle-ai/thanos/issues/660.
 func (s *Sender) Send(ctx context.Context, alerts []*notifier.Alert) {
 	if len(alerts) == 0 {
 		return

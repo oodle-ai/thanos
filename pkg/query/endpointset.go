@@ -13,7 +13,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/thanos-io/thanos/pkg/api/query/querypb"
+	"github.com/oodle-ai/thanos/pkg/api/query/querypb"
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
@@ -22,16 +22,16 @@ import (
 	"github.com/prometheus/prometheus/model/labels"
 	"google.golang.org/grpc"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/exemplars/exemplarspb"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/targets/targetspb"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/exemplars/exemplarspb"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/targets/targetspb"
 )
 
 const (

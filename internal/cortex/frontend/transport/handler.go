@@ -23,10 +23,10 @@ import (
 	"github.com/weaveworks/common/httpgrpc"
 	"github.com/weaveworks/common/httpgrpc/server"
 
-	querier_stats "github.com/thanos-io/thanos/internal/cortex/querier/stats"
-	"github.com/thanos-io/thanos/internal/cortex/tenant"
-	"github.com/thanos-io/thanos/internal/cortex/util"
-	util_log "github.com/thanos-io/thanos/internal/cortex/util/log"
+	querier_stats "github.com/oodle-ai/thanos/internal/cortex/querier/stats"
+	"github.com/oodle-ai/thanos/internal/cortex/tenant"
+	"github.com/oodle-ai/thanos/internal/cortex/util"
+	util_log "github.com/oodle-ai/thanos/internal/cortex/util/log"
 )
 
 const (

@@ -16,7 +16,7 @@ import (
 	"github.com/prometheus/prometheus/model/labels"
 	tsdb_errors "github.com/prometheus/prometheus/tsdb/errors"
 
-	util_log "github.com/thanos-io/thanos/internal/cortex/util/log"
+	util_log "github.com/oodle-ai/thanos/internal/cortex/util/log"
 )
 
 var (

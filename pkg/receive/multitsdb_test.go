@@ -24,13 +24,13 @@ import (
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
 
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/exemplars/exemplarspb"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/exemplars/exemplarspb"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 func TestMultiTSDB(t *testing.T) {
@@ -656,7 +656,7 @@ func TestMultiTSDBStats(t *testing.T) {
 	}
 }
 
-// Regression test for https://github.com/thanos-io/thanos/issues/6047.
+// Regression test for https://github.com/oodle-ai/thanos/issues/6047.
 func TestMultiTSDBWithNilStore(t *testing.T) {
 	dir := t.TempDir()
 

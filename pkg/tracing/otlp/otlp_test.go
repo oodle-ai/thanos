@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/tracing"
-	"github.com/thanos-io/thanos/pkg/tracing/migration"
+	"github.com/oodle-ai/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/tracing/migration"
 
 	"github.com/go-kit/log"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"

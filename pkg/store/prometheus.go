@@ -30,15 +30,15 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 // PrometheusStore implements the store node API on top of the Prometheus remote read API.
@@ -278,12 +278,12 @@ func (p *PrometheusStore) handleSampledPrometheusResponse(
 		// external labels hence we need to do this:
 		lset := rmLabels(labelpb.ExtendSortedLabels(labelpb.ProtobufLabelsToPromLabels(e.Labels), extLset), extLsetToRemove)
 		if len(e.Samples) == 0 {
-			// As found in https://github.com/thanos-io/thanos/issues/381
+			// As found in https://github.com/oodle-ai/thanos/issues/381
 			// Prometheus can give us completely empty time series. Ignore these with log until we figure out that
 			// this is expected from Prometheus perspective.
 			level.Warn(p.logger).Log(
 				"msg",
-				"found timeseries without any chunk. See https://github.com/thanos-io/thanos/issues/381 for details",
+				"found timeseries without any chunk. See https://github.com/oodle-ai/thanos/issues/381 for details",
 				"lset",
 				fmt.Sprintf("%v", lset),
 			)
@@ -370,7 +370,7 @@ func (p *PrometheusStore) handleStreamedPrometheusResponse(
 					MinTime: chk.MinTimeMs,
 					Raw: &storepb.Chunk{
 						Data: chk.Data,
-						// Prometheus ChunkEncoding vs ours https://github.com/thanos-io/thanos/blob/master/pkg/store/storepb/types.proto#L19
+						// Prometheus ChunkEncoding vs ours https://github.com/oodle-ai/thanos/blob/master/pkg/store/storepb/types.proto#L19
 						// has one difference. Prometheus has Chunk_UNKNOWN Chunk_Encoding = 0 vs we start from
 						// XOR as 0. Compensate for that here:
 						Type: storepb.Chunk_Encoding(chk.Type - 1),
@@ -556,7 +556,7 @@ func matchesExternalLabels(ms []*storepb.LabelMatcher, externalLabels labels.Lab
 }
 
 // encodeChunk translates the sample pairs into a chunk.
-// TODO(kakkoyun): Linter - result 0 (github.com/thanos-io/thanos/pkg/store/storepb.Chunk_Encoding) is always 0.
+// TODO(kakkoyun): Linter - result 0 (github.com/oodle-ai/thanos/pkg/store/storepb.Chunk_Encoding) is always 0.
 func (p *PrometheusStore) encodeChunk(ss []*prompb.Sample) (storepb.Chunk_Encoding, []byte, error) { //nolint:unparam
 	c := chunkenc.NewXORChunk()
 

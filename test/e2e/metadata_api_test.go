@@ -14,10 +14,10 @@ import (
 	e2emon "github.com/efficientgo/e2e/monitoring"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 func TestMetadataAPI_Fanout(t *testing.T) {

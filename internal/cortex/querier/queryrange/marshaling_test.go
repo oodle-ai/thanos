@@ -13,7 +13,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
 )
 
 func BenchmarkPrometheusCodec_DecodeResponse(b *testing.B) {

@@ -6,7 +6,7 @@ package querier
 import (
 	"time"
 
-	"github.com/thanos-io/thanos/internal/cortex/util/flagext"
+	"github.com/oodle-ai/thanos/internal/cortex/util/flagext"
 )
 
 // Config contains the configuration require to create a querier

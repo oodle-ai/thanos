@@ -42,7 +42,7 @@ for dir in ${DIRS}; do
 done
 popd
 
-cp -rf pkg/github.com/thanos-io/thanos/* ./
+cp -rf pkg/github.com/oodle-ai/thanos/* ./
 rm -rf pkg/github.com
 
 ## Generate vendored Cortex protobufs.

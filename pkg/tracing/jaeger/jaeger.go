@@ -6,7 +6,7 @@ package jaeger
 import (
 	"context"
 
-	"github.com/thanos-io/thanos/pkg/tracing/migration"
+	"github.com/oodle-ai/thanos/pkg/tracing/migration"
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"

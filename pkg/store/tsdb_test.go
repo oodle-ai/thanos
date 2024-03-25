@@ -19,12 +19,12 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 const skipMessage = "Chunk behavior changed due to https://github.com/prometheus/prometheus/pull/8723. Skip for now."
@@ -238,7 +238,7 @@ func (s *delegatorServer) Delegate(c io.Closer) {
 	s.closers = append(s.closers, c)
 }
 
-// Regression test for: https://github.com/thanos-io/thanos/issues/3013 .
+// Regression test for: https://github.com/oodle-ai/thanos/issues/3013 .
 func TestTSDBStore_SeriesAccessWithDelegateClosing(t *testing.T) {
 	t.Skip(skipMessage)
 

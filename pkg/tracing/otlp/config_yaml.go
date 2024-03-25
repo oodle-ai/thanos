@@ -6,7 +6,7 @@ package otlp
 import (
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/exthttp"
+	"github.com/oodle-ai/thanos/pkg/exthttp"
 
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"

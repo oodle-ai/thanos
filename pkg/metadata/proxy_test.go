@@ -14,8 +14,8 @@ import (
 	"go.uber.org/atomic"
 	"google.golang.org/grpc"
 
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 type testMetadataClient struct {

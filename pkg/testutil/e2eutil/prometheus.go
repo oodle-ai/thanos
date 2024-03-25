@@ -39,8 +39,8 @@ import (
 	"go.uber.org/atomic"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 const (
@@ -158,7 +158,7 @@ func ForeachPrometheus(t *testing.T, testFn func(t testing.TB, p *Prometheus)) {
 
 // NewPrometheus creates a new test Prometheus instance that will listen on local address.
 // Use ForeachPrometheus if you want to test against set of Prometheus versions.
-// TODO(bwplotka): Improve it with https://github.com/thanos-io/thanos/issues/758.
+// TODO(bwplotka): Improve it with https://github.com/oodle-ai/thanos/issues/758.
 func NewPrometheus() (*Prometheus, error) {
 	return newPrometheus("", "")
 }

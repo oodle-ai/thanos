@@ -38,18 +38,18 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/api"
-	statusapi "github.com/thanos-io/thanos/pkg/api/status"
-	"github.com/thanos-io/thanos/pkg/logging"
+	"github.com/oodle-ai/thanos/pkg/api"
+	statusapi "github.com/oodle-ai/thanos/pkg/api/status"
+	"github.com/oodle-ai/thanos/pkg/logging"
 
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/server/http/middleware"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/server/http/middleware"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 const (
@@ -602,7 +602,7 @@ func (h *Handler) handleRequest(ctx context.Context, rep uint64, tenant string, 
 	// A non-zero value indicates that the request has already been replicated by a previous receive instance.
 	// For almost all users, this is only used in fully connected topologies of IngestorRouter instances.
 	// For acyclic topologies that use RouterOnly and IngestorOnly instances, this causes issues when replicating data.
-	// See discussion in: https://github.com/thanos-io/thanos/issues/4359.
+	// See discussion in: https://github.com/oodle-ai/thanos/issues/4359.
 	if h.receiverMode == RouterOnly || h.receiverMode == IngestorOnly {
 		rep = 0
 	}

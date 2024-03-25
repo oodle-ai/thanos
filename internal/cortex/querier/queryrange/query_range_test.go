@@ -19,7 +19,7 @@ import (
 	"github.com/weaveworks/common/httpgrpc"
 	"github.com/weaveworks/common/user"
 
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
 )
 
 func TestRequest(t *testing.T) {

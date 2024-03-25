@@ -25,11 +25,11 @@ import (
 	"google.golang.org/grpc/keepalive"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 
 	pb "google.golang.org/grpc/examples/features/proto/echo"
 
-	thTLS "github.com/thanos-io/thanos/pkg/tls"
+	thTLS "github.com/oodle-ai/thanos/pkg/tls"
 )
 
 var serverName = "thanos"

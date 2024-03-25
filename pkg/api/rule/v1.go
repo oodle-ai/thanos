@@ -11,12 +11,12 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/route"
 
-	"github.com/thanos-io/thanos/pkg/api"
-	qapi "github.com/thanos-io/thanos/pkg/api/query"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/logging"
-	"github.com/thanos-io/thanos/pkg/rules"
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/api"
+	qapi "github.com/oodle-ai/thanos/pkg/api/query"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/logging"
+	"github.com/oodle-ai/thanos/pkg/rules"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
 )
 
 // RuleAPI is a very simple API used by Thanos Ruler.

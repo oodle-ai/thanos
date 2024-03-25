@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/exemplars/exemplarspb"
+	"github.com/oodle-ai/thanos/pkg/exemplars/exemplarspb"
 )
 
 // MultiTSDB implements exemplarspb.ExemplarsServer that allows to fetch exemplars a MultiTSDB instance.

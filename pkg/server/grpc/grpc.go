@@ -29,9 +29,9 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/prober"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/prober"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 // A Server defines parameters to serve RPC requests, a wrapper around grpc.Server.

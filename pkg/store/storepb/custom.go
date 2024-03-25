@@ -16,7 +16,7 @@ import (
 	"github.com/prometheus/prometheus/model/labels"
 	"google.golang.org/grpc/codes"
 
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 var PartialResponseStrategyValues = func() []string {

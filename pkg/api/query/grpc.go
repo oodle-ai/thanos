@@ -13,10 +13,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/api/query/querypb"
-	"github.com/thanos-io/thanos/pkg/query"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/api/query/querypb"
+	"github.com/oodle-ai/thanos/pkg/query"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
 )
 
 type GRPCAPI struct {

@@ -14,7 +14,7 @@ about what components it touches e.g "query:" or ".*:"
 -->
 
 <!--
-In case of issues related to exact bucket implementation, please ping corresponded maintainer from list here: https://github.com/thanos-io/thanos/blob/main/docs/storage.md
+In case of issues related to exact bucket implementation, please ping corresponded maintainer from list here: https://github.com/oodle-ai/thanos/blob/main/docs/storage.md
 -->
 
 **Thanos, Prometheus and Golang version used**:

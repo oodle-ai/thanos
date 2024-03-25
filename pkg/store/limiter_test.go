@@ -14,7 +14,7 @@ import (
 	prom_testutil "github.com/prometheus/client_golang/prometheus/testutil"
 	"github.com/prometheus/prometheus/model/labels"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 func TestLimiter(t *testing.T) {

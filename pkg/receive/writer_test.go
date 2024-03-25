@@ -21,11 +21,11 @@ import (
 	"github.com/prometheus/prometheus/tsdb"
 	"github.com/prometheus/prometheus/tsdb/tsdbutil"
 
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
-	"github.com/thanos-io/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
 )
 
 func TestWriter(t *testing.T) {

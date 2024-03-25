@@ -6,7 +6,7 @@ It is meant to be followed by all the developers of the Thanos project and the T
 
 * **Maintainers Team**: A core Thanos team that have owner access to http://github.com/thanos-io organization and all projects within it. Current list is available [here](../MAINTAINERS.md).
 
-* **Triage Team**: Contributors who does not belong to Maintainer's team, but has `Triage` GitHub role on [Thanos](https://github.com/thanos-io/thanos) repository allowing to change GitHub issues and PRs statuses and labels. They are listed [here](../MAINTAINERS.md#triage).
+* **Triage Team**: Contributors who does not belong to Maintainer's team, but has `Triage` GitHub role on [Thanos](https://github.com/oodle-ai/thanos) repository allowing to change GitHub issues and PRs statuses and labels. They are listed [here](../MAINTAINERS.md#triage).
 
 * **The Thanos project**: The sum of all activities performed under the [thanos-io organization on GitHub](https://github.com/thanos-io), concerning one or more repositories or the community.
 
@@ -49,7 +49,7 @@ If the new member proposal is accepted, the proposed team member should be conta
 
 If they choose to accept, the following steps are taken:
 
-* Triage member is added to the [Thanos project](http://github.com/thanos-io/thanos) with `Triage` access.
+* Triage member is added to the [Thanos project](http://github.com/oodle-ai/thanos) with `Triage` access.
 * Triage member is added to the [thanos-io](https://groups.google.com/forum/#!forum/thanos-io).
 * Triage member is added to the list of Triage members [here](../MAINTAINERS.md#triage).
 * New team Triage member are announced on the [Thanos Twitter](https://twitter.com/ThanosMetrics) by an existing team member.
@@ -62,13 +62,13 @@ Upon death of a member, their Triage team membership ends automatically.
 
 ### Technical decisions
 
-Smaller technical decisions are made informally and [lazy consensus](#consensus) is assumed. Technical decisions that span multiple parts of the Thanos project should be discussed and made on the [GitHub issues](https://github.com/thanos-io/thanos/issues) and in most cases followed by proposal as described [here](../CONTRIBUTING.md#adding-new-features--components).
+Smaller technical decisions are made informally and [lazy consensus](#consensus) is assumed. Technical decisions that span multiple parts of the Thanos project should be discussed and made on the [GitHub issues](https://github.com/oodle-ai/thanos/issues) and in most cases followed by proposal as described [here](../CONTRIBUTING.md#adding-new-features--components).
 
 Decisions are usually made by [lazy consensus](#consensus). If no consensus can be reached, the matter may be resolved by [majority vote](#majority-vote).
 
 ### Governance changes
 
-Material changes to this document are discussed publicly on the [Thanos GitHub](http://github.com/thanos-io/thanos). Any change requires a [supermajority](#supermajority-vote) in favor. Editorial changes may be made by [lazy consensus](#consensus) unless challenged.
+Material changes to this document are discussed publicly on the [Thanos GitHub](http://github.com/oodle-ai/thanos). Any change requires a [supermajority](#supermajority-vote) in favor. Editorial changes may be made by [lazy consensus](#consensus) unless challenged.
 
 ### Other matters
 
@@ -155,7 +155,7 @@ Should the decision be in favor, your new membership will also be announced on t
 
 ### How do I add a project?
 
-As a team member, propose the new project on the [Thanos GitHub Issue](https://github.com/thanos-io/thanos/issues). However, currently to maintain project in our organization you have to become Thanos Maintainers.
+As a team member, propose the new project on the [Thanos GitHub Issue](https://github.com/oodle-ai/thanos/issues). However, currently to maintain project in our organization you have to become Thanos Maintainers.
 
 All are encourage to start their own project related to Thanos. Thanos team is happy to link to your project inappropriate page e.g https://thanos.io/tip/thanos/integrations.md/
 

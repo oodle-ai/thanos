@@ -6,14 +6,14 @@ package queryfrontend
 import (
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 
 	"github.com/opentracing/opentracing-go"
 	otlog "github.com/opentracing/opentracing-go/log"
 	"github.com/prometheus/prometheus/model/labels"
 	"github.com/prometheus/prometheus/model/timestamp"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 )
 
 // ThanosRequestStoreMatcherGetter is a an interface for store matching that all request share.

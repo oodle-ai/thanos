@@ -11,8 +11,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/util/annotations"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/targets/targetspb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/targets/targetspb"
 )
 
 var _ UnaryClient = &GRPCClient{}

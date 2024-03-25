@@ -32,15 +32,15 @@ import (
 	"github.com/thanos-io/objstore/client"
 	"github.com/thanos-io/objstore/providers/s3"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/cacheutil"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/cacheutil"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 const testQuery = "{a=\"1\"}"
@@ -389,7 +389,7 @@ metafile_content_ttl: 0s`, memcached.InternalEndpoint("memcached"))
 		testutil.Ok(t, s1.WaitSumMetrics(e2emon.Equals(18+3), "thanos_bucket_store_series_blocks_queried"))
 	})
 
-	// TODO(khyati) Let's add some case for compaction-meta.json once the PR will be merged: https://github.com/thanos-io/thanos/pull/2136.
+	// TODO(khyati) Let's add some case for compaction-meta.json once the PR will be merged: https://github.com/oodle-ai/thanos/pull/2136.
 }
 
 // Test store with `--no-cache-index-header` flag.

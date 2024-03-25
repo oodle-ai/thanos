@@ -22,10 +22,10 @@ import (
 
 	"github.com/thanos-io/promql-engine/api"
 
-	"github.com/thanos-io/thanos/pkg/api/query/querypb"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/api/query/querypb"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
 )
 
 // Opts are the options for a PromQL query.

@@ -28,11 +28,11 @@ import (
 
 	"github.com/thanos-io/objstore/exthttp"
 
-	"github.com/thanos-io/thanos/pkg/alert"
-	apiv1 "github.com/thanos-io/thanos/pkg/api/query"
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/queryfrontend"
-	"github.com/thanos-io/thanos/pkg/receive"
+	"github.com/oodle-ai/thanos/pkg/alert"
+	apiv1 "github.com/oodle-ai/thanos/pkg/api/query"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/queryfrontend"
+	"github.com/oodle-ai/thanos/pkg/receive"
 )
 
 const (

@@ -8,7 +8,7 @@ menu: proposals-done
 
 ### Related Tickets
 
-https://github.com/thanos-io/thanos/issues/1375
+https://github.com/oodle-ai/thanos/issues/1375
 
 ## Summary
 
@@ -205,7 +205,7 @@ Deduplication of included alerting/recording rules inside groups is described in
 * Implement a new flag `--rule` in Thanos Querier which registers RulesAPI endpoints.
 * Implement a new flag `--rule.replica-label` in Thanos Querier.
 * Implement RulesAPI backends in sidecar, query, rule.
-* Feature branch: https://github.com/thanos-io/thanos/pull/2200
+* Feature branch: https://github.com/oodle-ai/thanos/pull/2200
 
 ## Future
 

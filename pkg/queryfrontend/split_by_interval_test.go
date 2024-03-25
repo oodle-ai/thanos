@@ -11,8 +11,8 @@ import (
 
 	"github.com/weaveworks/common/httpgrpc"
 
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 	"github.com/stretchr/testify/require"
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
 )
 
 func TestSplitQuery(t *testing.T) {

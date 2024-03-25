@@ -17,8 +17,8 @@ import (
 	"github.com/prometheus/prometheus/tsdb/fileutil"
 	"golang.org/x/sync/errgroup"
 
+	"github.com/oodle-ai/thanos/pkg/runutil"
 	"github.com/thanos-io/objstore"
-	"github.com/thanos-io/thanos/pkg/runutil"
 )
 
 // partitionSize is used for splitting range reads.

@@ -17,7 +17,7 @@ import (
 	"golang.org/x/time/rate"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/internal/cortex/util/flagext"
+	"github.com/oodle-ai/thanos/internal/cortex/util/flagext"
 )
 
 // mockTenantLimits exposes per-tenant limits based on a provided map

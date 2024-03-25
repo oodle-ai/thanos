@@ -12,10 +12,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 
-	"github.com/thanos-io/thanos/pkg/querysharding"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/querysharding"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 // PromQLShardingMiddleware creates a new Middleware that shards PromQL aggregations using grouping labels.

@@ -21,11 +21,11 @@ import (
 	"github.com/prometheus/prometheus/model/timestamp"
 	"github.com/weaveworks/common/httpgrpc"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	cortexutil "github.com/thanos-io/thanos/internal/cortex/util"
-	"github.com/thanos-io/thanos/internal/cortex/util/spanlogger"
-	queryv1 "github.com/thanos-io/thanos/pkg/api/query"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	cortexutil "github.com/oodle-ai/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/util/spanlogger"
+	queryv1 "github.com/oodle-ai/thanos/pkg/api/query"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 var (

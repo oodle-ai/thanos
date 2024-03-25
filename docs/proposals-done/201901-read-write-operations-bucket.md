@@ -8,10 +8,10 @@ menu: proposals-done
 
 ### Tickets:
 
-* https://github.com/thanos-io/thanos/issues/298 (eventual consistency)
-* https://github.com/thanos-io/thanos/issues/377 (eventual consistency & partial upload)
-* https://github.com/thanos-io/thanos/issues/564 (retention vs store gateway)
-* https://github.com/thanos-io/thanos/issues/271 (adapt for removals faster)
+* https://github.com/oodle-ai/thanos/issues/298 (eventual consistency)
+* https://github.com/oodle-ai/thanos/issues/377 (eventual consistency & partial upload)
+* https://github.com/oodle-ai/thanos/issues/564 (retention vs store gateway)
+* https://github.com/oodle-ai/thanos/issues/271 (adapt for removals faster)
 
 ## Summary
 
@@ -34,7 +34,7 @@ Moving from lock-based logic to coordination free and from strongly consistent l
 * Thanos compactor uploads compacted block and deletes source blocks. After next sync iteration it does not see a new block (read after write eventual consistency). It sees gap, wrongly plans next compaction and causes non-resolvable overlap.
 * Thanos compactor uploads compacted block and deletes source blocks. Thanos Store Gateway syncs every 3m so it missed that fact. Next query that hits store gateway tries to fetch deleted source blocks and fails.
 
-Currently, we have only basic safeguards against those in form of [`syncDelay`](https://github.com/thanos-io/thanos/blob/bc088285a1b4bf464fdf2539e4b365b805874eed/pkg/compact/compact.go#L187). That helps with operations between sidecar and compactor but does not fix inter-compactor logic in case of eventual consistent storage or partial upload failures.
+Currently, we have only basic safeguards against those in form of [`syncDelay`](https://github.com/oodle-ai/thanos/blob/bc088285a1b4bf464fdf2539e4b365b805874eed/pkg/compact/compact.go#L187). That helps with operations between sidecar and compactor but does not fix inter-compactor logic in case of eventual consistent storage or partial upload failures.
 
 We also partially assumed strong consistency for object storage, because [GCS has strong consistency](https://cloud.google.com/storage/docs/consistency) and S3 has it as well, but with [some caveats](https://codeburst.io/quick-explanation-of-the-s3-consistency-model-6c9f325e3f82) that we met.
 

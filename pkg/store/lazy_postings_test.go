@@ -19,9 +19,9 @@ import (
 	"github.com/prometheus/prometheus/tsdb"
 	"github.com/prometheus/prometheus/tsdb/index"
 
+	"github.com/oodle-ai/thanos/pkg/block/indexheader"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
 	"github.com/thanos-io/objstore/providers/filesystem"
-	"github.com/thanos-io/thanos/pkg/block/indexheader"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
 )
 
 func TestKeysToFetchFromPostingGroups(t *testing.T) {

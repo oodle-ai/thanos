@@ -14,14 +14,14 @@ import (
 	"google.golang.org/grpc/status"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
 
 	"github.com/pkg/errors"
 
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
 )
 
 // mockedStoreAPI is test gRPC store API client.

@@ -23,13 +23,13 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/strutil"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/strutil"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 type ctxKey int

@@ -11,13 +11,13 @@ import (
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/thanos-io/thanos/pkg/extkingpin"
 
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/gate"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/gate"
 )
 
 // Limiter is responsible for managing the configuration and initialization of

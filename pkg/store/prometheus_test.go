@@ -22,19 +22,19 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 func TestPrometheusStore_Series_e2e(t *testing.T) {
 	testPrometheusStoreSeriesE2e(t, "")
 }
 
-// Regression test for https://github.com/thanos-io/thanos/issues/478.
+// Regression test for https://github.com/oodle-ai/thanos/issues/478.
 func TestPrometheusStore_Series_promOnPath_e2e(t *testing.T) {
 	testPrometheusStoreSeriesE2e(t, "/prometheus/sub/path")
 }

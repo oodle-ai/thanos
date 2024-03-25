@@ -16,7 +16,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/model"
 )
 
 var (

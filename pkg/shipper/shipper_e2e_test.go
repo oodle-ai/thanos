@@ -16,7 +16,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/extprom"
 
 	"github.com/go-kit/log"
 	"github.com/oklog/ulid"
@@ -30,9 +30,9 @@ import (
 	"github.com/thanos-io/objstore/objtesting"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 func TestShipper_SyncBlocks_e2e(t *testing.T) {

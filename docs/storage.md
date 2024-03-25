@@ -782,7 +782,7 @@ Example meta.json file:
 }
 ```
 
-Format in Go code can be found [here](https://github.com/thanos-io/thanos/blob/main/pkg/block/metadata/meta.go).
+Format in Go code can be found [here](https://github.com/oodle-ai/thanos/blob/main/pkg/block/metadata/meta.go).
 
 ##### External Labels
 

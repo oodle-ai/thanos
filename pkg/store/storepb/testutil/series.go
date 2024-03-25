@@ -30,9 +30,9 @@ import (
 	"github.com/prometheus/prometheus/tsdb/wlog"
 	"go.uber.org/atomic"
 
-	"github.com/thanos-io/thanos/pkg/store/hintspb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/hintspb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 const (

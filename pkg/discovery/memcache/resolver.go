@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 type clusterConfig struct {

@@ -9,8 +9,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/oodle-ai/thanos/pkg/runutil"
 	"github.com/pkg/errors"
-	"github.com/thanos-io/thanos/pkg/runutil"
 )
 
 func ExampleRepeat() {

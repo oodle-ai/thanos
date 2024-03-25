@@ -22,9 +22,9 @@ import (
 	"github.com/thanos-io/objstore/providers/filesystem"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 func TestReaders(t *testing.T) {
@@ -173,7 +173,7 @@ func TestReaders(t *testing.T) {
 					testutil.Assert(t, rngs[2].End > rngs[2].Start)
 					testutil.Equals(t, NotFoundRange, rngs[1])
 
-					// Regression tests for https://github.com/thanos-io/thanos/issues/2213.
+					// Regression tests for https://github.com/oodle-ai/thanos/issues/2213.
 					// Most of not existing value was working despite bug, except in certain unlucky cases
 					// it was causing "invalid size" errors.
 					_, err = br.PostingsOffset("not-existing", "1")

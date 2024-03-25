@@ -14,7 +14,7 @@ import (
 	"github.com/prometheus/prometheus/tsdb"
 )
 
-// DuplicatedCompactionBlocks is for bug fixed in https://github.com/thanos-io/thanos/commit/94e26c63e52ba45b713fd998638d0e7b2492664f.
+// DuplicatedCompactionBlocks is for bug fixed in https://github.com/oodle-ai/thanos/commit/94e26c63e52ba45b713fd998638d0e7b2492664f.
 // Bug resulted in source block not being removed immediately after compaction, so we were compacting again and again same sources
 // until sync-delay passes.
 // The expected print of this are same overlapped blocks with exactly the same sources, time ranges and stats.

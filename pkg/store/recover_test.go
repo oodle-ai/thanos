@@ -10,7 +10,7 @@ import (
 	"github.com/efficientgo/core/testutil"
 	"github.com/go-kit/log"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 func TestRecoverableServer(t *testing.T) {

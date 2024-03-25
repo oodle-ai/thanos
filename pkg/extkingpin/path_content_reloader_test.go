@@ -14,7 +14,7 @@ import (
 	"github.com/pkg/errors"
 	"go.uber.org/atomic"
 
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 
 	"github.com/efficientgo/core/testutil"
 	"github.com/go-kit/log"

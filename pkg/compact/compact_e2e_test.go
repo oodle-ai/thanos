@@ -28,10 +28,10 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/dedup"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/dedup"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 const fetcherConcurrency = 32
@@ -234,7 +234,7 @@ func testGroupCompactE2e(t *testing.T, mergeFunc storage.VerticalChunkSeriesMerg
 		_, err = os.Stat(dir)
 		testutil.Assert(t, os.IsNotExist(err), "dir %s should be remove after compaction.", dir)
 
-		// Test label name with slash, regression: https://github.com/thanos-io/thanos/issues/1661.
+		// Test label name with slash, regression: https://github.com/oodle-ai/thanos/issues/1661.
 		extLabels := labels.Labels{{Name: "e1", Value: "1/weird"}}
 		extLabels2 := labels.Labels{{Name: "e1", Value: "1"}}
 		metas := createAndUpload(t, bkt, []blockgenSpec{

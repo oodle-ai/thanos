@@ -13,7 +13,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/weaveworks/common/httpgrpc"
 
-	util_log "github.com/thanos-io/thanos/internal/cortex/util/log"
+	util_log "github.com/oodle-ai/thanos/internal/cortex/util/log"
 )
 
 type RetryMiddlewareMetrics struct {

@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 )
 
 func TestConfig_Validate(t *testing.T) {

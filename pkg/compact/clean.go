@@ -13,7 +13,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block"
 )
 
 const (
@@ -49,7 +49,7 @@ func BestEffortCleanAbortedPartialUploads(
 		level.Info(logger).Log("msg", "found partially uploaded block; marking for deletion", "block", id)
 		// We don't gather any information about deletion marks for partial blocks, so let's simply remove it. We waited
 		// long PartialUploadThresholdAge already.
-		// TODO(bwplotka): Fix some edge cases: https://github.com/thanos-io/thanos/issues/2470 .
+		// TODO(bwplotka): Fix some edge cases: https://github.com/oodle-ai/thanos/issues/2470 .
 		if err := block.Delete(ctx, logger, bkt, id); err != nil {
 			blockCleanupFailures.Inc()
 			level.Warn(logger).Log("msg", "failed to delete aborted partial upload; will retry in next iteration", "block", id, "thresholdAge", PartialUploadThresholdAge, "err", err)

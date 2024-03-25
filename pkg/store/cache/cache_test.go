@@ -15,7 +15,7 @@ import (
 	"golang.org/x/crypto/blake2b"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
 )
 
 func TestMain(m *testing.M) {

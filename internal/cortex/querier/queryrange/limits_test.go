@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/weaveworks/common/user"
 
-	"github.com/thanos-io/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/util"
 )
 
 func TestLimitsMiddleware_MaxQueryLookback(t *testing.T) {

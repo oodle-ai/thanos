@@ -19,10 +19,10 @@ import (
 	"github.com/prometheus/prometheus/tsdb/fileutil"
 	"github.com/prometheus/prometheus/tsdb/index"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 // streamedBlockWriter writes downsampled blocks to a new data block. Implemented to save memory consumption

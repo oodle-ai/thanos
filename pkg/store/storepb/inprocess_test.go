@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/efficientgo/core/testutil"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 	"github.com/pkg/errors"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
 )
 
 type testStoreServer struct {

@@ -12,13 +12,13 @@ import (
 	"testing"
 	"time"
 
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/tracing/client"
+	"github.com/oodle-ai/thanos/pkg/tracing/jaeger"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 	"github.com/pkg/errors"
 	"github.com/prometheus/common/model"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/tracing/client"
-	"github.com/thanos-io/thanos/pkg/tracing/jaeger"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
 
 	"github.com/efficientgo/core/testutil"
 	"github.com/efficientgo/e2e"

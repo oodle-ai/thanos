@@ -12,8 +12,8 @@ import (
 	"github.com/prometheus/prometheus/storage"
 	"google.golang.org/grpc/codes"
 
-	"github.com/thanos-io/thanos/pkg/exemplars/exemplarspb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/exemplars/exemplarspb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 // TSDB allows fetching exemplars from a TSDB instance.

@@ -15,8 +15,8 @@ import (
 	"github.com/prometheus/prometheus/promql/parser"
 	"github.com/prometheus/prometheus/util/annotations"
 
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 var _ UnaryClient = &GRPCClient{}

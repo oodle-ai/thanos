@@ -10,7 +10,7 @@
     - [#<PR-id>](<PR-URL>) Thanos <Component> ...
 
     <PR-id> Id of your pull request.
-    <PR-URL> URL of your PR such as https://github.com/thanos-io/thanos/pull/<PR-id>
+    <PR-URL> URL of your PR such as https://github.com/oodle-ai/thanos/pull/<PR-id>
     <Component> Component affected by your changes such as Query, Store, Receive.
 -->
 

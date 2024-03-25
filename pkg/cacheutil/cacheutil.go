@@ -11,7 +11,7 @@ import (
 	"github.com/sony/gobreaker"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/thanos-io/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/gate"
 )
 
 var (

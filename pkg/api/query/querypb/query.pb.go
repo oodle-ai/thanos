@@ -10,8 +10,8 @@
 package querypb
 
 import (
-	storepb "github.com/thanos-io/thanos/pkg/store/storepb"
-	prompb "github.com/thanos-io/thanos/pkg/store/storepb/prompb"
+	storepb "github.com/oodle-ai/thanos/pkg/store/storepb"
+	prompb "github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

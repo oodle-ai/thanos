@@ -31,13 +31,13 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
 )
 
 type mockedSeriesServer struct {
@@ -2032,7 +2032,7 @@ func benchProxySeries(t testutil.TB, totalSamples, totalSeries int) {
 	for _, c := range clients {
 		m := c.(*storetestutil.TestClient).StoreClient.(*mockedStoreAPI)
 
-		// NOTE: Proxy will merge all series with same labels without any frame limit (https://github.com/thanos-io/thanos/issues/2332).
+		// NOTE: Proxy will merge all series with same labels without any frame limit (https://github.com/oodle-ai/thanos/issues/2332).
 		for _, r := range m.RespSeries {
 			allResps = append(allResps, r)
 

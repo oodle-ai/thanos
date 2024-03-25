@@ -14,7 +14,7 @@ import (
 	"github.com/prometheus/prometheus/model/labels"
 	"github.com/prometheus/prometheus/storage"
 
-	"github.com/thanos-io/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
 )
 
 func TestFilterCache(t *testing.T) {

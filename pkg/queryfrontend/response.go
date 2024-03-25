@@ -6,7 +6,7 @@ package queryfrontend
 import (
 	"unsafe"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 )
 
 // ThanosResponseExtractor helps to extract specific info from Query Response.

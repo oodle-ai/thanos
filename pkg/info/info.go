@@ -6,8 +6,8 @@ package info
 import (
 	"context"
 
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 	"google.golang.org/grpc"
 )
 

@@ -27,16 +27,16 @@ import (
 	"github.com/thanos-io/objstore"
 	"github.com/thanos-io/objstore/providers/filesystem"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 type labelNameCallCase struct {
@@ -790,7 +790,7 @@ func testStoreAPIsAcceptance(t *testing.T, startStore startStoreFn) {
 	}
 }
 
-// Regression test for https://github.com/thanos-io/thanos/issues/396.
+// Regression test for https://github.com/oodle-ai/thanos/issues/396.
 // Note: Only TSDB and Prometheus Stores do this.
 func testStoreAPIsSeriesSplitSamplesIntoChunksWithMaxSizeOf120(t *testing.T, startStore startStoreFn) {
 	t.Run("should split into chunks of max size 120", func(t *testing.T) {

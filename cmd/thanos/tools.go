@@ -14,9 +14,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/extkingpin"
-	"github.com/thanos-io/thanos/pkg/rules"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
+	"github.com/oodle-ai/thanos/pkg/rules"
 )
 
 type checkRulesConfig struct {

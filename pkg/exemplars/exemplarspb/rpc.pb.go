@@ -10,8 +10,8 @@
 package exemplarspb
 
 import (
-	labelpb "github.com/thanos-io/thanos/pkg/store/labelpb"
-	storepb "github.com/thanos-io/thanos/pkg/store/storepb"
+	labelpb "github.com/oodle-ai/thanos/pkg/store/labelpb"
+	storepb "github.com/oodle-ai/thanos/pkg/store/storepb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

@@ -10,7 +10,7 @@
 package metadatapb
 
 import (
-	storepb "github.com/thanos-io/thanos/pkg/store/storepb"
+	storepb "github.com/oodle-ai/thanos/pkg/store/storepb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

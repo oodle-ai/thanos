@@ -15,9 +15,9 @@ import (
 	"github.com/thanos-io/objstore/providers/filesystem"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 func TestReaderPool_NewBinaryReader(t *testing.T) {

@@ -17,7 +17,7 @@ import (
 	"github.com/prometheus/prometheus/tsdb/chunkenc"
 	"github.com/prometheus/prometheus/util/annotations"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 
 	"github.com/efficientgo/core/testutil"
 )
@@ -393,7 +393,7 @@ func TestDedupSeriesSet(t *testing.T) {
 			},
 		},
 		{
-			// Regression test against https://github.com/thanos-io/thanos/issues/2401.
+			// Regression test against https://github.com/oodle-ai/thanos/issues/2401.
 			// Two counter series, when one (initially chosen) series is having hiccup (few dropped samples), while second is live.
 			// This also happens when 2 replicas scrape in different time (they usually do) and one sees later counter value then the other.
 			// Now, depending on what replica we look, we can see totally different counter value in total where total means
@@ -460,7 +460,7 @@ func TestDedupSeriesSet(t *testing.T) {
 			},
 		},
 		{
-			// Regression test on real data against https://github.com/thanos-io/thanos/issues/2401.
+			// Regression test on real data against https://github.com/oodle-ai/thanos/issues/2401.
 			// Real data with stale marker after downsample.CounterSeriesIterator (required for downsampling + rate).
 			name:      "Regression test on real data against 2401",
 			isCounter: true,

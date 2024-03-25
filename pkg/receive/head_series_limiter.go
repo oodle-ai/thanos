@@ -15,9 +15,9 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/errors"
-	"github.com/thanos-io/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/errors"
+	"github.com/oodle-ai/thanos/pkg/promclient"
 )
 
 // headSeriesLimit implements headSeriesLimiter interface.

@@ -28,9 +28,9 @@ import (
 	"go.uber.org/automaxprocs/maxprocs"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/thanos-io/thanos/pkg/extkingpin"
-	"github.com/thanos-io/thanos/pkg/logging"
-	"github.com/thanos-io/thanos/pkg/tracing/client"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
+	"github.com/oodle-ai/thanos/pkg/logging"
+	"github.com/oodle-ai/thanos/pkg/tracing/client"
 )
 
 func init() {

@@ -61,7 +61,7 @@ import (
 	"github.com/go-kit/log/level"
 	"github.com/pkg/errors"
 
-	"github.com/thanos-io/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/errutil"
 )
 
 // RepeatInfinitely executes f every interval seconds until stopc is closed or f returns an error.

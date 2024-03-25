@@ -9,7 +9,7 @@ import (
 	kitlog "github.com/go-kit/log"
 	"github.com/weaveworks/common/tracing"
 
-	"github.com/thanos-io/thanos/internal/cortex/tenant"
+	"github.com/oodle-ai/thanos/internal/cortex/tenant"
 )
 
 // WithUserID returns a Logger that has information about the current user in

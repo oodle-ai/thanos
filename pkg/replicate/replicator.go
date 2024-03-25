@@ -25,14 +25,14 @@ import (
 	"github.com/thanos-io/objstore/client"
 	objstoretracing "github.com/thanos-io/objstore/tracing/opentracing"
 
-	thanosblock "github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/compact"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	thanosmodel "github.com/thanos-io/thanos/pkg/model"
-	"github.com/thanos-io/thanos/pkg/prober"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/server/http"
+	thanosblock "github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/compact"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	thanosmodel "github.com/oodle-ai/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/prober"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/server/http"
 )
 
 const (

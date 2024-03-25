@@ -9,17 +9,17 @@ import (
 	"strings"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
 
-	"github.com/thanos-io/thanos/pkg/querysharding"
+	"github.com/oodle-ai/thanos/pkg/querysharding"
 
 	"github.com/go-kit/log"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	"github.com/thanos-io/thanos/internal/cortex/util/validation"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/util/validation"
 )
 
 const (

@@ -11,8 +11,8 @@ import (
 	proto "github.com/gogo/protobuf/proto"
 	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	types "github.com/gogo/protobuf/types"
-	cortexpb "github.com/thanos-io/thanos/internal/cortex/cortexpb"
-	github_com_thanos_io_thanos_internal_cortex_cortexpb "github.com/thanos-io/thanos/internal/cortex/cortexpb"
+	cortexpb "github.com/oodle-ai/thanos/internal/cortex/cortexpb"
+	github_com_thanos_io_thanos_internal_cortex_cortexpb "github.com/oodle-ai/thanos/internal/cortex/cortexpb"
 
 	io "io"
 	math "math"
@@ -924,7 +924,7 @@ func (m *PrometheusResponseQueryableSamplesStatsPerStep) GetTimestampMs() int64 
 }
 
 type SampleStream struct {
-	Labels               []github_com_thanos_io_thanos_internal_cortex_cortexpb.LabelAdapter `protobuf:"bytes,1,rep,name=labels,proto3,customtype=github.com/thanos-io/thanos/internal/cortex/cortexpb.LabelAdapter" json:"metric"`
+	Labels               []github_com_thanos_io_thanos_internal_cortex_cortexpb.LabelAdapter `protobuf:"bytes,1,rep,name=labels,proto3,customtype=github.com/oodle-ai/thanos/internal/cortex/cortexpb.LabelAdapter" json:"metric"`
 	Samples              []cortexpb.Sample                                                   `protobuf:"bytes,2,rep,name=samples,proto3" json:"values"`
 	Histograms           []SampleHistogramPair                                               `protobuf:"bytes,3,rep,name=histograms,proto3" json:"histogram"`
 	XXX_NoUnkeyedLiteral struct{}                                                            `json:"-"`
@@ -980,7 +980,7 @@ func (m *SampleStream) GetHistograms() []SampleHistogramPair {
 }
 
 type Sample struct {
-	Labels               []github_com_thanos_io_thanos_internal_cortex_cortexpb.LabelAdapter `protobuf:"bytes,1,rep,name=labels,proto3,customtype=github.com/thanos-io/thanos/internal/cortex/cortexpb.LabelAdapter" json:"metric"`
+	Labels               []github_com_thanos_io_thanos_internal_cortex_cortexpb.LabelAdapter `protobuf:"bytes,1,rep,name=labels,proto3,customtype=github.com/oodle-ai/thanos/internal/cortex/cortexpb.LabelAdapter" json:"metric"`
 	SampleValue          float64                                                             `protobuf:"fixed64,2,opt,name=sampleValue,proto3" json:"value"`
 	Timestamp            int64                                                               `protobuf:"varint,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	Histogram            *SampleHistogram                                                    `protobuf:"bytes,4,opt,name=histogram,proto3" json:"histogram"`

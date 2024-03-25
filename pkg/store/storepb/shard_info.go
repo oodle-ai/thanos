@@ -7,8 +7,8 @@ import (
 	"sync"
 
 	"github.com/cespare/xxhash/v2"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 	"github.com/prometheus/prometheus/model/labels"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
 )
 
 var sep = []byte{'\xff'}

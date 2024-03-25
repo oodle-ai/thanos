@@ -23,12 +23,12 @@ import (
 	"github.com/prometheus/prometheus/rules"
 	"gopkg.in/yaml.v3"
 
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 const tmpRuleDir = ".tmp-rules"

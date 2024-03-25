@@ -26,11 +26,11 @@ import (
 	"golang.org/x/net/http2"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/discovery/dns"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/model"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/cache/cachekey"
+	"github.com/oodle-ai/thanos/pkg/discovery/dns"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/cache/cachekey"
 )
 
 type Groupcache struct {

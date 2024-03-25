@@ -1,4 +1,4 @@
-module github.com/thanos-io/thanos
+module github.com/oodle-ai/thanos
 
 go 1.21
 

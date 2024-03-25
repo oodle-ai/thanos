@@ -10,7 +10,7 @@
 package infopb
 
 import (
-	labelpb "github.com/thanos-io/thanos/pkg/store/labelpb"
+	labelpb "github.com/oodle-ai/thanos/pkg/store/labelpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

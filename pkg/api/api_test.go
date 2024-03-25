@@ -30,8 +30,8 @@ import (
 	"github.com/prometheus/common/route"
 
 	"github.com/efficientgo/core/testutil"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/logging"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/logging"
 )
 
 func TestRespondSuccess(t *testing.T) {

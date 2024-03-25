@@ -7,7 +7,7 @@ package queryfrontend;
 
 import "store/labelpb/types.proto";
 
-option go_package = "github.com/thanos-io/thanos/pkg/queryfrontend";
+option go_package = "github.com/oodle-ai/thanos/pkg/queryfrontend";
 
 message ThanosLabelsResponse {
   string Status = 1;

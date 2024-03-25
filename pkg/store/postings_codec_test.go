@@ -22,7 +22,7 @@ import (
 	"github.com/prometheus/prometheus/tsdb/index"
 
 	"github.com/efficientgo/core/testutil"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
 )
 
 func TestStreamedSnappyMaximumDecodedLen(t *testing.T) {

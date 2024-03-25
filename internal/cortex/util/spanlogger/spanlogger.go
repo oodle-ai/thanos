@@ -12,8 +12,8 @@ import (
 	"github.com/opentracing/opentracing-go/ext"
 	otlog "github.com/opentracing/opentracing-go/log"
 
-	"github.com/thanos-io/thanos/internal/cortex/tenant"
-	util_log "github.com/thanos-io/thanos/internal/cortex/util/log"
+	"github.com/oodle-ai/thanos/internal/cortex/tenant"
+	util_log "github.com/oodle-ai/thanos/internal/cortex/util/log"
 )
 
 type loggerCtxMarker struct{}

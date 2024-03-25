@@ -14,7 +14,7 @@ localLinksStyle:
   hugo:
     indexFileName: "_index.md"
 
-linkPrefixForNonMarkdownResources: "https://github.com/thanos-io/thanos/blob/main"
+linkPrefixForNonMarkdownResources: "https://github.com/oodle-ai/thanos/blob/main"
 
 transformations:
 
@@ -29,7 +29,7 @@ transformations:
     backMatter: &docBackMatter
       template: |
         Found a typo, inconsistency or missing information in our docs?
-        Help us to improve [Thanos](https://thanos.io) documentation by proposing a fix [on GitHub here](https://github.com/thanos-io/thanos/edit/main/{{ .Origin.Path }}) :heart:
+        Help us to improve [Thanos](https://thanos.io) documentation by proposing a fix [on GitHub here](https://github.com/oodle-ai/thanos/edit/main/{{ .Origin.Path }}) :heart:
 
   - glob: "$(EXTERNAL_GLOB_REL)MAINTAINERS.md"
     path: /thanos/MAINTAINERS.md

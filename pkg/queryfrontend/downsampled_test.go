@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 )
 
 func TestDownsampled_MinResponseTime(t *testing.T) {

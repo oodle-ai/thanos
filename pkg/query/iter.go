@@ -11,9 +11,9 @@ import (
 	"github.com/prometheus/prometheus/tsdb/chunkenc"
 	"github.com/prometheus/prometheus/util/annotations"
 
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
-	"github.com/thanos-io/thanos/pkg/dedup"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/pkg/dedup"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 // promSeriesSet implements the SeriesSet interface of the Prometheus storage
@@ -139,7 +139,7 @@ func (s *chunkSeries) Iterator(_ chunkenc.Iterator) chunkenc.Iterator {
 			for _, c := range s.chunks {
 				its = append(its, getFirstIterator(c.Counter, c.Raw))
 			}
-			// TODO(bwplotka): This breaks resets function. See https://github.com/thanos-io/thanos/issues/3644
+			// TODO(bwplotka): This breaks resets function. See https://github.com/oodle-ai/thanos/issues/3644
 			sit = downsample.NewApplyCounterResetsIterator(its...)
 		default:
 			return errSeriesIterator{err: errors.Errorf("unexpected result aggregate type %v", s.aggrs)}

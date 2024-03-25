@@ -9,7 +9,7 @@ import (
 
 	"github.com/opentracing/opentracing-go"
 
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 // TracingCache includes Fetch operation in the traces.

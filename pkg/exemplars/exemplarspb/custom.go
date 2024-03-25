@@ -11,7 +11,7 @@ import (
 	"github.com/prometheus/prometheus/model/exemplar"
 	"github.com/prometheus/prometheus/model/labels"
 
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 // ExemplarStore wraps the ExemplarsClient and contains the info of external labels.

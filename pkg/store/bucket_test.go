@@ -48,21 +48,21 @@ import (
 	"github.com/thanos-io/objstore"
 	"github.com/thanos-io/objstore/providers/filesystem"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/indexheader"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/compact"
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/pool"
-	storecache "github.com/thanos-io/thanos/pkg/store/cache"
-	"github.com/thanos-io/thanos/pkg/store/hintspb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/indexheader"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/compact"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/pool"
+	storecache "github.com/oodle-ai/thanos/pkg/store/cache"
+	"github.com/oodle-ai/thanos/pkg/store/hintspb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 var emptyRelabelConfig = make([]*relabel.Config, 0)
@@ -931,7 +931,7 @@ func testSharding(t *testing.T, reuseDisk string, bkt objstore.Bucket, all ...ul
 			testutil.Equals(t, sc.expectedAdvLabels, resp.LabelSets)
 
 			// Make sure we don't download files we did not expect to.
-			// Regression test: https://github.com/thanos-io/thanos/issues/1664
+			// Regression test: https://github.com/oodle-ai/thanos/issues/1664
 
 			// Sort records. We load blocks concurrently so operations might be not ordered.
 			sort.Strings(rec.getRangeTouched)
@@ -985,7 +985,7 @@ func expectedTouchedBlockOps(all, expected, cached []ulid.ULID) []string {
 	return ops
 }
 
-// Regression tests against: https://github.com/thanos-io/thanos/issues/1983.
+// Regression tests against: https://github.com/oodle-ai/thanos/issues/1983.
 func TestReadIndexCache_LoadSeries(t *testing.T) {
 	bkt := objstore.NewInMemBucket()
 	ctx := context.Background()
@@ -1572,7 +1572,7 @@ func (m *mockedPool) Put(b *[]byte) {
 	m.parent.Put(b)
 }
 
-// Regression test against: https://github.com/thanos-io/thanos/issues/2147.
+// Regression test against: https://github.com/oodle-ai/thanos/issues/2147.
 func TestBucketSeries_OneBlock_InMemIndexCacheSegfault(t *testing.T) {
 	tmpDir := t.TempDir()
 

@@ -22,12 +22,12 @@ import (
 	"golang.org/x/net/http2"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/discovery/dns"
-	"github.com/thanos-io/thanos/pkg/model"
-	"github.com/thanos-io/thanos/pkg/prober"
-	httpserver "github.com/thanos-io/thanos/pkg/server/http"
-	"github.com/thanos-io/thanos/pkg/store/cache/cachekey"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/discovery/dns"
+	"github.com/oodle-ai/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/prober"
+	httpserver "github.com/oodle-ai/thanos/pkg/server/http"
+	"github.com/oodle-ai/thanos/pkg/store/cache/cachekey"
 )
 
 const basePath = `/_groupcache/`

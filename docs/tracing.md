@@ -38,7 +38,7 @@ In Kubernetes it is as easy as (using Thanos sidecar example):
 
 At that point, anyone can use your provider by spec.
 
-See [this issue](https://github.com/thanos-io/thanos/issues/1972) to check our progress on moving to OpenTelemetry Go client library.
+See [this issue](https://github.com/oodle-ai/thanos/issues/1972) to check our progress on moving to OpenTelemetry Go client library.
 
 ## Usage
 

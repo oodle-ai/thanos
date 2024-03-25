@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/efficientgo/core/testutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 	"github.com/pkg/errors"
-	"github.com/thanos-io/thanos/pkg/runutil"
 )
 
 func Copy(t testing.TB, src, dst string) {

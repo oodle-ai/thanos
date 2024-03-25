@@ -8,7 +8,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 // StoreSeriesClient is test gRPC storeAPI series client.

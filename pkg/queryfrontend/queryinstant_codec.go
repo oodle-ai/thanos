@@ -19,12 +19,12 @@ import (
 	"github.com/prometheus/common/model"
 	"github.com/weaveworks/common/httpgrpc"
 
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	cortexutil "github.com/oodle-ai/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/util/spanlogger"
+	queryv1 "github.com/oodle-ai/thanos/pkg/api/query"
 	"github.com/prometheus/prometheus/promql/parser"
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	cortexutil "github.com/thanos-io/thanos/internal/cortex/util"
-	"github.com/thanos-io/thanos/internal/cortex/util/spanlogger"
-	queryv1 "github.com/thanos-io/thanos/pkg/api/query"
 )
 
 // queryInstantCodec is used to encode/decode Thanos instant query requests and responses.

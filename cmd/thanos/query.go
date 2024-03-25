@@ -31,36 +31,36 @@ import (
 	"github.com/prometheus/prometheus/promql"
 	"github.com/thanos-io/promql-engine/api"
 
-	apiv1 "github.com/thanos-io/thanos/pkg/api/query"
-	"github.com/thanos-io/thanos/pkg/api/query/querypb"
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/discovery/cache"
-	"github.com/thanos-io/thanos/pkg/discovery/dns"
-	"github.com/thanos-io/thanos/pkg/exemplars"
-	"github.com/thanos-io/thanos/pkg/extgrpc"
-	"github.com/thanos-io/thanos/pkg/extgrpc/snappy"
-	"github.com/thanos-io/thanos/pkg/extkingpin"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/info"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/logging"
-	"github.com/thanos-io/thanos/pkg/metadata"
-	"github.com/thanos-io/thanos/pkg/prober"
-	"github.com/thanos-io/thanos/pkg/query"
-	"github.com/thanos-io/thanos/pkg/rules"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	grpcserver "github.com/thanos-io/thanos/pkg/server/grpc"
-	httpserver "github.com/thanos-io/thanos/pkg/server/http"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/targets"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/pkg/tls"
-	"github.com/thanos-io/thanos/pkg/ui"
+	apiv1 "github.com/oodle-ai/thanos/pkg/api/query"
+	"github.com/oodle-ai/thanos/pkg/api/query/querypb"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/discovery/cache"
+	"github.com/oodle-ai/thanos/pkg/discovery/dns"
+	"github.com/oodle-ai/thanos/pkg/exemplars"
+	"github.com/oodle-ai/thanos/pkg/extgrpc"
+	"github.com/oodle-ai/thanos/pkg/extgrpc/snappy"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/info"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/logging"
+	"github.com/oodle-ai/thanos/pkg/metadata"
+	"github.com/oodle-ai/thanos/pkg/prober"
+	"github.com/oodle-ai/thanos/pkg/query"
+	"github.com/oodle-ai/thanos/pkg/rules"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	grpcserver "github.com/oodle-ai/thanos/pkg/server/grpc"
+	httpserver "github.com/oodle-ai/thanos/pkg/server/http"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/targets"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tls"
+	"github.com/oodle-ai/thanos/pkg/ui"
 )
 
 const (
@@ -142,7 +142,7 @@ func registerQuery(app *extkingpin.App) {
 	stores := extkingpin.Addrs(cmd.Flag("store", "Deprecation Warning - This flag is deprecated and replaced with `endpoint`. Addresses of statically configured store API servers (repeatable). The scheme may be prefixed with 'dns+' or 'dnssrv+' to detect store API servers through respective DNS lookups.").
 		PlaceHolder("<store>"))
 
-	// TODO(bwplotka): Hidden because we plan to extract discovery to separate API: https://github.com/thanos-io/thanos/issues/2600.
+	// TODO(bwplotka): Hidden because we plan to extract discovery to separate API: https://github.com/oodle-ai/thanos/issues/2600.
 	ruleEndpoints := extkingpin.Addrs(cmd.Flag("rule", "Deprecation Warning - This flag is deprecated and replaced with `endpoint`. Experimental: Addresses of statically configured rules API servers (repeatable). The scheme may be prefixed with 'dns+' or 'dnssrv+' to detect rule API servers through respective DNS lookups.").
 		Hidden().PlaceHolder("<rule>"))
 
@@ -152,7 +152,7 @@ func registerQuery(app *extkingpin.App) {
 	exemplarEndpoints := extkingpin.Addrs(cmd.Flag("exemplar", "Deprecation Warning - This flag is deprecated and replaced with `endpoint`. Experimental: Addresses of statically configured exemplars API servers (repeatable). The scheme may be prefixed with 'dns+' or 'dnssrv+' to detect exemplars API servers through respective DNS lookups.").
 		Hidden().PlaceHolder("<exemplar>"))
 
-	// TODO(atunik): Hidden because we plan to extract discovery to separate API: https://github.com/thanos-io/thanos/issues/2600.
+	// TODO(atunik): Hidden because we plan to extract discovery to separate API: https://github.com/oodle-ai/thanos/issues/2600.
 	targetEndpoints := extkingpin.Addrs(cmd.Flag("target", "Deprecation Warning - This flag is deprecated and replaced with `endpoint`. Experimental: Addresses of statically configured target API servers (repeatable). The scheme may be prefixed with 'dns+' or 'dnssrv+' to detect target API servers through respective DNS lookups.").
 		Hidden().PlaceHolder("<target>"))
 
@@ -648,7 +648,7 @@ func runQuery(
 	engineOpts := promql.EngineOpts{
 		Logger: logger,
 		Reg:    reg,
-		// TODO(bwplotka): Expose this as a flag: https://github.com/thanos-io/thanos/issues/703.
+		// TODO(bwplotka): Expose this as a flag: https://github.com/oodle-ai/thanos/issues/703.
 		MaxSamples:    math.MaxInt32,
 		Timeout:       queryTimeout,
 		LookbackDelta: lookbackDelta,

@@ -15,12 +15,12 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/tracing/elasticapm"
-	"github.com/thanos-io/thanos/pkg/tracing/google_cloud"
-	"github.com/thanos-io/thanos/pkg/tracing/jaeger"
-	"github.com/thanos-io/thanos/pkg/tracing/lightstep"
-	"github.com/thanos-io/thanos/pkg/tracing/migration"
-	"github.com/thanos-io/thanos/pkg/tracing/otlp"
+	"github.com/oodle-ai/thanos/pkg/tracing/elasticapm"
+	"github.com/oodle-ai/thanos/pkg/tracing/google_cloud"
+	"github.com/oodle-ai/thanos/pkg/tracing/jaeger"
+	"github.com/oodle-ai/thanos/pkg/tracing/lightstep"
+	"github.com/oodle-ai/thanos/pkg/tracing/migration"
+	"github.com/oodle-ai/thanos/pkg/tracing/otlp"
 )
 
 type TracingProvider string

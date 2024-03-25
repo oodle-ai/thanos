@@ -24,11 +24,11 @@ import (
 	"github.com/prometheus/prometheus/storage/remote"
 	"github.com/prometheus/prometheus/tsdb/tsdbutil"
 
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/queryfrontend"
-	"github.com/thanos-io/thanos/pkg/receive"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/queryfrontend"
+	"github.com/oodle-ai/thanos/pkg/receive"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 const (

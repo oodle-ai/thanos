@@ -11,8 +11,8 @@ package storepb
 
 import (
 	any1 "github.com/golang/protobuf/ptypes/any"
-	labelpb "github.com/thanos-io/thanos/pkg/store/labelpb"
-	prompb "github.com/thanos-io/thanos/pkg/store/storepb/prompb"
+	labelpb "github.com/oodle-ai/thanos/pkg/store/labelpb"
+	prompb "github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

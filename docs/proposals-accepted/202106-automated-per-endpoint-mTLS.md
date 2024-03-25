@@ -14,7 +14,7 @@ menu: proposals-accepted
 
 * **Related Tickets:**
 
-  * [Per-Store TLS configuration in Thanos Query](https://github.com/thanos-io/thanos/issues/977)
+  * [Per-Store TLS configuration in Thanos Query](https://github.com/oodle-ai/thanos/issues/977)
 
 ## What
 

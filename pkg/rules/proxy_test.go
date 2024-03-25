@@ -14,8 +14,8 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 type testRulesClient struct {

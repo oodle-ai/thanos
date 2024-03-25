@@ -11,7 +11,7 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/model"
 )
 
 func TestTimeOrDurationValue(t *testing.T) {

@@ -13,13 +13,13 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 	"github.com/go-kit/log"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/util/annotations"
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
 )
 
 func TestMain(m *testing.M) {

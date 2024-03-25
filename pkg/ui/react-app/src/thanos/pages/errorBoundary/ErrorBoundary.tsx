@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component<any, ErrorState> {
           <h1>Aaaah! Something went wrong.</h1>
           <h3>
             Please file an issue in the&nbsp;
-            <a href="https://github.com/thanos-io/thanos/issues" target="_blank" rel="noreferrer noopener">
+            <a href="https://github.com/oodle-ai/thanos/issues" target="_blank" rel="noreferrer noopener">
               Thanos issue tracker.
             </a>
           </h3>

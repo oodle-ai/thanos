@@ -26,11 +26,11 @@ import (
 	"github.com/prometheus/prometheus/config"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/alert"
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/queryfrontend"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/alert"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/queryfrontend"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 // TestPromQLCompliance tests PromQL compatibility against https://github.com/prometheus/compliance/tree/main/promql.

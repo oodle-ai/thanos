@@ -12,7 +12,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/reloader"
+	"github.com/oodle-ai/thanos/pkg/reloader"
 )
 
 func ExampleReloader() {

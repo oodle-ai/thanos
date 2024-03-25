@@ -12,7 +12,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
-	"github.com/thanos-io/thanos/pkg/cacheutil"
+	"github.com/oodle-ai/thanos/pkg/cacheutil"
 )
 
 // MemcachedCache is a memcached-based cache.

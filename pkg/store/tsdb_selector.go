@@ -11,7 +11,7 @@ import (
 	"github.com/prometheus/prometheus/model/relabel"
 	"golang.org/x/exp/maps"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 const reMatchEmpty = "^$"

@@ -19,7 +19,7 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"github.com/prometheus/common/version"
 
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 type tracer struct {

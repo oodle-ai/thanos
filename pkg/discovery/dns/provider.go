@@ -14,10 +14,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
-	"github.com/thanos-io/thanos/pkg/discovery/dns/godns"
-	"github.com/thanos-io/thanos/pkg/discovery/dns/miekgdns"
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/discovery/dns/godns"
+	"github.com/oodle-ai/thanos/pkg/discovery/dns/miekgdns"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/extprom"
 )
 
 // Provider is a stateful cache for asynchronous DNS resolutions. It provides a way to resolve addresses and obtain them.

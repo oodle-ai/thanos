@@ -28,11 +28,11 @@ import (
 	"golang.org/x/sync/errgroup"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/model"
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 const FetcherConcurrency = 32

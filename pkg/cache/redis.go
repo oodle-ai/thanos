@@ -9,9 +9,9 @@ import (
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
+	"github.com/oodle-ai/thanos/pkg/cacheutil"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/thanos-io/thanos/pkg/cacheutil"
 )
 
 // RedisCache is a redis cache.

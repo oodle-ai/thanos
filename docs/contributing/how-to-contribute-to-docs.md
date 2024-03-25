@@ -78,7 +78,7 @@ and create PR against Thanos `main` branch.
 
 ## White noise
 
-We want all docs to not have any white noise. To achieve it, we provide [cleanup-white-noise.sh](https://github.com/thanos-io/thanos/blob/main/scripts/cleanup-white-noise.sh) under `scripts` to check. You can call it before a pull request, also PR test would call it too.
+We want all docs to not have any white noise. To achieve it, we provide [cleanup-white-noise.sh](https://github.com/oodle-ai/thanos/blob/main/scripts/cleanup-white-noise.sh) under `scripts` to check. You can call it before a pull request, also PR test would call it too.
 
 ## Testing
 

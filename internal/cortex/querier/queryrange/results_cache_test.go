@@ -17,9 +17,9 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/weaveworks/common/user"
 
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
-	"github.com/thanos-io/thanos/internal/cortex/util/flagext"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/util/flagext"
 )
 
 const (

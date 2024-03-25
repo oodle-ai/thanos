@@ -85,7 +85,7 @@ For release candidate, reuse the same branch and rebase it on every candidate un
 
 2. Update `VERSION` file to version one minor version higher than the released one and `dev` suffix. This allows CI to build Thanos binary with the version indicating potential next minor release, showing that someone uses non-released binary (which is fine, just better to know this!).
 
-Feel free to mimic following PR: https://github.com/thanos-io/thanos/pull/3861
+Feel free to mimic following PR: https://github.com/oodle-ai/thanos/pull/3861
 
 ### Prepare the release
 
@@ -104,16 +104,16 @@ Feel free to mimic following PR: https://github.com/thanos-io/thanos/pull/3861
    1. Note any changes in the changelog
    2. If there were any changes then update the relevant alerting rules and/or dashboards since `thanos-mixin` is part of the repository now
 
-5. *(Applies only to minor, non-`rc` release)* Update website's [hugo.yaml](https://github.com/thanos-io/thanos/blob/main/website/hugo.yaml) to have correct links for new release ( add `0.y.z: "/:sections/:filename.md"`).
+5. *(Applies only to minor, non-`rc` release)* Update website's [hugo.yaml](https://github.com/oodle-ai/thanos/blob/main/website/hugo.yaml) to have correct links for new release ( add `0.y.z: "/:sections/:filename.md"`).
 
 6. *(Applies only to minor, non-`rc` release)* Update tutorials:
 
    1. Update the Thanos version used in the [tutorials](https://github.com/thanos-io/tutorials) manifests to use the latest version.
    2. In case of any breaking changes or necessary updates adjust the manifests so the tutorial stays up to date.
-   3. Update the [scripts/quickstart.sh](https://github.com/thanos-io/thanos/blob/main/scripts/quickstart.sh) script if needed.
+   3. Update the [scripts/quickstart.sh](https://github.com/oodle-ai/thanos/blob/main/scripts/quickstart.sh) script if needed.
 
 7. Set the version in `VERSION` to reflect the tag you are going to make.
-   - If you are going to tag `v<major>.<minor>.0-rc.0`, this exact tag should be in `VERSION`. Example: [v0.25.2-rc.0/VERSION](https://github.com/thanos-io/thanos/blob/v0.25.2-rc.0/VERSION)
+   - If you are going to tag `v<major>.<minor>.0-rc.0`, this exact tag should be in `VERSION`. Example: [v0.25.2-rc.0/VERSION](https://github.com/oodle-ai/thanos/blob/v0.25.2-rc.0/VERSION)
 
 8. Open a PR with any changes resulting from the previous steps against the release branch and ask the maintainers to review it.
 
@@ -141,7 +141,7 @@ Feel free to mimic following PR: https://github.com/thanos-io/thanos/pull/3861
 
 1. Announce the release on the `#thanos` Slack channel. You are also encouraged to announce the new release on any Thanos social media accounts, such as Twitter (the credentials are available via Thanos' [Keybase](https://keybase.io/) team which includes all maintainers).
 
-2. Pull commits from release branch to main branch for non `rc` releases. Make sure to not modify `VERSION`, it should be still pointing to `version+1-dev` ([TODO to automate this](https://github.com/thanos-io/thanos/issues/4741))
+2. Pull commits from release branch to main branch for non `rc` releases. Make sure to not modify `VERSION`, it should be still pointing to `version+1-dev` ([TODO to automate this](https://github.com/oodle-ai/thanos/issues/4741))
 
 3. After releasing a major version, please cut a release for `kube-thanos` as well. https://github.com/thanos-io/kube-thanos/releases Make sure all the flag changes are reflected in the manifests. Otherwise, the process is the same, except we don't have `rc` for the `kube-thanos`. We do this to make sure we have compatible manifests for each major versions.
 

@@ -9,7 +9,7 @@ import (
 	"path"
 	"path/filepath"
 
-	"github.com/thanos-io/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
 
 	"github.com/go-kit/log/level"
 	"github.com/oklog/ulid"
@@ -17,7 +17,7 @@ import (
 
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block"
 )
 
 // IndexKnownIssues verifies any known index issue.

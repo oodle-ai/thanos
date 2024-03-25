@@ -8,8 +8,8 @@ menu: proposals-accepted
 
 ### Related Tickets
 
-* https://github.com/thanos-io/thanos/issues/2600
-* https://github.com/thanos-io/thanos/issues/3538
+* https://github.com/oodle-ai/thanos/issues/2600
+* https://github.com/oodle-ai/thanos/issues/3538
 
 ### Summary
 

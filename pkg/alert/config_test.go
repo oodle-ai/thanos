@@ -10,7 +10,7 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
 )
 
 func TestUnmarshalAPIVersion(t *testing.T) {

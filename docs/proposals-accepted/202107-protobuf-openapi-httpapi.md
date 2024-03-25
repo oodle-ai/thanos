@@ -11,7 +11,7 @@ menu: proposals-accepted
 * Owners:
   * Hangzhi
 * Related Tickets:
-  * Program Proposal: https://github.com/thanos-io/thanos/issues/4102
+  * Program Proposal: https://github.com/oodle-ai/thanos/issues/4102
   * Need for auto-documentation in Prometheus: https://github.com/prometheus/prometheus/issues/7192, https://github.com/prometheus/prometheus/issues/5567
 * Other docs:
   * A proposal of LFX mentorship: https://docs.google.com/document/d/1GeyFCk4QkVSrx4pQ4OSmOA1KE_FvmJRi_aq9hr2GoZQ/edit?usp=sharing

@@ -45,24 +45,24 @@ import (
 
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/indexheader"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/model"
-	"github.com/thanos-io/thanos/pkg/pool"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	storecache "github.com/thanos-io/thanos/pkg/store/cache"
-	"github.com/thanos-io/thanos/pkg/store/hintspb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/strutil"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/indexheader"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/pool"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	storecache "github.com/oodle-ai/thanos/pkg/store/cache"
+	"github.com/oodle-ai/thanos/pkg/store/hintspb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/strutil"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 const (
@@ -2659,7 +2659,7 @@ func (pg postingGroup) mergeKeys(other *postingGroup) *postingGroup {
 
 func checkNilPosting(name, value string, p index.Postings) index.Postings {
 	if p == nil {
-		// This should not happen. Debug for https://github.com/thanos-io/thanos/issues/874.
+		// This should not happen. Debug for https://github.com/oodle-ai/thanos/issues/874.
 		return index.ErrPostings(errors.Errorf("postings is nil for {%s=%s}. It was never fetched.", name, value))
 	}
 	return p

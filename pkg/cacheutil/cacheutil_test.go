@@ -15,7 +15,7 @@ import (
 	"go.uber.org/atomic"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/gate"
 )
 
 func TestMain(m *testing.M) {

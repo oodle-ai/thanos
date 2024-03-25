@@ -10,8 +10,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/util/annotations"
 
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 var _ UnaryClient = &GRPCClient{}

@@ -14,14 +14,14 @@ import (
 	"github.com/efficientgo/core/testutil"
 	"github.com/go-kit/log"
 	"github.com/gogo/protobuf/proto"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/targets/targetspb"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/model/labels"
 	"github.com/prometheus/prometheus/util/annotations"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/targets/targetspb"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
 )
 
 func TestPrometheus_Targets_e2e(t *testing.T) {

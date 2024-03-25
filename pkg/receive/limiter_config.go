@@ -8,8 +8,8 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/errors"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/errors"
 )
 
 // RootLimitsConfig is the root configuration for limits.

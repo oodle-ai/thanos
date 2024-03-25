@@ -17,7 +17,7 @@
 syntax = "proto3";
 package prometheus_copy;
 
-option go_package = "github.com/thanos-io/thanos/pkg/store/storepb/prompb";
+option go_package = "github.com/oodle-ai/thanos/pkg/store/storepb/prompb";
 
 import "store/labelpb/types.proto";
 
@@ -124,7 +124,7 @@ message BucketSpan {
 // TimeSeries represents samples and labels for a single time series.
 message TimeSeries {
   // Labels have to be sorted by label names and without duplicated label names.
-  // TODO(bwplotka): Don't use zero copy ZLabels, see https://github.com/thanos-io/thanos/pull/3279 for details.
+  // TODO(bwplotka): Don't use zero copy ZLabels, see https://github.com/oodle-ai/thanos/pull/3279 for details.
   repeated thanos.Label labels = 1;
   repeated Sample samples = 2;
   repeated Exemplar exemplars = 3;

@@ -18,8 +18,8 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/keepalive"
 
-	"github.com/thanos-io/thanos/pkg/tls"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/tls"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 // EndpointGroupGRPCOpts creates gRPC dial options for connecting to endpoint groups.

@@ -8,11 +8,11 @@ menu: proposals-accepted
 
 ## 1 Related links/tickets
 
-* https://github.com/thanos-io/thanos/pull/5520
-* https://github.com/thanos-io/thanos/pull/5333
-* https://github.com/thanos-io/thanos/pull/5402
-* https://github.com/thanos-io/thanos/issues/5404
-* https://github.com/thanos-io/thanos/issues/4972
+* https://github.com/oodle-ai/thanos/pull/5520
+* https://github.com/oodle-ai/thanos/pull/5333
+* https://github.com/oodle-ai/thanos/pull/5402
+* https://github.com/oodle-ai/thanos/issues/5404
+* https://github.com/oodle-ai/thanos/issues/4972
 
 ## 2 Why
 
@@ -26,7 +26,7 @@ We run multiple Thanos Receive replicas in a hashring topology, to ingest metric
 
 While this composes a scalable and highly available system, sudden increased load, i.e increase in [active series](https://grafana.com/docs/grafana-cloud/fundamentals/active-series-and-dpm/) from any tenant can cause Receive to hit its limits and cause incidents.
 
-We could scale horizontally automatically during such increased load (once we implement [this](https://github.com/thanos-io/thanos/issues/4972)), but it is yet safe to do so, plus a full solution cannot have unbounded cost scaling. Thus, some form of limits must be put in place, to prevent such issues from occurring and causing incidents.
+We could scale horizontally automatically during such increased load (once we implement [this](https://github.com/oodle-ai/thanos/issues/4972)), but it is yet safe to do so, plus a full solution cannot have unbounded cost scaling. Thus, some form of limits must be put in place, to prevent such issues from occurring and causing incidents.
 
 ## 4 Audience
 
@@ -40,9 +40,9 @@ We could scale horizontally automatically during such increased load (once we im
 
 ## 6 Non-Goals
 
-* [Request-based limiting](https://github.com/thanos-io/thanos/issues/5404), i.e, number of samples in a remote write request
-* Per-replica-tenant limiting which is already being discussed in this [PR](https://github.com/thanos-io/thanos/pull/5333)
-* Using [consistent hashing](https://github.com/thanos-io/thanos/issues/4972) implementation in Receive to make it easily scalable
+* [Request-based limiting](https://github.com/oodle-ai/thanos/issues/5404), i.e, number of samples in a remote write request
+* Per-replica-tenant limiting which is already being discussed in this [PR](https://github.com/oodle-ai/thanos/pull/5333)
+* Using [consistent hashing](https://github.com/oodle-ai/thanos/issues/4972) implementation in Receive to make it easily scalable
 
 ## 7 How
 
@@ -54,7 +54,7 @@ Thus, any remote write request can be failed completely, with a 429 status code 
 
 There are however a few challenges to this, as tenant metric data is distributed and replicated across multiple Thanos Receive replicas. Also, with a multi-replica setup, we have the concept of per-replica-tenant and per-tenant limits that can be defined as,
 
-* **Per-replica-tenant limit**: The limit imposed for active series per tenant, per replica of Thanos Receive. An initial implementation of this is already WIP in this [PR](https://github.com/thanos-io/thanos/pull/5333). This can also be treated as the active series limit for non-hashring topology or single replica Receive setups.
+* **Per-replica-tenant limit**: The limit imposed for active series per tenant, per replica of Thanos Receive. An initial implementation of this is already WIP in this [PR](https://github.com/oodle-ai/thanos/pull/5333). This can also be treated as the active series limit for non-hashring topology or single replica Receive setups.
 
 * **Per-tenant limit**: The overall limit imposed for active series per tenant across all replicas of Thanos Receive. This is essentially what this proposal is for.
 
@@ -106,7 +106,7 @@ So if a user configures a *per-tenant* limit, say `globalSeriesLimit`, the resul
 
 This is the simplest solution that can be implemented within Thanos Receive that can help us achieve best-effort limiting and stability. The fact that it does not rely on inter-Receive communication, which is very complex to implement, makes it a pragmatic solution.
 
-A full-fledged reference implementation of this can be found here: https://github.com/thanos-io/thanos/pull/5520.
+A full-fledged reference implementation of this can be found here: https://github.com/oodle-ai/thanos/pull/5520.
 
 ## 9 Alternatives
 
@@ -116,11 +116,11 @@ There are a few alternatives to what is proposed above,
 
 We can implement some new endpoints on Thanos Receive.
 
-Firstly, we can take advantage of the `api/v1/status/tsdb` endpoint that is exposed by [Prometheus TSDB](https://prometheus.io/docs/prometheus/latest/querying/api/#tsdb-stats) but has been implemented in Thanos Receive ([PR](https://github.com/thanos-io/thanos/pull/5402) which utilizes tenant headers to get local tenant TSDB stats in Receive).
+Firstly, we can take advantage of the `api/v1/status/tsdb` endpoint that is exposed by [Prometheus TSDB](https://prometheus.io/docs/prometheus/latest/querying/api/#tsdb-stats) but has been implemented in Thanos Receive ([PR](https://github.com/oodle-ai/thanos/pull/5402) which utilizes tenant headers to get local tenant TSDB stats in Receive).
 
-In its current implementation, it can provide us stats for each local TSDB of a tenant which contains a measure of active series (head series). It can return stats for all tenants in a Receive instance as well ([PR](https://github.com/thanos-io/thanos/pull/5470)). We can merge this across replicas to get the total number of active series a tenant has.
+In its current implementation, it can provide us stats for each local TSDB of a tenant which contains a measure of active series (head series). It can return stats for all tenants in a Receive instance as well ([PR](https://github.com/oodle-ai/thanos/pull/5470)). We can merge this across replicas to get the total number of active series a tenant has.
 
-Furthermore, we also have each tenant’s [Appendable](https://pkg.go.dev/github.com/thanos-io/thanos/pkg/receive#Appendable) in multitsdb, which returns a Prometheus [storage.Appender](https://pkg.go.dev/github.com/prometheus/prometheus/storage#Appender), which can in turn give us a [storage.GetRef](https://pkg.go.dev/github.com/prometheus/prometheus/storage#GetRef.GetRef) interface. This helps us know if a TSDB has a cached reference for a particular set of labels in its HEAD.
+Furthermore, we also have each tenant’s [Appendable](https://pkg.go.dev/github.com/oodle-ai/thanos/pkg/receive#Appendable) in multitsdb, which returns a Prometheus [storage.Appender](https://pkg.go.dev/github.com/prometheus/prometheus/storage#Appender), which can in turn give us a [storage.GetRef](https://pkg.go.dev/github.com/prometheus/prometheus/storage#GetRef.GetRef) interface. This helps us know if a TSDB has a cached reference for a particular set of labels in its HEAD.
 
 This GetRef interface returns a [SeriesRef](https://pkg.go.dev/github.com/prometheus/prometheus/storage#SeriesRef) when a set of labels is passed to it. If the SeriesRef is 0, it means that that set of labels is not cached, and any sample with that set of labels will generate a new active series. This data can also be fetched from a new endpoint like `api/v1/getrefmap` and merged across replicas.
 
@@ -137,7 +137,7 @@ The implementation would be as follows,
 
 * The above merged results may be exposed as metrics by Validator
 * Each remote write request is first intercepted by a Validator, which perform the above and calculates if the request is under the limit.
-* [Request-based limits](https://github.com/thanos-io/thanos/issues/5404) can also be implemented with such approach.
+* [Request-based limits](https://github.com/oodle-ai/thanos/issues/5404) can also be implemented with such approach.
 
 So, the limiting equation in this case becomes `globalSeriesLimit >= currentSeries + increaseOnRequest`.
 
@@ -162,7 +162,7 @@ message SeriesRefMap {
 
 #### 9.1.1 Pros:
 
-* Would result in more accurate measurements to limit on, however data replication would still make `api/v1/status/tsdb` [inaccurate](https://github.com/thanos-io/thanos/pull/5402#discussion_r893434246)
+* Would result in more accurate measurements to limit on, however data replication would still make `api/v1/status/tsdb` [inaccurate](https://github.com/oodle-ai/thanos/pull/5402#discussion_r893434246)
   * It considers the exact amount of current active series for a tenant as it calls status API each time
   * It considers how much the number of active series would increase after a remote write request
 * No new TSDB-related changes, it utilizes interfaces that are already present
@@ -199,7 +199,7 @@ The option of using gRPC instead of two API calls each time is also valid here.
 
 #### 9.2.1 Pros:
 
-* Would result in more accurate measurements to limit on however data replication would still make `api/v1/status/tsdb` [inaccurate](https://github.com/thanos-io/thanos/pull/5402#discussion_r893434246)
+* Would result in more accurate measurements to limit on however data replication would still make `api/v1/status/tsdb` [inaccurate](https://github.com/oodle-ai/thanos/pull/5402#discussion_r893434246)
   * It considers the exact amount of active series for a tenant as it calls status API each time
   * It considers how much the number of active series would increase after a remote write request
 * No new TSDB-related changes, it utilizes interfaces that are already present
@@ -218,7 +218,7 @@ An alternative could be just not to limit active series globally and make do wit
 
 ### 9.4 Make scaling-up non-disruptive
 
-[Consistent hashing](https://github.com/thanos-io/thanos/issues/4972) might be implemented and problems with sharding can be sorted out, which would make adding Receive replicas to hashring a non-disruptive operation, so that solutions like HPA can be used and make scale up/down operations much easier to the point where limits are not needed.
+[Consistent hashing](https://github.com/oodle-ai/thanos/issues/4972) might be implemented and problems with sharding can be sorted out, which would make adding Receive replicas to hashring a non-disruptive operation, so that solutions like HPA can be used and make scale up/down operations much easier to the point where limits are not needed.
 
 ### 9.5 Implement somewhere else (e.g Observatorium)
 

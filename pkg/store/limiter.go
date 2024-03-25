@@ -12,8 +12,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"go.uber.org/atomic"
 
-	"github.com/thanos-io/thanos/pkg/extkingpin"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 type ChunksLimiter interface {

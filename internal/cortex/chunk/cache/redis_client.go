@@ -15,7 +15,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/redis/rueidis"
 
-	"github.com/thanos-io/thanos/internal/cortex/util/flagext"
+	"github.com/oodle-ai/thanos/internal/cortex/util/flagext"
 )
 
 // RedisConfig defines how a RedisCache should be constructed.

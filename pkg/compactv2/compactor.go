@@ -18,7 +18,7 @@ import (
 	tsdb_errors "github.com/prometheus/prometheus/tsdb/errors"
 	"github.com/prometheus/prometheus/tsdb/index"
 
-	"github.com/thanos-io/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block"
 )
 
 type ProgressLogger interface {

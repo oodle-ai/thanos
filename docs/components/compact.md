@@ -87,7 +87,7 @@ The main risk is the **irreversible** implications of potential configuration er
 
 * If you accidentally upload blocks with the same external labels but produced by totally different Prometheis for totally different applications, some metrics can overlap and potentially merge together, making the series useless.
 * If you merge disjoint series in multiple of blocks together, there is currently no easy way to split them back.
-* The `penalty` offline deduplication algorithm has its own limitations. Even though it has been battle-tested for quite a long time, very few issues still come up from time to time (such as [breaking rate/irate](https://github.com/thanos-io/thanos/issues/2890)). If you'd like to enable this deduplication algorithm, do so at your own risk and back up your data first!
+* The `penalty` offline deduplication algorithm has its own limitations. Even though it has been battle-tested for quite a long time, very few issues still come up from time to time (such as [breaking rate/irate](https://github.com/oodle-ai/thanos/issues/2890)). If you'd like to enable this deduplication algorithm, do so at your own risk and back up your data first!
 
 #### Enabling Vertical Compaction
 
@@ -255,7 +255,7 @@ You should horizontally scale Compactor to cope with this using [label sharding]
 
 2. TSDB blocks from single stream is too big, it takes too much time or resources.
 
-This is rare as first you would need to ingest that amount of data into Prometheus and it's usually not recommended to have bigger than 10 millions series in the 2 hours blocks. However, with 2 weeks blocks, potential [Vertical Compaction](#vertical-compactions) enabled and other producers than Prometheus (e.g backfilling) this scalability concern can appear as well. See [Limit size of blocks](https://github.com/thanos-io/thanos/issues/3068) ticket to track progress of solution if you are hitting this.
+This is rare as first you would need to ingest that amount of data into Prometheus and it's usually not recommended to have bigger than 10 millions series in the 2 hours blocks. However, with 2 weeks blocks, potential [Vertical Compaction](#vertical-compactions) enabled and other producers than Prometheus (e.g backfilling) this scalability concern can appear as well. See [Limit size of blocks](https://github.com/oodle-ai/thanos/issues/3068) ticket to track progress of solution if you are hitting this.
 
 ## Eventual Consistency
 

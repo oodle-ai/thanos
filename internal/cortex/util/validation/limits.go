@@ -16,7 +16,7 @@ import (
 	"github.com/prometheus/prometheus/model/relabel"
 	"golang.org/x/time/rate"
 
-	"github.com/thanos-io/thanos/internal/cortex/util/flagext"
+	"github.com/oodle-ai/thanos/internal/cortex/util/flagext"
 )
 
 var errMaxGlobalSeriesPerUserValidation = errors.New("The ingester.max-global-series-per-user limit is unsupported if distributor.shard-by-all-labels is disabled")

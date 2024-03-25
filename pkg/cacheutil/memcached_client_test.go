@@ -22,8 +22,8 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/model"
 )
 
 func TestMemcachedClientConfig_validate(t *testing.T) {

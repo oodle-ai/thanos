@@ -16,7 +16,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
 
 	"github.com/go-kit/log"
 	"github.com/mwitkow/go-conntrack"
@@ -29,7 +29,7 @@ import (
 	"golang.org/x/net/http2"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/discovery/cache"
+	"github.com/oodle-ai/thanos/pkg/discovery/cache"
 )
 
 // HTTPConfig is a structure that allows pointing to various HTTP endpoint, e.g ruler connecting to queriers.

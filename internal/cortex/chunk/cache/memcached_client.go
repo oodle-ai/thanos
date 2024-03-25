@@ -16,13 +16,13 @@ import (
 	"github.com/bradfitz/gomemcache/memcache"
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/discovery/dns"
+	memcacheDiscovery "github.com/oodle-ai/thanos/pkg/discovery/memcache"
+	"github.com/oodle-ai/thanos/pkg/extprom"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/sony/gobreaker"
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/discovery/dns"
-	memcacheDiscovery "github.com/thanos-io/thanos/pkg/discovery/memcache"
-	"github.com/thanos-io/thanos/pkg/extprom"
 )
 
 // MemcachedClient interface exists for mocking memcacheClient.

@@ -15,7 +15,7 @@ import (
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
 
-	httputil "github.com/thanos-io/thanos/pkg/server/http"
+	httputil "github.com/oodle-ai/thanos/pkg/server/http"
 )
 
 type HTTPServerMiddleware struct {

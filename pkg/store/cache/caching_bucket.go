@@ -21,9 +21,9 @@ import (
 
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/cache"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/cache/cachekey"
+	"github.com/oodle-ai/thanos/pkg/cache"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/cache/cachekey"
 )
 
 const (

@@ -8,7 +8,7 @@ menu: proposals-accepted
 
 ## 1 Related links/tickets
 
-https://github.com/thanos-io/thanos/issues/5434
+https://github.com/oodle-ai/thanos/issues/5434
 
 ## 2 Why
 
@@ -28,7 +28,7 @@ Currently, we can only add external labels to Receiver itself, not to each tenan
 
 ## 5 Non-goals
 
-* Logically split RouterOnly and IngestorOnly modes (Issue [#5643](https://github.com/thanos-io/thanos/issues/5643)): If RouterOnly and IngestorOnly modes are logically split, implementing tenants’ external labels in RouterOnly and IngestorOnly modes would be less challenging. However, fixing this issue will not be a goal of this proposal, because it's not directly related to tenants' external labels. Regardless, fixing this issue before implementing tenants’ external labels in RouterOnly and IngestorOnly modes would be the best-case scenario.
+* Logically split RouterOnly and IngestorOnly modes (Issue [#5643](https://github.com/oodle-ai/thanos/issues/5643)): If RouterOnly and IngestorOnly modes are logically split, implementing tenants’ external labels in RouterOnly and IngestorOnly modes would be less challenging. However, fixing this issue will not be a goal of this proposal, because it's not directly related to tenants' external labels. Regardless, fixing this issue before implementing tenants’ external labels in RouterOnly and IngestorOnly modes would be the best-case scenario.
 * Dynamically extract tenants' external labels from time series' data: This proposal only covers statically specifying tenants' external labels. Dynamically receiving and extracting tenants' external labels from time series' data will be added as a follow-up to this proposal.
 
 ## 6 Audience
@@ -58,7 +58,7 @@ We will handle the cases of hard tenancy first. Once tenants' external labels ca
 
 Tenants’ external labels will be first implemented in RouterIngestor, since this is the most commonly used mode.
 
-After that, we can implement tenants’ external labels in RouterOnly and IngestorOnly modes. As stated above, the best-case scenario would be logically splitting RouterOnly and IngestorOnl (Issue [#5643](https://github.com/thanos-io/thanos/issues/5643)) before implement tenants’ external labels in each.
+After that, we can implement tenants’ external labels in RouterOnly and IngestorOnly modes. As stated above, the best-case scenario would be logically splitting RouterOnly and IngestorOnl (Issue [#5643](https://github.com/oodle-ai/thanos/issues/5643)) before implement tenants’ external labels in each.
 
 For the tests, the foremost ones are testing defining one or multiple tenants’ external labels correctly, handling changes in tenants’ external labels correctly, backward compatibility with Receiver’s external labels, and shipper detecting and uploading tenants’ external labels correctly to block storage. We may add more tests in the future but currently these are the most important ones to do first.
 
@@ -83,4 +83,4 @@ For the tests, the foremost ones are testing defining one or multiple tenants’
 * Dynamically extract tenants' external labels from time series' data: Once statically specifying tenants' external labels have been implemented and tested successfully and completely, we can think of implementing dynamically receiving and extracting tenants' external labels from time series' data.
 * Automatically making use of tenants' external labels: We can think of the most useful use cases with tenants' external labels and whether we should automate any of those use cases. One typical case is automatically grouping new blocks based on tenants' external labels.
 
-(Both of these are Ben's ideas expressed [here](https://github.com/thanos-io/thanos/pull/5720#pullrequestreview-1167923565).)
+(Both of these are Ben's ideas expressed [here](https://github.com/oodle-ai/thanos/pull/5720#pullrequestreview-1167923565).)

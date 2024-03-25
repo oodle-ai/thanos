@@ -23,7 +23,7 @@
 package prompb
 
 import (
-	labelpb "github.com/thanos-io/thanos/pkg/store/labelpb"
+	labelpb "github.com/oodle-ai/thanos/pkg/store/labelpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -753,7 +753,7 @@ type TimeSeries struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Labels have to be sorted by label names and without duplicated label names.
-	// TODO(bwplotka): Don't use zero copy ZLabels, see https://github.com/thanos-io/thanos/pull/3279 for details.
+	// TODO(bwplotka): Don't use zero copy ZLabels, see https://github.com/oodle-ai/thanos/pull/3279 for details.
 	Labels     []*labelpb.Label `protobuf:"bytes,1,rep,name=labels,proto3" json:"labels,omitempty"`
 	Samples    []*Sample        `protobuf:"bytes,2,rep,name=samples,proto3" json:"samples,omitempty"`
 	Exemplars  []*Exemplar      `protobuf:"bytes,3,rep,name=exemplars,proto3" json:"exemplars,omitempty"`

@@ -10,8 +10,8 @@ menu: proposals-done
   * @moadz
 
 * **Related Tickets:**
-  * [More granular query performance metrics issue by moadz](https://github.com/thanos-io/thanos/issues/1706)
-  * [Accurately Measuring Query Performance by ianbillet](https://github.com/thanos-io/thanos/discussions/4674)
+  * [More granular query performance metrics issue by moadz](https://github.com/oodle-ai/thanos/issues/1706)
+  * [Accurately Measuring Query Performance by ianbillet](https://github.com/oodle-ai/thanos/discussions/4674)
 
 ## Why
 
@@ -41,9 +41,9 @@ There's a few reason why measuring the latency on the query and query_range endp
 
 ## How
 
-Mercifully, we already capture these stats in [tracing spans from the query path](https://github.com/thanos-io/thanos/blob/de0e3848ff6085acf89a5f77e053c555a2cce550/pkg/store/proxy.go#L393-L397). Unfortunately, traces are sampled and are difficult to query reliably for SLI's. My suggestion is that we add a new histogram, `thanos_store_query_duration_seconds` that persists the total elapsed time for the query, with partitions(labels) for `series_le` and `samples_le` attached to each observation to allow for querying for a particular dimension (e.g. `thanos_query_duration_seconds` for the `0.99` request duration quantile with `> 1,000,000 samples` returned). Ideally we would represent this with an N-dimensional histogram, but this is not possible with prometheus.
+Mercifully, we already capture these stats in [tracing spans from the query path](https://github.com/oodle-ai/thanos/blob/de0e3848ff6085acf89a5f77e053c555a2cce550/pkg/store/proxy.go#L393-L397). Unfortunately, traces are sampled and are difficult to query reliably for SLI's. My suggestion is that we add a new histogram, `thanos_store_query_duration_seconds` that persists the total elapsed time for the query, with partitions(labels) for `series_le` and `samples_le` attached to each observation to allow for querying for a particular dimension (e.g. `thanos_query_duration_seconds` for the `0.99` request duration quantile with `> 1,000,000 samples` returned). Ideally we would represent this with an N-dimensional histogram, but this is not possible with prometheus.
 
-As the [`storepb.SeriesStatsCounter`](https://github.com/thanos-io/thanos/blob/de0e3848ff6085acf89a5f77e053c555a2cce550/pkg/store/storepb/custom.go#L470) already trackes this information in `thanos/store/proxy.go`, we will have to write an aggregator in the same file that can sum the series/samples for each 'query'. As one thanos query is translated into multiple, fan out queries and aggregated into a single response, we will need to do this once for all the queries [here](.).
+As the [`storepb.SeriesStatsCounter`](https://github.com/oodle-ai/thanos/blob/de0e3848ff6085acf89a5f77e053c555a2cce550/pkg/store/storepb/custom.go#L470) already trackes this information in `thanos/store/proxy.go`, we will have to write an aggregator in the same file that can sum the series/samples for each 'query'. As one thanos query is translated into multiple, fan out queries and aggregated into a single response, we will need to do this once for all the queries [here](.).
 
 ### Given most queries will have highly variable samples/series returned for each query, how do we manage cardinality?
 
@@ -172,7 +172,7 @@ for _, st := range s.stores() {
 }
 ```
 
-[Propagating the `SeriesStats` via `storepb.SeriesServer`](https://github.com/thanos-io/thanos/blob/de0e3848ff6085acf89a5f77e053c555a2cce550/pkg/store/proxy.go#L362):
+[Propagating the `SeriesStats` via `storepb.SeriesServer`](https://github.com/oodle-ai/thanos/blob/de0e3848ff6085acf89a5f77e053c555a2cce550/pkg/store/proxy.go#L362):
 
 ```go
 type seriesServer struct {

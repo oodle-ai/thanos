@@ -30,11 +30,11 @@ import (
 	"github.com/prometheus/prometheus/prompb"
 	"github.com/stretchr/testify/require"
 
-	"github.com/thanos-io/thanos/pkg/cacheutil"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/queryfrontend"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/cacheutil"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/queryfrontend"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 func TestQueryFrontend(t *testing.T) {

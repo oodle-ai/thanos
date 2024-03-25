@@ -6,7 +6,7 @@ owner: bwplotka, Harshitha1234, metalmatze
 menu: proposals-accepted
 ---
 
-### Ticket: https://github.com/thanos-io/thanos/issues/1598
+### Ticket: https://github.com/oodle-ai/thanos/issues/1598
 
 ## Summary
 
@@ -19,7 +19,7 @@ The main motivation for considering deletions in the object storage are the foll
 * **Accidental insertion of confidential data:** This is a scenario where a user accidentally inserts confidential data and wants to delete it immediately. In this case, the user expects their request to accelerate an immediate deletion of the series pertaining to the blocks concerned with that specific data to be deleted.
 * **GDPR:** Masking data and eventual deletion is expected.
 * **Deletions to sustain user requirements:** Let’s assume the user has some data which leads to some unexpected results or causes performance degradation (due to high cardinality) and the user wants to restore the previous data set-up for obtaining the desired results. In this scenario, the user would want to send a request to mask the data for the time being as there isn’t a high priority requirement to delete the data but eventually during the compaction the user can expect the data to be deleted by the compactor not leading to any major performance issues.
-* **Helps achieving series based retention (e.g rule aggregation) [#903](https://github.com/thanos-io/thanos/issues/903).**
+* **Helps achieving series based retention (e.g rule aggregation) [#903](https://github.com/oodle-ai/thanos/issues/903).**
 
 ## Goals
 

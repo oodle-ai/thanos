@@ -25,17 +25,17 @@ import (
 	"github.com/prometheus/prometheus/storage"
 	"github.com/prometheus/prometheus/tsdb"
 
+	"github.com/oodle-ai/thanos/pkg/api/status"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/exemplars"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/shipper"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 	"github.com/thanos-io/objstore"
-	"github.com/thanos-io/thanos/pkg/api/status"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/exemplars"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/shipper"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
 )
 
 type TSDBStats interface {
@@ -112,14 +112,14 @@ func (l *localClient) TimeRange() (mint int64, maxt int64) {
 	return l.store.TimeRange()
 }
 
-func (l *localClient) TSDBInfos() []infopb.TSDBInfo {
+func (l *localClient) TSDBInfos() []*infopb.TSDBInfo {
 	labelsets := l.store.LabelSet()
 	if len(labelsets) == 0 {
-		return []infopb.TSDBInfo{}
+		return []*infopb.TSDBInfo{}
 	}
 
 	mint, maxt := l.store.TimeRange()
-	return []infopb.TSDBInfo{
+	return []*infopb.TSDBInfo{
 		{
 			Labels:  labelsets[0],
 			MinTime: mint,

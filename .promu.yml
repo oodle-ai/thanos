@@ -1,7 +1,7 @@
 go:
   version: 1.21
 repository:
-  path: github.com/thanos-io/thanos
+  path: github.com/oodle-ai/thanos
 build:
   binaries:
     - name: thanos

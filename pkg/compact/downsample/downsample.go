@@ -28,10 +28,10 @@ import (
 
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 // Standard downsampling resolution levels in Thanos.
@@ -151,7 +151,7 @@ func Downsample(
 			for _, c := range chks {
 				// TODO(bwplotka): We can optimze this further by using in WriteSeries iterators of each chunk instead of
 				// samples. Also ensure 120 sample limit, otherwise we have gigantic chunks.
-				// https://github.com/thanos-io/thanos/issues/2542.
+				// https://github.com/oodle-ai/thanos/issues/2542.
 				if err := expandChunkIterator(c.Chunk.Iterator(reuseIt), &all); err != nil {
 					return id, errors.Wrapf(err, "expand chunk %d, series %d", c.Ref, postings.At())
 				}
@@ -166,7 +166,7 @@ func Downsample(
 				if !ok {
 					if c.Chunk.NumSamples() == 0 {
 						// Downsampled block can erroneously contain empty XOR chunks, skip those
-						// https://github.com/thanos-io/thanos/issues/5272
+						// https://github.com/oodle-ai/thanos/issues/5272
 						level.Warn(logger).Log("msg", fmt.Sprintf("expected downsampled chunk (*downsample.AggrChunk) got an empty %T instead for series: %d", c.Chunk, postings.At()))
 						continue
 					} else {
@@ -619,7 +619,7 @@ type sample struct {
 //
 // It handles overlapped chunks (removes overlaps).
 // NOTE: It is important to deduplicate with care ensuring that you don't hit
-// issue https://github.com/thanos-io/thanos/issues/2401#issuecomment-621958839.
+// issue https://github.com/oodle-ai/thanos/issues/2401#issuecomment-621958839.
 // NOTE(bwplotka): This hides resets from PromQL engine. This means it will not work for PromQL resets function.
 type ApplyCounterResetsSeriesIterator struct {
 	chks        []chunkenc.Iterator

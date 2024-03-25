@@ -34,11 +34,11 @@ import (
 	"github.com/prometheus/common/route"
 	"github.com/prometheus/common/version"
 
-	"github.com/thanos-io/thanos/pkg/extannotations"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/logging"
-	"github.com/thanos-io/thanos/pkg/server/http/middleware"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/extannotations"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/logging"
+	"github.com/oodle-ai/thanos/pkg/server/http/middleware"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 type status string

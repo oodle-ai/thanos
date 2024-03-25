@@ -7,8 +7,8 @@ import (
 	"context"
 	"os"
 
+	"github.com/oodle-ai/thanos/pkg/tracing/migration"
 	"github.com/prometheus/common/version"
-	"github.com/thanos-io/thanos/pkg/tracing/migration"
 
 	cloudtrace "github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace"
 	"github.com/go-kit/log"

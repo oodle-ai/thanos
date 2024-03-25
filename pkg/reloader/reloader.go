@@ -80,7 +80,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 // Reloader can watch config files and trigger reloads of a Prometheus server.
@@ -131,7 +131,7 @@ type CfgDirOption struct {
 	// should then use OutputDir as its config path.
 	OutputDir string
 
-	// TODO: https://github.com/thanos-io/thanos/issues/7201
+	// TODO: https://github.com/oodle-ai/thanos/issues/7201
 }
 
 // Options bundles options for the Reloader.

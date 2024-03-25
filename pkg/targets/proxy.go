@@ -15,12 +15,13 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/targets/targetspb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/targets/targetspb"
 )
 
 // Proxy implements targetspb.Targets gRPC that fans out requests to given targetspb.Targets.
 type Proxy struct {
+	targetspb.UnimplementedTargetsServer
 	logger  log.Logger
 	targets func() []targetspb.TargetsClient
 }

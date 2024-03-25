@@ -12,8 +12,8 @@ import (
 	"github.com/efficientgo/e2e"
 	"github.com/prometheus/common/model"
 
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 func TestDistributedQueryExecution(t *testing.T) {

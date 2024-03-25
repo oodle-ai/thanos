@@ -29,9 +29,9 @@ import (
 	"github.com/prometheus/prometheus/model/timestamp"
 	"github.com/weaveworks/common/httpgrpc"
 
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
-	"github.com/thanos-io/thanos/internal/cortex/util"
-	"github.com/thanos-io/thanos/internal/cortex/util/spanlogger"
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/util/spanlogger"
 )
 
 // StatusSuccess Prometheus success result.

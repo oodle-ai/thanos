@@ -27,12 +27,12 @@ import (
 	"github.com/uber/jaeger-client-go"
 	"github.com/weaveworks/common/httpgrpc"
 
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
-	"github.com/thanos-io/thanos/internal/cortex/querier"
-	"github.com/thanos-io/thanos/internal/cortex/tenant"
-	"github.com/thanos-io/thanos/internal/cortex/util/spanlogger"
-	"github.com/thanos-io/thanos/internal/cortex/util/validation"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/querier"
+	"github.com/oodle-ai/thanos/internal/cortex/tenant"
+	"github.com/oodle-ai/thanos/internal/cortex/util/spanlogger"
+	"github.com/oodle-ai/thanos/internal/cortex/util/validation"
 )
 
 var (

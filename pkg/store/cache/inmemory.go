@@ -20,8 +20,8 @@ import (
 	"github.com/prometheus/prometheus/storage"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/model"
-	"github.com/thanos-io/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
 )
 
 var (

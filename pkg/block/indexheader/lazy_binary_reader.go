@@ -20,7 +20,7 @@ import (
 	"github.com/thanos-io/objstore"
 	"go.uber.org/atomic"
 
-	"github.com/thanos-io/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block"
 )
 
 var (

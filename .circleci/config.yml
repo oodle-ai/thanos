@@ -61,7 +61,7 @@ jobs:
   # Cross build is needed for publish_release but needs to be done outside of docker.
   cross_build:
     machine: true
-    working_directory: /home/circleci/.go_workspace/src/github.com/thanos-io/thanos
+    working_directory: /home/circleci/.go_workspace/src/github.com/oodle-ai/thanos
     environment:
       GOBIN: "/home/circleci/.go_workspace/go/bin"
       PROMU_VERSION: "0.5.0"

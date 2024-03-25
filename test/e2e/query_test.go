@@ -49,20 +49,20 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/api/query/querypb"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/exemplars/exemplarspb"
-	"github.com/thanos-io/thanos/pkg/extannotations"
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	prompb_copy "github.com/thanos-io/thanos/pkg/store/storepb/prompb"
-	"github.com/thanos-io/thanos/pkg/targets/targetspb"
-	"github.com/thanos-io/thanos/pkg/tenancy"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/api/query/querypb"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/exemplars/exemplarspb"
+	"github.com/oodle-ai/thanos/pkg/extannotations"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	prompb_copy "github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/targets/targetspb"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 const testQueryA = "{a=\"1\"}"
@@ -1034,7 +1034,7 @@ func TestQueryStoreDedup(t *testing.T) {
 			blockFinderLabel: "dedupint",
 			expectedSeries:   1,
 		},
-		// This is a regression test for the bug outlined in https://github.com/thanos-io/thanos/issues/6257.
+		// This is a regression test for the bug outlined in https://github.com/oodle-ai/thanos/issues/6257.
 		{
 			desc:            "Deduplication works on internal label with resorting required",
 			intReplicaLabel: "a",
@@ -1055,7 +1055,7 @@ func TestQueryStoreDedup(t *testing.T) {
 			blockFinderLabel: "dedupintresort",
 			expectedSeries:   2,
 		},
-		// This is a regression test for the bug outlined in https://github.com/thanos-io/thanos/issues/6257.
+		// This is a regression test for the bug outlined in https://github.com/oodle-ai/thanos/issues/6257.
 		{
 			desc:            "Deduplication works with extra internal label",
 			intReplicaLabel: "replica",
@@ -1076,7 +1076,7 @@ func TestQueryStoreDedup(t *testing.T) {
 			blockFinderLabel: "dedupintextra",
 			expectedSeries:   2,
 		},
-		// This is a regression test for the bug outlined in https://github.com/thanos-io/thanos/issues/6257.
+		// This is a regression test for the bug outlined in https://github.com/oodle-ai/thanos/issues/6257.
 		{
 			desc:            "Deduplication works with both internal and external label",
 			intReplicaLabel: "replica",
@@ -1252,7 +1252,7 @@ func TestSidecarQueryDedup(t *testing.T) {
 
 	t.Run("deduplication on internal label with reorder", func(t *testing.T) {
 		// Uses "a" as replica label, which is an internal label from the samples used.
-		// This is a regression test for the bug outlined in https://github.com/thanos-io/thanos/issues/6257.
+		// This is a regression test for the bug outlined in https://github.com/oodle-ai/thanos/issues/6257.
 		// Until the bug was fixed, this testcase would return 4 samples instead of 2.
 		instantQuery(t, ctx, query4.Endpoint("http"), func() string {
 			return "my_fake_metric"
@@ -2004,7 +2004,7 @@ func TestGrpcQueryRange(t *testing.T) {
 	testutil.Ok(t, err)
 }
 
-// Repro for https://github.com/thanos-io/thanos/pull/5296#issuecomment-1217875271.
+// Repro for https://github.com/oodle-ai/thanos/pull/5296#issuecomment-1217875271.
 func TestConnectedQueriesWithLazyProxy(t *testing.T) {
 	t.Parallel()
 

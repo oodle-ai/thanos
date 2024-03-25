@@ -46,7 +46,7 @@ After initial review, I move this switch to each panel. As this helps to run the
 
 **Pull Requests**
 - Add engine param to Thanos engine constructor ([thanos-io/promql-engine#228](https://github.com/thanos-io/promql-engine/pull/228))
-- Query: Switch Multiple Engines ([thanos-io/thanos#6234](https://github.com/thanos-io/thanos/pull/6234))
+- Query: Switch Multiple Engines ([thanos-io/thanos#6234](https://github.com/oodle-ai/thanos/pull/6234))
 
 ### Query Explanation
 
@@ -64,7 +64,7 @@ Thanos UI got updated with time, resulting in the development of the explanation
 
 **Pull Requests**
 - Add method to explain query vector ([thanos-io/promql-engine#252](https://github.com/thanos-io/promql-engine/pull/252))
-- Query Explanation ([thanos-io/thanos#6346](https://github.com/thanos-io/thanos/pull/6346))
+- Query Explanation ([thanos-io/thanos#6346](https://github.com/oodle-ai/thanos/pull/6346))
 
 ### What next
 

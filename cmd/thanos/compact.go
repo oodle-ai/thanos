@@ -31,23 +31,23 @@ import (
 	"github.com/thanos-io/objstore/client"
 	objstoretracing "github.com/thanos-io/objstore/tracing/opentracing"
 
-	blocksAPI "github.com/thanos-io/thanos/pkg/api/blocks"
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/compact"
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/dedup"
-	"github.com/thanos-io/thanos/pkg/extkingpin"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/logging"
-	"github.com/thanos-io/thanos/pkg/prober"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	httpserver "github.com/thanos-io/thanos/pkg/server/http"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/tracing"
-	"github.com/thanos-io/thanos/pkg/ui"
+	blocksAPI "github.com/oodle-ai/thanos/pkg/api/blocks"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/compact"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/dedup"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/logging"
+	"github.com/oodle-ai/thanos/pkg/prober"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	httpserver "github.com/oodle-ai/thanos/pkg/server/http"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/ui"
 )
 
 var (
@@ -753,7 +753,7 @@ func (cc *compactConfig) registerFlag(cmd extkingpin.FlagClause) {
 	cmd.Flag("retention.resolution-1h", "How long to retain samples of resolution 2 (1 hour) in bucket. Setting this to 0d will retain samples of this resolution forever").
 		Default("0d").SetValue(&cc.retentionOneHr)
 
-	// TODO(kakkoyun, pgough): https://github.com/thanos-io/thanos/issues/2266.
+	// TODO(kakkoyun, pgough): https://github.com/oodle-ai/thanos/issues/2266.
 	cmd.Flag("wait", "Do not exit after all compactions have been processed and wait for new work.").
 		Short('w').BoolVar(&cc.wait)
 	cmd.Flag("wait-interval", "Wait interval between consecutive compaction runs and bucket refreshes. Only works when --wait flag specified.").
@@ -809,11 +809,11 @@ func (cc *compactConfig) registerFlag(cmd extkingpin.FlagClause) {
 		"If you need a different deduplication algorithm (e.g one that works well with Prometheus replicas), please set it via --deduplication.func.").
 		StringsVar(&cc.dedupReplicaLabels)
 
-	// TODO(bwplotka): This is short term fix for https://github.com/thanos-io/thanos/issues/1424, replace with vertical block sharding https://github.com/thanos-io/thanos/pull/3390.
+	// TODO(bwplotka): This is short term fix for https://github.com/oodle-ai/thanos/issues/1424, replace with vertical block sharding https://github.com/oodle-ai/thanos/pull/3390.
 	cmd.Flag("compact.block-max-index-size", "Maximum index size for the resulted block during any compaction. Note that"+
 		"total size is approximated in worst case. If the block that would be resulted from compaction is estimated to exceed this number, biggest source"+
 		"block is marked for no compaction (no-compact-mark.json is uploaded) which causes this block to be excluded from any compaction. "+
-		"Default is due to https://github.com/thanos-io/thanos/issues/1424, but it's overall recommended to keeps block size to some reasonable size.").
+		"Default is due to https://github.com/oodle-ai/thanos/issues/1424, but it's overall recommended to keeps block size to some reasonable size.").
 		Hidden().Default("64GB").BytesVar(&cc.maxBlockIndexSize)
 
 	cmd.Flag("compact.skip-block-with-out-of-order-chunks", "When set to true, mark blocks containing index with out-of-order chunks for no compact instead of halting the compaction").

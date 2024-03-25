@@ -8,7 +8,7 @@ menu: proposals-done
 
 ### Related Tickets
 
-* Response caching: https://github.com/thanos-io/thanos/issues/1651
+* Response caching: https://github.com/oodle-ai/thanos/issues/1651
 * Moving query frontend to separate repo: https://github.com/cortexproject/Cortex/issues/1672
 * Discussion about naming: https://cloud-native.slack.com/archives/CK5RSSC10/p1586939369171300
 
@@ -30,7 +30,7 @@ We will go through rationales, and potential alternatives.
 
 Since the nature of Cortex backend is really similar to Thanos, with exactly the same PromQL API, and long term capabilities, the caching work done for Cortex fits to Thanos. Given also our good collaboration in the past, it feels natural to reuse Cortex's code. We even started discussion to move it to separate repo, but there was no motivation towards this, since there is no issue on using the Cortex one, as Cortex is happy to take generalized contributions.
 
-At the end we were advertising to use Cortex query frontend on production on top of Thanos and this works considerably well, with some problems on edge cases and for downsampled data as mentioned [here](https://github.com/thanos-io/thanos/issues/1651).
+At the end we were advertising to use Cortex query frontend on production on top of Thanos and this works considerably well, with some problems on edge cases and for downsampled data as mentioned [here](https://github.com/oodle-ai/thanos/issues/1651).
 
 However, we realized recently that asking users to install suddenly Cortex component on top of Thanos system is extremely confusing:
 
@@ -70,7 +70,7 @@ The idea is to create `thanos query-frontend` component that allows specifying f
 * `--query-range.disable-step-align`, `bool`
 * `--query-range.response-cache-ttl` `time.Duration`
 * `--query-range.response-cache-max-freshness` `time.Duration` default = `1m`
-* `--query-range.response-cache-config(-file)` `pathorcontent` + [CacheConfig](https://github.com/thanos-io/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/pkg/store/cache/factory.go#L32)
+* `--query-range.response-cache-config(-file)` `pathorcontent` + [CacheConfig](https://github.com/oodle-ai/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/pkg/store/cache/factory.go#L32)
 
 We plan to have in-mem, fifo and memcached support for now. Cache config will be exactly the same as the one used for Store Gateway.
 
@@ -102,7 +102,7 @@ Overall, [Reusing is caring](https://www.bwplotka.dev/2020/how-to-became-oss-mai
 
 ## Work Plan
 
-1. Refactor [IndexCacheConfig](https://github.com/thanos-io/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/pkg/store/cache/factory.go#L32) to generic cache config so we can reuse. Make it implement Cortex cache.Cache interface.
+1. Refactor [IndexCacheConfig](https://github.com/oodle-ai/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/pkg/store/cache/factory.go#L32) to generic cache config so we can reuse. Make it implement Cortex cache.Cache interface.
 2. Add necessary changes to Cortex frontend
    * Metric generalization (they are globals now).
    * Avoid unnecessary dependencies.
@@ -113,4 +113,4 @@ Overall, [Reusing is caring](https://www.bwplotka.dev/2020/how-to-became-oss-mai
 
 ## Future Work
 
-Improvements to Cortex query frontend, so Thanos `query-frontend` as described [here](https://github.com/thanos-io/thanos/issues/1651)
+Improvements to Cortex query frontend, so Thanos `query-frontend` as described [here](https://github.com/oodle-ai/thanos/issues/1651)

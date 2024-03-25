@@ -15,7 +15,7 @@ import (
 	"github.com/prometheus/prometheus/tsdb/index"
 	"golang.org/x/exp/slices"
 
-	"github.com/thanos-io/thanos/pkg/block/indexheader"
+	"github.com/oodle-ai/thanos/pkg/block/indexheader"
 )
 
 var emptyLazyPostings = &lazyExpandedPostings{postings: nil, matchers: nil}

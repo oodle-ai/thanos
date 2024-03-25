@@ -13,7 +13,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/model/labels"
 
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 const (
@@ -55,11 +55,11 @@ func NewRecordingRule(r *RecordingRule) *Rule {
 //
 // Note: This method assumes r1 and r2 are logically equal as per Rule#Compare.
 func (r1 *RecordingRule) Compare(r2 *RecordingRule) int {
-	if r1.LastEvaluation.Before(r2.LastEvaluation) {
+	if r1.LastEvaluation.AsTime().Before(r2.LastEvaluation.AsTime()) {
 		return 1
 	}
 
-	if r1.LastEvaluation.After(r2.LastEvaluation) {
+	if r1.LastEvaluation.AsTime().After(r2.LastEvaluation.AsTime()) {
 		return -1
 	}
 
@@ -84,10 +84,10 @@ func (r *Rule) GetLabels() labels.Labels {
 }
 
 func (r *Rule) SetLabels(ls labels.Labels) {
-	var result labelpb.ZLabelSet
+	var result *labelpb.ZLabelSet
 
 	if !ls.IsEmpty() {
-		result = labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(ls)}
+		result = &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(ls)}
 	}
 
 	switch {
@@ -123,9 +123,9 @@ func (r *Rule) GetQuery() string {
 func (r *Rule) GetLastEvaluation() time.Time {
 	switch {
 	case r.GetRecording() != nil:
-		return r.GetRecording().LastEvaluation
+		return r.GetRecording().LastEvaluation.AsTime()
 	case r.GetAlert() != nil:
-		return r.GetAlert().LastEvaluation
+		return r.GetAlert().LastEvaluation.AsTime()
 	default:
 		return time.Time{}
 	}
@@ -319,11 +319,11 @@ func (a1 *Alert) Compare(a2 *Alert) int {
 		return d
 	}
 
-	if a1.LastEvaluation.Before(a2.LastEvaluation) {
+	if a1.LastEvaluation.AsTime().Before(a2.LastEvaluation.AsTime()) {
 		return 1
 	}
 
-	if a1.LastEvaluation.After(a2.LastEvaluation) {
+	if a1.LastEvaluation.AsTime().After(a2.LastEvaluation.AsTime()) {
 		return -1
 	}
 

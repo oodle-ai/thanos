@@ -6,8 +6,8 @@ package queryfrontend
 import (
 	"fmt"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
 )
 
 // thanosCacheKeyGenerator is a utility for using split interval when determining cache keys.

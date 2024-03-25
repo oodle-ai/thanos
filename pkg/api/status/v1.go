@@ -23,13 +23,13 @@ import (
 	"github.com/prometheus/prometheus/tsdb"
 
 	"github.com/go-kit/log"
+	"github.com/oodle-ai/thanos/pkg/api"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/logging"
 	"github.com/opentracing/opentracing-go"
 	"github.com/prometheus/common/route"
 	"github.com/prometheus/prometheus/model/labels"
 	v1 "github.com/prometheus/prometheus/web/api/v1"
-	"github.com/thanos-io/thanos/pkg/api"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/logging"
 )
 
 type TenantStats struct {

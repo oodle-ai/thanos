@@ -9,7 +9,7 @@ import (
 
 	"github.com/prometheus/prometheus/model/labels"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 
 	"github.com/efficientgo/core/testutil"
 )

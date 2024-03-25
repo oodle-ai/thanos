@@ -48,7 +48,7 @@ defer f.Close() // What if an error occurs here?
 
 Unchecked errors like this can lead to major bugs. Consider the above example: the `*os.File` `Close` method can be responsible for actually flushing to the file, so if an error occurs at that point, the whole **write might be aborted!** 😱
 
-Always check errors! To make it consistent and not distracting, use our [runutil](https://pkg.go.dev/github.com/thanos-io/thanos@v0.17.0/pkg/runutil?tab=doc) helper package, e.g.:
+Always check errors! To make it consistent and not distracting, use our [runutil](https://pkg.go.dev/github.com/oodle-ai/thanos@v0.17.0/pkg/runutil?tab=doc) helper package, e.g.:
 
 ```go
 // Use `CloseWithErrCapture` if you want to close and fail the function or
@@ -103,7 +103,7 @@ func writeToFile(...) (err error) {
 
 #### Exhaust Readers
 
-One of the most common bugs is forgetting to close or fully read the bodies of HTTP requests and responses, especially on error. If you read the body of such structures, you can use the [runutil](https://pkg.go.dev/github.com/thanos-io/thanos@v0.17.0/pkg/runutil?tab=doc) helper as well:
+One of the most common bugs is forgetting to close or fully read the bodies of HTTP requests and responses, especially on error. If you read the body of such structures, you can use the [runutil](https://pkg.go.dev/github.com/oodle-ai/thanos@v0.17.0/pkg/runutil?tab=doc) helper as well:
 
 ```go
 defer runutil.ExhaustCloseWithLogOnErr(logger, resp.Body, "close response")
@@ -914,25 +914,25 @@ This is the list of rules we ensure automatically. This section is for those who
 
 Never use `print`. Always use a passed `go-kit/log.Logger`.
 
-Ensured [here](https://github.com/thanos-io/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L311).
+Ensured [here](https://github.com/oodle-ai/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L311).
 
 #### Ensure Prometheus Metric Registration
 
-It's very easy to forget to add Prometheus metrics (e.g a `prometheus.Counter`) into a `registry.MustRegister` function. To avoid this, we ensure all metrics are created via `promtest.With(r).New*` and we disallow the old type of registration. Read more about the problem [here](https://github.com/thanos-io/thanos/issues/2102).
+It's very easy to forget to add Prometheus metrics (e.g a `prometheus.Counter`) into a `registry.MustRegister` function. To avoid this, we ensure all metrics are created via `promtest.With(r).New*` and we disallow the old type of registration. Read more about the problem [here](https://github.com/oodle-ai/thanos/issues/2102).
 
-Ensured [here](https://github.com/thanos-io/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L308).
+Ensured [here](https://github.com/oodle-ai/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L308).
 
 #### go vet
 
 Standard Go vet is quite strict, but for a good reason. Always vet your Go code!
 
-Ensured [here](https://github.com/thanos-io/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L313).
+Ensured [here](https://github.com/oodle-ai/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L313).
 
 #### golangci-lint
 
 [golangci-lint](https://github.com/golangci/golangci-lint) is an amazing tool that allows running a set of different custom linters from the Go community against your code. Give it a star and use it. (:
 
-Ensured [here](https://github.com/thanos-io/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L315) with [those linters](https://github.com/thanos-io/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/.golangci.yml#L31) enabled.
+Ensured [here](https://github.com/oodle-ai/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L315) with [those linters](https://github.com/oodle-ai/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/.golangci.yml#L31) enabled.
 
 #### misspell
 
@@ -940,16 +940,16 @@ Misspell is amazing, it catches typos in comments and docs.
 
 No Grammarly plugin for this yet ): (We wish).
 
-Ensured [here](https://github.com/thanos-io/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L#300), using [golangci-lint](https://github.com/golangci/golangci-lint) / [misspell](https://github.com/client9/misspell).
+Ensured [here](https://github.com/oodle-ai/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L#300), using [golangci-lint](https://github.com/golangci/golangci-lint) / [misspell](https://github.com/client9/misspell).
 
 #### Comments Should be Full Sentences
 
 All comments should be full sentences. They should start with an uppercase letter and end with a period.
 
-Ensured [here](https://github.com/thanos-io/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L300) using [golangci-lint](https://github.com/golangci/golangci-lint) / [godot](https://github.com/tetafro/godot).
+Ensured [here](https://github.com/oodle-ai/thanos/blob/40526f52f54d4501737e5246c0e71e56dd7e0b2d/Makefile#L300) using [golangci-lint](https://github.com/golangci/golangci-lint) / [godot](https://github.com/tetafro/godot).
 
 # Bash
 
-Overall try to NOT use bash. For scripts longer than 30 lines, consider writing it in Go as we did [here](https://github.com/thanos-io/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/scripts/copyright/copyright.go).
+Overall try to NOT use bash. For scripts longer than 30 lines, consider writing it in Go as we did [here](https://github.com/oodle-ai/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/scripts/copyright/copyright.go).
 
-If you have to, we follow the Google Shell style guide: https://google.github.io/styleguide/shellguide.html Ensured [here](https://github.com/thanos-io/thanos/blob/040b69b0b7c8e1be3890054bcb16389fa975eb45/Makefile#L165) using [shfmt](https://github.com/mvdan/sh). We also use [shellcheck](https://github.com/koalaman/shellcheck) to check any script errors.
+If you have to, we follow the Google Shell style guide: https://google.github.io/styleguide/shellguide.html Ensured [here](https://github.com/oodle-ai/thanos/blob/040b69b0b7c8e1be3890054bcb16389fa975eb45/Makefile#L165) using [shfmt](https://github.com/mvdan/sh). We also use [shellcheck](https://github.com/koalaman/shellcheck) to check any script errors.

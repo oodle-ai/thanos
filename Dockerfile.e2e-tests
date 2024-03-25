@@ -1,9 +1,9 @@
 # Taking a non-alpine image for e2e tests so that cgo can be enabled for the race detector.
 FROM golang:1.21 as builder
 
-WORKDIR $GOPATH/src/github.com/thanos-io/thanos
+WORKDIR $GOPATH/src/github.com/oodle-ai/thanos
 
-COPY . $GOPATH/src/github.com/thanos-io/thanos
+COPY . $GOPATH/src/github.com/oodle-ai/thanos
 
 RUN CGO_ENABLED=1 go build -o $GOBIN/thanos -race ./cmd/thanos
 # -----------------------------------------------------------------------------

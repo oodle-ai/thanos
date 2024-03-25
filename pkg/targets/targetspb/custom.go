@@ -10,7 +10,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/model/labels"
 
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 func NewTargetsResponse(targets *TargetDiscovery) *TargetsResponse {
@@ -80,11 +80,11 @@ func (t1 *ActiveTarget) CompareState(t2 *ActiveTarget) int {
 		return d
 	}
 
-	if t1.LastScrape.Before(t2.LastScrape) {
+	if t1.LastScrape.AsTime().Before(t2.LastScrape.AsTime()) {
 		return 1
 	}
 
-	if t1.LastScrape.After(t2.LastScrape) {
+	if t1.LastScrape.AsTime().After(t2.LastScrape.AsTime()) {
 		return -1
 	}
 
@@ -100,30 +100,30 @@ func (t1 *DroppedTarget) Compare(t2 *DroppedTarget) int {
 }
 
 func (t *ActiveTarget) SetLabels(ls labels.Labels) {
-	var result labelpb.ZLabelSet
+	var result *labelpb.ZLabelSet
 
 	if !ls.IsEmpty() {
-		result = labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(ls)}
+		result = &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(ls)}
 	}
 
 	t.Labels = result
 }
 
 func (t *ActiveTarget) SetDiscoveredLabels(ls labels.Labels) {
-	var result labelpb.ZLabelSet
+	var result *labelpb.ZLabelSet
 
 	if !ls.IsEmpty() {
-		result = labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(ls)}
+		result = &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(ls)}
 	}
 
 	t.DiscoveredLabels = result
 }
 
 func (t *DroppedTarget) SetDiscoveredLabels(ls labels.Labels) {
-	var result labelpb.ZLabelSet
+	var result *labelpb.ZLabelSet
 
 	if !ls.IsEmpty() {
-		result = labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(ls)}
+		result = &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(ls)}
 	}
 
 	t.DiscoveredLabels = result

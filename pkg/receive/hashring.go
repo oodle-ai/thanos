@@ -18,9 +18,9 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
 )
 
 // HashringAlgorithm is the algorithm used to distribute series in the ring.

@@ -12,8 +12,8 @@ menu: proposals-accepted
   * [@douglascamata](https://github.com/douglascamata)
 
 * **Related Tickets:**
-  * [Querier: Added native multi-tenancy support](https://github.com/thanos-io/thanos/pull/4141).
-  * [Proposal: Native Multi-tenancy Support](https://github.com/thanos-io/thanos/pull/4055)
+  * [Querier: Added native multi-tenancy support](https://github.com/oodle-ai/thanos/pull/4141).
+  * [Proposal: Native Multi-tenancy Support](https://github.com/oodle-ai/thanos/pull/4055)
 
 * **Other docs:**
   * [Multi-tenancy in Thanos](https://thanos.io/tip/operating/multi-tenancy.md/)

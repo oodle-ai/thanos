@@ -31,13 +31,13 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
 )
 
 type mockedSeriesServer struct {
@@ -1693,7 +1693,7 @@ func seriesEquals(t *testing.T, expected []rawSeries, got []storepb.Series) {
 	ret := make([]rawSeries, len(got))
 	for i, s := range got {
 		r := rawSeries{
-			lset: labelpb.ZLabelsToPromLabels(s.Labels),
+			lset: labelpb.ProtobufLabelsToPromLabels(s.Labels),
 		}
 		for _, chk := range s.Chunks {
 			var samples []sample
@@ -1938,7 +1938,7 @@ func (s *mockedStoreAPI) LabelValues(_ context.Context, req *storepb.LabelValues
 func storeSeriesResponse(t testing.TB, lset labels.Labels, smplChunks ...[]sample) *storepb.SeriesResponse {
 	var s storepb.Series
 
-	s.Labels = append(s.Labels, labelpb.ZLabelsFromPromLabels(lset)...)
+	s.Labels = append(s.Labels, labelpb.ProtobufLabelsFromPromLabels(lset)...)
 
 	for _, smpls := range smplChunks {
 		c := chunkenc.NewXORChunk()
@@ -2032,7 +2032,7 @@ func benchProxySeries(t testutil.TB, totalSamples, totalSeries int) {
 	for _, c := range clients {
 		m := c.(*storetestutil.TestClient).StoreClient.(*mockedStoreAPI)
 
-		// NOTE: Proxy will merge all series with same labels without any frame limit (https://github.com/thanos-io/thanos/issues/2332).
+		// NOTE: Proxy will merge all series with same labels without any frame limit (https://github.com/oodle-ai/thanos/issues/2332).
 		for _, r := range m.RespSeries {
 			allResps = append(allResps, r)
 
@@ -2219,7 +2219,7 @@ func TestDedupRespHeap_Deduplication(t *testing.T) {
 				{
 					Result: &storepb.SeriesResponse_Series{
 						Series: &storepb.Series{
-							Labels: labelpb.ZLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
+							Labels: labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
 							Chunks: []storepb.AggrChunk{
 								{
 									Raw: &storepb.Chunk{
@@ -2245,7 +2245,7 @@ func TestDedupRespHeap_Deduplication(t *testing.T) {
 				{
 					Result: &storepb.SeriesResponse_Series{
 						Series: &storepb.Series{
-							Labels: labelpb.ZLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
+							Labels: labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
 							Chunks: []storepb.AggrChunk{
 								{
 									Raw: &storepb.Chunk{
@@ -2260,7 +2260,7 @@ func TestDedupRespHeap_Deduplication(t *testing.T) {
 				{
 					Result: &storepb.SeriesResponse_Series{
 						Series: &storepb.Series{
-							Labels: labelpb.ZLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
+							Labels: labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings("foo", "bar")),
 							Chunks: []storepb.AggrChunk{
 								{
 									Raw: &storepb.Chunk{

@@ -26,7 +26,7 @@ import (
 	"github.com/prometheus/prometheus/tsdb/tombstones"
 	"gopkg.in/yaml.v3"
 
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 type SourceType string

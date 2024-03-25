@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
 )
 
 func TestTieredSimple(t *testing.T) {

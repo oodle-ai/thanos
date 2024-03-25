@@ -7,8 +7,8 @@ import (
 	"github.com/go-kit/log"
 	"github.com/prometheus/common/route"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/component"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
 )
 
 // Bucket is a web UI representing state of buckets as a timeline.

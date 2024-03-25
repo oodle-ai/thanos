@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/atomic"
 
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
 )
 
 func TestMemcached(t *testing.T) {

@@ -14,7 +14,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 const (
@@ -74,7 +74,7 @@ const (
 	ManualNoCompactReason NoCompactReason = "manual"
 	// ManualNoDownsampleReason is a custom reason of excluding from downsample that should be added when no-downsample mark is added for unknown/user specified reason.
 	ManualNoDownsampleReason NoDownsampleReason = "manual"
-	// IndexSizeExceedingNoCompactReason is a reason of index being too big (for example exceeding 64GB limit: https://github.com/thanos-io/thanos/issues/1424)
+	// IndexSizeExceedingNoCompactReason is a reason of index being too big (for example exceeding 64GB limit: https://github.com/oodle-ai/thanos/issues/1424)
 	// This reason can be ignored when vertical block sharding will be implemented.
 	IndexSizeExceedingNoCompactReason = "index-size-exceeding"
 	// OutOfOrderChunksNoCompactReason is a reason of to no compact block with index contains out of order chunk so that the compaction is not blocked.

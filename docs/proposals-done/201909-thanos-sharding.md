@@ -8,13 +8,13 @@ menu: proposals-done
 
 ### Related Tickets
 
-* https://github.com/thanos-io/thanos/issues/1034 (main)
-* https://github.com/thanos-io/thanos/pull/1245 (attempt on compactor)
-* https://github.com/thanos-io/thanos/pull/1059 (attempt on store)
-* https://github.com/thanos-io/thanos/issues/1318 (subpaths, multitenancy)
+* https://github.com/oodle-ai/thanos/issues/1034 (main)
+* https://github.com/oodle-ai/thanos/pull/1245 (attempt on compactor)
+* https://github.com/oodle-ai/thanos/pull/1059 (attempt on store)
+* https://github.com/oodle-ai/thanos/issues/1318 (subpaths, multitenancy)
 * Store issues because of large bucket:
-  * https://github.com/thanos-io/thanos/issues/814
-  * https://github.com/thanos-io/thanos/issues/1455
+  * https://github.com/oodle-ai/thanos/issues/814
+  * https://github.com/oodle-ai/thanos/issues/1455
 
 ## Summary
 
@@ -69,7 +69,7 @@ Our goals for this design it to find and implement solution for:
 * Time partitioning:
   * Store GW allows that already.
 * "Merging" sources together virtually for downsampling/compactions across single Source that just changes external labels.
-* [Bloom filters](https://github.com/thanos-io/thanos/issues/1611) (or custom advertised labels) for application metrics within blocks; advertise labels manipulation.
+* [Bloom filters](https://github.com/oodle-ai/thanos/issues/1611) (or custom advertised labels) for application metrics within blocks; advertise labels manipulation.
 * Allow all permutations of object storage setups:
   * User uses multiple object storages for all sources?
   * User uses single object storage for all sources?
@@ -139,7 +139,7 @@ Example usages would be:
 
 * Add coordination or reconciliation in case of multi Compactor run on the same "sources" or any form of Compactor HA (e.g active passive)
   * Requires separate design.
-* Allow bloom-like filters: https://github.com/thanos-io/thanos/issues/1611
+* Allow bloom-like filters: https://github.com/oodle-ai/thanos/issues/1611
 * Extend relabelling to allow adjusting advertised labels (e.g for Store Gateway). For example changing external labels as they might change over time for the same source that would allow to hide that change for user querying the data.
 
 For example:

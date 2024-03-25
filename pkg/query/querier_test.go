@@ -31,11 +31,11 @@ import (
 	"github.com/prometheus/prometheus/util/annotations"
 	"github.com/prometheus/prometheus/util/gate"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
 )
 
 type sample struct {
@@ -349,7 +349,7 @@ func TestQuerier_Select_AfterPromQL(t *testing.T) {
 		expectedWarning    string
 	}{
 		{
-			// Regression test 1 against https://github.com/thanos-io/thanos/issues/2890.
+			// Regression test 1 against https://github.com/oodle-ai/thanos/issues/2890.
 			name: "when switching replicas don't miss samples when set with a big enough lookback delta",
 			storeAPI: newProxyStore(func() storepb.StoreServer {
 				s, err := store.NewLocalStoreFromJSONMmappableFile(logger, component.Debug, nil, "./testdata/issue2890-seriesresponses.json", store.ScanGRPCCurlProtoStreamMessages)
@@ -576,7 +576,7 @@ func TestQuerier_Select(t *testing.T) {
 			}},
 		},
 		{
-			// Regression test against https://github.com/thanos-io/thanos/issues/2401.
+			// Regression test against https://github.com/oodle-ai/thanos/issues/2401.
 			// Thanks to @Superq and GitLab for real data reproducing this.
 			name: "realistic data with stale marker with hints rate function",
 			storeEndpoints: []storepb.StoreServer{func() storepb.StoreServer {
@@ -1134,7 +1134,7 @@ func TestQuerierWithDedupUnderstoodByPromQL_Rate(t *testing.T) {
 			}, vec)
 		})
 	})
-	// Regression test against https://github.com/thanos-io/thanos/issues/2401.
+	// Regression test against https://github.com/oodle-ai/thanos/issues/2401.
 	// Rate + dedup can cause incorrectness.
 	t.Run("dedup=true", func(t *testing.T) {
 		expectedLset := labels.FromStrings(
@@ -1246,7 +1246,7 @@ func storeSeriesResponse(t testing.TB, lset labels.Labels, smplChunks ...[]sampl
 	var s storepb.Series
 
 	for _, l := range lset {
-		s.Labels = append(s.Labels, labelpb.ZLabel{Name: l.Name, Value: l.Value})
+		s.Labels = append(s.Labels, &labelpb.Label{Name: l.Name, Value: l.Value})
 	}
 
 	for _, smpls := range smplChunks {
@@ -1258,7 +1258,7 @@ func storeSeriesResponse(t testing.TB, lset labels.Labels, smplChunks ...[]sampl
 			a.Append(smpl.t, smpl.v)
 		}
 
-		ch := storepb.AggrChunk{
+		ch := &storepb.AggrChunk{
 			MinTime: smpls[0].t,
 			MaxTime: smpls[len(smpls)-1].t,
 			Raw:     &storepb.Chunk{Type: storepb.Chunk_XOR, Data: c.Bytes()},

@@ -4,7 +4,7 @@ load 5m
 	http_requests{path="/bar"}	1 2 3 4 5 1 2 3 4 5
 	http_requests{path="/biz"}	0 0 0 0 0 1 1 1 1 1
 
-# TODO(bwplotka): Tests for resets() were removed for now. See https://github.com/thanos-io/thanos/issues/3644
+# TODO(bwplotka): Tests for resets() were removed for now. See https://github.com/oodle-ai/thanos/issues/3644
 
 # Tests for changes().
 eval instant at 50m changes(http_requests[5m])

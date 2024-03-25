@@ -19,10 +19,10 @@ import (
 	"github.com/redis/rueidis"
 	"gopkg.in/yaml.v3"
 
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/model"
-	thanos_tls "github.com/thanos-io/thanos/pkg/tls"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/model"
+	thanos_tls "github.com/oodle-ai/thanos/pkg/tls"
 )
 
 var (

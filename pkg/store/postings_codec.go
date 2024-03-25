@@ -12,12 +12,12 @@ import (
 
 	"github.com/golang/snappy"
 	"github.com/klauspost/compress/s2"
+	extsnappy "github.com/oodle-ai/thanos/pkg/extgrpc/snappy"
+	"github.com/oodle-ai/thanos/pkg/pool"
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/storage"
 	"github.com/prometheus/prometheus/tsdb/encoding"
 	"github.com/prometheus/prometheus/tsdb/index"
-	extsnappy "github.com/thanos-io/thanos/pkg/extgrpc/snappy"
-	"github.com/thanos-io/thanos/pkg/pool"
 )
 
 // This file implements encoding and decoding of postings using diff (or delta) + varint

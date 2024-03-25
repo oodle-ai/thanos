@@ -18,14 +18,15 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/exemplars/exemplarspb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/exemplars/exemplarspb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 // Proxy implements exemplarspb.Exemplars gRPC that fanouts requests to
 // given exemplarspb.Exemplars.
 type Proxy struct {
+	exemplarspb.UnimplementedExemplarsServer
 	logger         log.Logger
 	exemplars      func() []*exemplarspb.ExemplarStore
 	selectorLabels labels.Labels

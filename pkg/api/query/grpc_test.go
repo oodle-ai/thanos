@@ -17,10 +17,10 @@ import (
 	"github.com/prometheus/prometheus/util/annotations"
 	v1 "github.com/prometheus/prometheus/web/api/v1"
 
-	"github.com/thanos-io/thanos/pkg/api/query/querypb"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/query"
-	"github.com/thanos-io/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/api/query/querypb"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/query"
+	"github.com/oodle-ai/thanos/pkg/store"
 )
 
 func TestGRPCQueryAPIErrorHandling(t *testing.T) {

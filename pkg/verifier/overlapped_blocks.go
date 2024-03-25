@@ -12,7 +12,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/prometheus/prometheus/tsdb"
 
-	"github.com/thanos-io/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block"
 )
 
 // OverlappedBlocksIssue checks bucket for blocks with overlapped time ranges.

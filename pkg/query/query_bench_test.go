@@ -18,10 +18,10 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
 )
 
 // TestQuerySelect benchmarks querier Select method. Note that this is what PromQL is using, but PromQL might invoke
@@ -70,7 +70,7 @@ func benchQuerySelect(t testutil.TB, totalSamples, totalSeries int, dedup bool) 
 		testutil.Ok(t, head.Close())
 		for i := 0; i < len(created); i++ {
 			if !dedup || j == 0 {
-				lset := labelpb.ZLabelsToPromLabels(created[i].Labels).Copy()
+				lset := labelpb.ProtobufLabelsToPromLabels(created[i].Labels).Copy()
 				if dedup {
 					lset = lset[1:]
 				}

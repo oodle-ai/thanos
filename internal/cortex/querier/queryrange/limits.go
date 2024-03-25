@@ -12,10 +12,10 @@ import (
 	"github.com/prometheus/prometheus/model/timestamp"
 	"github.com/weaveworks/common/httpgrpc"
 
-	"github.com/thanos-io/thanos/internal/cortex/tenant"
-	"github.com/thanos-io/thanos/internal/cortex/util"
-	"github.com/thanos-io/thanos/internal/cortex/util/spanlogger"
-	"github.com/thanos-io/thanos/internal/cortex/util/validation"
+	"github.com/oodle-ai/thanos/internal/cortex/tenant"
+	"github.com/oodle-ai/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/util/spanlogger"
+	"github.com/oodle-ai/thanos/internal/cortex/util/validation"
 )
 
 // Limits allows us to specify per-tenant runtime limits on the behavior of

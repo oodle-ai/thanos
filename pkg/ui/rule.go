@@ -15,9 +15,9 @@ import (
 	"github.com/prometheus/common/route"
 	"github.com/prometheus/prometheus/rules"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	thanosrules "github.com/thanos-io/thanos/pkg/rules"
+	"github.com/oodle-ai/thanos/pkg/component"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	thanosrules "github.com/oodle-ai/thanos/pkg/rules"
 )
 
 type Rule struct {

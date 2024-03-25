@@ -6,7 +6,7 @@ package cache_test
 import (
 	"testing"
 
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
 )
 
 func TestBackground(t *testing.T) {

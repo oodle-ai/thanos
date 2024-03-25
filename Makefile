@@ -172,7 +172,7 @@ deps: ## Ensures fresh go.mod and go.sum.
 	@go mod verify
 
 # NOTICE: This is a temporary workaround for the cyclic dependency issue documented in:
-# https://github.com/thanos-io/thanos/issues/3832
+# https://github.com/oodle-ai/thanos/issues/3832
 # The real solution is to have our own version of needed packages, or extract them out from a dedicated module.
 # vendor dependencies
 .PHONY: internal/cortex
@@ -293,7 +293,8 @@ go-format: $(GOIMPORTS)
 .PHONY: proto
 proto: ## Generates Go files from Thanos proto files.
 proto: check-git $(GOIMPORTS) $(PROTOC) $(PROTOC_GEN_GOGOFAST)
-	@GOIMPORTS_BIN="$(GOIMPORTS)" PROTOC_BIN="$(PROTOC)" PROTOC_GEN_GOGOFAST_BIN="$(PROTOC_GEN_GOGOFAST)" PROTOC_VERSION="$(PROTOC_VERSION)" scripts/genproto.sh
+	echo ${PROTOC_GEN_GO_VTPROTO}
+	@GOIMPORTS_BIN="$(GOIMPORTS)" PROTOC_BIN="$(PROTOC)" PROTOC_VERSION="$(PROTOC_VERSION)" PROTOC_GEN_GO_VTPROTO_BIN="$(PROTOC_GEN_GO_VTPROTO)" PROTOC_GEN_GO_BIN="$(PROTOC_GEN_GO)" scripts/genproto.sh
 
 .PHONY: tarballs-release
 tarballs-release: ## Build tarballs.
@@ -397,13 +398,13 @@ go-lint: check-git deps $(GOLANGCI_LINT) $(FAILLINT)
 	@# TODO(bwplotka): Add, Printf, DefaultRegisterer, NewGaugeFunc and MustRegister once exception are accepted. Add fmt.{Errorf}=github.com/pkg/errors.{Errorf} once https://github.com/fatih/faillint/issues/10 is addressed.
 	@$(FAILLINT) -paths "errors=github.com/pkg/errors,\
 github.com/prometheus/tsdb=github.com/prometheus/prometheus/tsdb,\
-github.com/prometheus/prometheus/pkg/testutils=github.com/thanos-io/thanos/pkg/testutil,\
+github.com/prometheus/prometheus/pkg/testutils=github.com/oodle-ai/thanos/pkg/testutil,\
 github.com/prometheus/client_golang/prometheus.{DefaultGatherer,DefBuckets,NewUntypedFunc,UntypedFunc},\
 github.com/prometheus/client_golang/prometheus.{NewCounter,NewCounterVec,NewCounterVec,NewGauge,NewGaugeVec,NewGaugeFunc,\
 NewHistorgram,NewHistogramVec,NewSummary,NewSummaryVec}=github.com/prometheus/client_golang/prometheus/promauto.{NewCounter,\
 NewCounterVec,NewCounterVec,NewGauge,NewGaugeVec,NewGaugeFunc,NewHistorgram,NewHistogramVec,NewSummary,NewSummaryVec},\
 github.com/NYTimes/gziphandler.{GzipHandler}=github.com/klauspost/compress/gzhttp.{GzipHandler},\
-sync/atomic=go.uber.org/atomic,github.com/cortexproject/cortex=github.com/thanos-io/thanos/internal/cortex,\
+sync/atomic=go.uber.org/atomic,github.com/cortexproject/cortex=github.com/oodle-ai/thanos/internal/cortex,\
 io/ioutil.{Discard,NopCloser,ReadAll,ReadDir,ReadFile,TempDir,TempFile,Writefile}" $(shell go list ./... | grep -v "internal/cortex")
 	@$(FAILLINT) -paths "fmt.{Print,Println,Sprint}" -ignore-tests ./...
 	@echo ">> linting all of the Go files GOGC=${GOGC}"

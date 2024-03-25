@@ -26,10 +26,10 @@ import (
 	"github.com/thanos-io/objstore/client"
 
 	"github.com/efficientgo/core/testutil"
-	v1 "github.com/thanos-io/thanos/pkg/api/blocks"
-	"github.com/thanos-io/thanos/pkg/errors"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	v1 "github.com/oodle-ai/thanos/pkg/api/blocks"
+	"github.com/oodle-ai/thanos/pkg/errors"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 func TestToolsBucketWebExternalPrefixWithoutReverseProxy(t *testing.T) {

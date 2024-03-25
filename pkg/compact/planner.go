@@ -15,8 +15,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
 )
 
 type tsdbBasedPlanner struct {
@@ -48,7 +48,7 @@ func NewPlanner(logger log.Logger, ranges []int64, noCompBlocks *GatherNoCompact
 	return &tsdbBasedPlanner{logger: logger, ranges: ranges, noCompBlocksFunc: noCompBlocks.NoCompactMarkedBlocks}
 }
 
-// TODO(bwplotka): Consider smarter algorithm, this prefers smaller iterative compactions vs big single one: https://github.com/thanos-io/thanos/issues/3405
+// TODO(bwplotka): Consider smarter algorithm, this prefers smaller iterative compactions vs big single one: https://github.com/oodle-ai/thanos/issues/3405
 func (p *tsdbBasedPlanner) Plan(_ context.Context, metasByMinTime []*metadata.Meta, _ chan error, _ any) ([]*metadata.Meta, error) {
 	return p.plan(p.noCompBlocksFunc(), metasByMinTime)
 }
@@ -238,7 +238,7 @@ var _ Planner = &largeTotalIndexSizeFilter{}
 // When found, it marks block for no compaction by placing no-compact-mark.json and updating cache.
 // NOTE: The estimation is very rough as it assumes extreme cases of indexes sharing no bytes, thus summing all source index sizes.
 // Adjust limit accordingly reducing to some % of actual limit you want to give.
-// TODO(bwplotka): This is short term fix for https://github.com/thanos-io/thanos/issues/1424, replace with vertical block sharding https://github.com/thanos-io/thanos/pull/3390.
+// TODO(bwplotka): This is short term fix for https://github.com/oodle-ai/thanos/issues/1424, replace with vertical block sharding https://github.com/oodle-ai/thanos/pull/3390.
 func WithLargeTotalIndexSizeFilter(with *tsdbBasedPlanner, bkt objstore.Bucket, totalMaxIndexSizeBytes int64, markedForNoCompact prometheus.Counter) *largeTotalIndexSizeFilter {
 	return &largeTotalIndexSizeFilter{tsdbBasedPlanner: with, bkt: bkt, totalMaxIndexSizeBytes: totalMaxIndexSizeBytes, markedForNoCompact: markedForNoCompact}
 }
@@ -282,14 +282,14 @@ PlanLoop:
 			// Leave 15% headroom for index compaction bloat.
 			if totalIndexBytes >= int64(float64(t.totalMaxIndexSizeBytes)*0.85) {
 				// Marking blocks for no compact to limit size.
-				// TODO(bwplotka): Make sure to reset cache once this is done: https://github.com/thanos-io/thanos/issues/3408
+				// TODO(bwplotka): Make sure to reset cache once this is done: https://github.com/oodle-ai/thanos/issues/3408
 				if err := block.MarkForNoCompact(
 					ctx,
 					t.logger,
 					t.bkt,
 					plan[biggestIndex].ULID,
 					metadata.IndexSizeExceedingNoCompactReason,
-					fmt.Sprintf("largeTotalIndexSizeFilter: Total compacted block's index size could exceed: %v with this block. See https://github.com/thanos-io/thanos/issues/1424", t.totalMaxIndexSizeBytes),
+					fmt.Sprintf("largeTotalIndexSizeFilter: Total compacted block's index size could exceed: %v with this block. See https://github.com/oodle-ai/thanos/issues/1424", t.totalMaxIndexSizeBytes),
 					t.markedForNoCompact,
 				); err != nil {
 					return nil, errors.Wrapf(err, "mark %v for no compaction", plan[biggestIndex].ULID.String())

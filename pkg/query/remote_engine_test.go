@@ -17,9 +17,9 @@ import (
 	"github.com/prometheus/prometheus/promql/parser"
 	"google.golang.org/grpc"
 
-	"github.com/thanos-io/thanos/pkg/api/query/querypb"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/api/query/querypb"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 func TestRemoteEngine_Warnings(t *testing.T) {
@@ -188,7 +188,7 @@ func TestRemoteEngine_MinT(t *testing.T) {
 
 func zLabelSetFromStrings(ss ...string) labelpb.ZLabelSet {
 	return labelpb.ZLabelSet{
-		Labels: labelpb.ZLabelsFromPromLabels(labels.FromStrings(ss...)),
+		Labels: labelpb.ProtobufLabelsFromPromLabels(labels.FromStrings(ss...)),
 	}
 }
 

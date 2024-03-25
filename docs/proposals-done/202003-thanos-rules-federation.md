@@ -8,7 +8,7 @@ menu: proposals-done
 
 ### Related Tickets
 
-https://github.com/thanos-io/thanos/issues/1375
+https://github.com/oodle-ai/thanos/issues/1375
 
 ## Summary
 
@@ -205,7 +205,7 @@ Deduplication of included alerting/recording rules inside groups is described in
 * Implement a new flag `--rule` in Thanos Querier which registers RulesAPI endpoints.
 * Implement a new flag `--rule.replica-label` in Thanos Querier.
 * Implement RulesAPI backends in sidecar, query, rule.
-* Feature branch: https://github.com/thanos-io/thanos/pull/2200
+* Feature branch: https://github.com/oodle-ai/thanos/pull/2200
 
 ## Future
 
@@ -230,7 +230,7 @@ The current fields in `InfoResponse` connected to Store APIs are deprecated and 
 ```diff
 message InfoResponse {
   // Deprecated. Use label_sets instead.
-  repeated Label labels = 1 [(gogoproto.nullable) = false];
+  repeated Label labels = 1;
 +  // Deprecated. Will be removed in favor of StoreInfoResponse in the future.
   int64 min_time = 2;
 +  // Deprecated. Will be removed in favor of StoreInfoResponse in the future.
@@ -239,7 +239,7 @@ message InfoResponse {
 +  Type type  = 4;
   // label_sets is an unsorted list of `LabelSet`s.
 +  // Deprecated. Will be removed in favor of StoreInfoResponse in the future.
-  repeated LabelSet label_sets = 5 [(gogoproto.nullable) = false];
+  repeated LabelSet label_sets = 5;
 +
 +  StoreInfoResponse store = 6;
 +  RulesInfoResponse rules = 7;

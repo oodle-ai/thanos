@@ -16,4 +16,4 @@ You can import them via `Import -> Paste JSON` in Grafana. These dashboards requ
 
 ## Configuration
 
-All dashboards are generated using [`thanos-mixin`](https://github.com/thanos-io/thanos/tree/main/mixin) and check out [README](https://github.com/thanos-io/thanos/blob/main/mixin/README.md) for further information.
+All dashboards are generated using [`thanos-mixin`](https://github.com/oodle-ai/thanos/tree/main/mixin) and check out [README](https://github.com/oodle-ai/thanos/blob/main/mixin/README.md) for further information.

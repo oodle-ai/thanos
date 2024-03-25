@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/extkingpin"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
 
 	"github.com/efficientgo/core/testutil"
 	"github.com/go-kit/log"

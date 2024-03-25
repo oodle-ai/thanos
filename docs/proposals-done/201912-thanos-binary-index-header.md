@@ -8,11 +8,11 @@ menu: proposals-done
 
 ### Related Tickets
 
-* https://github.com/thanos-io/thanos/issues/942 (format changes)
-* https://github.com/thanos-io/thanos/issues/1711 (pulling index in smarter way)
-* https://github.com/thanos-io/thanos/pull/1013 (initial investigation of different formats)
-* https://github.com/thanos-io/thanos/issues/448 (OOM)
-* https://github.com/thanos-io/thanos/issues/1705 (LTS umbrella issue)
+* https://github.com/oodle-ai/thanos/issues/942 (format changes)
+* https://github.com/oodle-ai/thanos/issues/1711 (pulling index in smarter way)
+* https://github.com/oodle-ai/thanos/pull/1013 (initial investigation of different formats)
+* https://github.com/oodle-ai/thanos/issues/448 (OOM)
+* https://github.com/oodle-ai/thanos/issues/1705 (LTS umbrella issue)
 
 ## Summary
 
@@ -40,7 +40,7 @@ The `sync` process includes:
   * Delete downloaded TSDB index.
 * Load whole index-cache.json to memory and keep it for lifetime of the block.
 
-The current, mentioned [index-cache.json](https://github.com/thanos-io/thanos/blob/bd9aa1b4be3bb5d841cb7271c29d02ebb5eb5168/pkg/block/index.go#L40) holds block’s:
+The current, mentioned [index-cache.json](https://github.com/oodle-ai/thanos/blob/bd9aa1b4be3bb5d841cb7271c29d02ebb5eb5168/pkg/block/index.go#L40) holds block’s:
 * [TOC](https://github.com/prometheus/prometheus/blob/master/tsdb/docs/format/index.md#toc)
 * [Symbols](https://github.com/prometheus/prometheus/blob/master/tsdb/docs/format/index.md#symbol-table)
 * LabelValues:
@@ -57,7 +57,7 @@ There are few problems with this approach:
    * Some blocks are never queried.
    * Some posting offsets and label values within each block are never used.
 
-1, 2 & 3 contributes to Store Gateway startup being slow and resource consuming: https://github.com/thanos-io/thanos/issues/448
+1, 2 & 3 contributes to Store Gateway startup being slow and resource consuming: https://github.com/oodle-ai/thanos/issues/448
 
 1. causes unnecessary constant cache for unused blocks.
 
@@ -71,7 +71,7 @@ This design is trying to address those four problems.
 
 ## No Goals
 
-* Removing initial startup for Thanos Store Gateway completely as designed in [Cortex, no initial block sync](https://github.com/thanos-io/thanos/issues/1813)
+* Removing initial startup for Thanos Store Gateway completely as designed in [Cortex, no initial block sync](https://github.com/oodle-ai/thanos/issues/1813)
   * However this proposal might be a step towards that as we might be able to load and build index-cache/index quickly on demand from disk. See [Future Work](#future-work)
   * At the same time be able to load `index-header` at query time directly from bucket is not a goal of this proposal.
 * Decreasing size. While it would be nice to use less space; our aim is latency of building/loading the block. That might be correlated with size, but not necessarily (e.g when extra considering compression)
@@ -89,7 +89,7 @@ To allow reduced resource consumption and effort when building (1), (2), "index-
 
 The process for building this will be as follows:
 
-* Thanks to https://github.com/thanos-io/thanos/pull/1792 we can check final size of index and scan for TOC file.
+* Thanks to https://github.com/oodle-ai/thanos/pull/1792 we can check final size of index and scan for TOC file.
 * With TOC:
   * Get the symbols table and copy it to the local file.
   * Get the posting table and copy it to the local file.
@@ -105,11 +105,11 @@ Thanos will build/compose all index-headers on the startup for now, however in t
 
 While idea of combing different pieces of TSDB index as our index-header is great, unfortunately we heavily rely on information about size of each posting represented as `postingRange.End`.
 
-We need to know apriori how to partition and how many bytes we need to fetch from the storage to get each posting: https://github.com/thanos-io/thanos/blob/7e11afe64af0c096743a3de8a594616abf52be45/pkg/store/bucket.go#L1567
+We need to know apriori how to partition and how many bytes we need to fetch from the storage to get each posting: https://github.com/oodle-ai/thanos/blob/7e11afe64af0c096743a3de8a594616abf52be45/pkg/store/bucket.go#L1567
 
-To calculate those sizes we use [`indexr.PostingsRanges()`](https://github.com/thanos-io/thanos/blob/7e11afe64af0c096743a3de8a594616abf52be45/pkg/block/index.go#L156-L155) which scans through `posting` section of the TSDB index. Having to fetch whole postings section just to get size of each posting makes this proposal less valuable as we still need to download big part of index and traverse through it instead of what we propose in [#Proposal](#proposal)
+To calculate those sizes we use [`indexr.PostingsRanges()`](https://github.com/oodle-ai/thanos/blob/7e11afe64af0c096743a3de8a594616abf52be45/pkg/block/index.go#L156-L155) which scans through `posting` section of the TSDB index. Having to fetch whole postings section just to get size of each posting makes this proposal less valuable as we still need to download big part of index and traverse through it instead of what we propose in [#Proposal](#proposal)
 
-For series we don't know the exact size either, however we estimate max size of each series to be 64*1024. It depends on sane number of label pairs and chunks per series. We have really only one potential case when this was too low: https://github.com/thanos-io/thanos/issues/552. Decision about series this was made here: https://github.com/thanos-io/thanos/issues/146
+For series we don't know the exact size either, however we estimate max size of each series to be 64*1024. It depends on sane number of label pairs and chunks per series. We have really only one potential case when this was too low: https://github.com/oodle-ai/thanos/issues/552. Decision about series this was made here: https://github.com/oodle-ai/thanos/issues/146
 
 For postings it's more tricky as it depends on number of series in which given label pair exists. For worst case it can be even million label-pair for popular pairs like `__name__=http_request_http_duration_bucket` etc.
 
@@ -154,7 +154,7 @@ This will load **all** blocks to the system on every such call.
 
 We have couple of options:
 
-* Limit with time range: https://github.com/thanos-io/thanos/issues/1811
+* Limit with time range: https://github.com/oodle-ai/thanos/issues/1811
 * Cache e.g popular label values queries like `__name__`
 
 ## Alternatives

@@ -159,7 +159,7 @@ Query Frontend supports `--query-frontend.log-queries-longer-than` flag to log q
 
 ## Naming
 
-Naming is hard :) Please check [here](https://github.com/thanos-io/thanos/pull/2434#discussion_r408300683) to see why we chose `query-frontend` as the name.
+Naming is hard :) Please check [here](https://github.com/oodle-ai/thanos/pull/2434#discussion_r408300683) to see why we chose `query-frontend` as the name.
 
 ## Recommended Downstream Tripper Configuration
 
@@ -175,7 +175,7 @@ Keys which denote a duration are strings that can end with `s` or `m` to indicat
 * `max_idle_conns_per_host` - maximum number of idle connections to each host (integer);
 * `max_conns_per_host` - maximum number of connections to each host (integer);
 
-You can find the default values [here](https://github.com/thanos-io/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/pkg/exthttp/transport.go#L12-L27).
+You can find the default values [here](https://github.com/oodle-ai/thanos/blob/55cb8ca38b3539381dc6a781e637df15c694e50a/pkg/exthttp/transport.go#L12-L27).
 
 ## Forward Headers to Downstream Queriers
 

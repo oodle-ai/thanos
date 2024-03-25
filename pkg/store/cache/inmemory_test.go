@@ -21,7 +21,7 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
 )
 
 func TestNewInMemoryIndexCache(t *testing.T) {

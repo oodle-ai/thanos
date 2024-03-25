@@ -27,8 +27,8 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
 )
 
 func TestMain(m *testing.M) {
@@ -1106,7 +1106,7 @@ func TestDownsample(t *testing.T) {
 				},
 			},
 		},
-		// TODO(bwplotka): This is not very efficient for further query time, we should produce 2 chunks. Fix it https://github.com/thanos-io/thanos/issues/2542.
+		// TODO(bwplotka): This is not very efficient for further query time, we should produce 2 chunks. Fix it https://github.com/oodle-ai/thanos/issues/2542.
 		func() *downsampleTestCase {
 			d := &downsampleTestCase{
 				name:       "downsampling four, 120 sample chunks for 2x resolution should result in two chunks, but results in one.",

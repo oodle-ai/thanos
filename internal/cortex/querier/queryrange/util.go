@@ -9,8 +9,8 @@ import (
 
 	"github.com/weaveworks/common/httpgrpc"
 
-	"github.com/thanos-io/thanos/internal/cortex/tenant"
-	"github.com/thanos-io/thanos/internal/cortex/util/validation"
+	"github.com/oodle-ai/thanos/internal/cortex/tenant"
+	"github.com/oodle-ai/thanos/internal/cortex/util/validation"
 )
 
 // RequestResponse contains a request response and the respective request that was used.

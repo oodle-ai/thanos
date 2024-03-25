@@ -8,7 +8,7 @@ menu: proposals-done
 
 ### Related Tickets
 
-* Add Query Logging: https://github.com/thanos-io/thanos/issues/1706
+* Add Query Logging: https://github.com/oodle-ai/thanos/issues/1706
 
 ## Summary
 

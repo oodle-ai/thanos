@@ -20,11 +20,11 @@ import (
 	"github.com/sony/gobreaker"
 	"gopkg.in/yaml.v2"
 
-	"github.com/thanos-io/thanos/pkg/discovery/dns"
-	memcacheDiscovery "github.com/thanos-io/thanos/pkg/discovery/memcache"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/discovery/dns"
+	memcacheDiscovery "github.com/oodle-ai/thanos/pkg/discovery/memcache"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/model"
 )
 
 const (

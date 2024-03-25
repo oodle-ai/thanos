@@ -20,9 +20,9 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 	e2edb "github.com/efficientgo/e2e/db"
-	"github.com/thanos-io/thanos/pkg/query"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/query"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 func TestInfo(t *testing.T) {

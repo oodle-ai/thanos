@@ -13,9 +13,9 @@ import (
 	"github.com/prometheus/prometheus/model/labels"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/testutil/testpromcompatibility"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/testutil/testpromcompatibility"
 )
 
 func TestJSONUnmarshalMarshal(t *testing.T) {

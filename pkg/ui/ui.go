@@ -20,8 +20,8 @@ import (
 	"github.com/prometheus/common/route"
 	"github.com/prometheus/common/version"
 
-	"github.com/thanos-io/thanos/pkg/component"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/component"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
 )
 
 var reactRouterPaths = []string{

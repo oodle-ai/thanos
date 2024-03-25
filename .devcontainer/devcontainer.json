@@ -6,8 +6,8 @@
     "dockerfile": "Dockerfile"
   },
 
-  "workspaceFolder": "/go/src/github.com/thanos-io/thanos",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/thanos-io/thanos,type=bind,consistency=cached",
+  "workspaceFolder": "/go/src/github.com/oodle-ai/thanos",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/oodle-ai/thanos,type=bind,consistency=cached",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {

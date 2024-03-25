@@ -7,13 +7,14 @@ import (
 	"context"
 	"net/url"
 
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 // Prometheus implements metadatapb.Metadata gRPC service that allows to fetch metric metadata from Prometheus HTTP /api/v1/metadata endpoint.
 type Prometheus struct {
+	metadatapb.UnimplementedMetadataServer
 	base   *url.URL
 	client *promclient.Client
 }

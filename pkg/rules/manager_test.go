@@ -28,9 +28,9 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 type nopAppendable struct{}
@@ -68,7 +68,7 @@ func (n nopQueryable) Querier(_, _ int64) (storage.Querier, error) {
 	return storage.NoopQuerier(), nil
 }
 
-// Regression test against https://github.com/thanos-io/thanos/issues/1779.
+// Regression test against https://github.com/oodle-ai/thanos/issues/1779.
 func TestRun_Subqueries(t *testing.T) {
 	dir := t.TempDir()
 
@@ -216,7 +216,7 @@ groups:
 	testutil.Assert(t, strings.Contains(err.Error(), "non_existing.yaml: no such file or directory"), err.Error())
 
 	// Still failed update should load at least partially correct rules.
-	// Also, check metrics: Regression test: https://github.com/thanos-io/thanos/issues/3083
+	// Also, check metrics: Regression test: https://github.com/oodle-ai/thanos/issues/3083
 	testutil.Equals(t,
 		map[string]float64{
 			fmt.Sprintf("prometheus_rule_group_rules{rule_group=%s/.tmp-rules/ABORT%s/abort.yaml;something2,strategy=abort}", dataDir, dir):              1,

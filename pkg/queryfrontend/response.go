@@ -6,7 +6,7 @@ package queryfrontend
 import (
 	"unsafe"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
 )
 
 // ThanosResponseExtractor helps to extract specific info from Query Response.
@@ -47,12 +47,12 @@ func headersToQueryRangeHeaders(headers []*ResponseHeader) []*queryrange.Prometh
 
 // GetHeaders returns the HTTP headers in the response.
 func (m *ThanosLabelsResponse) GetHeaders() []*queryrange.PrometheusResponseHeader {
-	return headersToQueryRangeHeaders(m.Headers)
+	return headersToQueryRangeHeaders(m.RespHeaders)
 }
 
 // GetHeaders returns the HTTP headers in the response.
 func (m *ThanosSeriesResponse) GetHeaders() []*queryrange.PrometheusResponseHeader {
-	return headersToQueryRangeHeaders(m.Headers)
+	return headersToQueryRangeHeaders(m.RespHeaders)
 }
 
 // GetStats returns response stats. Unimplemented for ThanosLabelsResponse.

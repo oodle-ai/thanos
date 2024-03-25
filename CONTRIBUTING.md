@@ -19,8 +19,8 @@ The philosophy of Thanos and our community borrows heavily from UNIX philosophy 
 
 If you encounter any issue or you have an idea to improve, please:
 
-* Search through Google and [existing open and closed GitHub Issues](https://github.com/thanos-io/thanos/issues) for the answer first. If you find a relevant topic, please comment on the issue.
-* If none of the issues are relevant, please add an issue to [GitHub issues](https://github.com/thanos-io/thanos/issues). Please provide any relevant information as suggested by the Issue template.
+* Search through Google and [existing open and closed GitHub Issues](https://github.com/oodle-ai/thanos/issues) for the answer first. If you find a relevant topic, please comment on the issue.
+* If none of the issues are relevant, please add an issue to [GitHub issues](https://github.com/oodle-ai/thanos/issues). Please provide any relevant information as suggested by the Issue template.
 * If you have a quick question you might want to also ask on #thanos or #thanos-dev slack channel in the CNCF workspace. We recommend using GitHub issues for issues and feedback, because GitHub issues are trackable.
 
 If you encounter a security vulnerability, please refer to [Reporting a Vulnerability process](SECURITY.md#reporting-a-vulnerability)
@@ -85,7 +85,7 @@ It's key to get familiarized with the style guide and mechanics of Thanos, espec
   * A codespace will open in a web-based version of Visual Studio Code. The [dev container](.devcontainer/devcontainer.json) is fully configured with software needed for this project.
   * **Note**: Dev containers is an open spec which is supported by [GitHub Codespaces](https://github.com/codespaces) and [other tools](https://containers.dev/supporting).
 * In case you want to develop the project locally, install **Golang** in your machine. Here is a nice [gist](https://gist.github.com/nikhita/432436d570b89cab172dcf2894465753) for this purpose.
-* You can run an interactive example, which populates some data as well, by following the steps mentioned [here](https://github.com/thanos-io/thanos/blob/main/tutorials/interactive-example/README.md).
+* You can run an interactive example, which populates some data as well, by following the steps mentioned [here](https://github.com/oodle-ai/thanos/blob/main/tutorials/interactive-example/README.md).
 
 ### Installing Project locally in your machine
 
@@ -104,7 +104,7 @@ It's key to get familiarized with the style guide and mechanics of Thanos, espec
 
   * Consider adding the environment variables to your host machine (e.g `/.bashrc` or [`.envrc`](https://direnv.net/)) file so that those environment variables are persisted across sessions.
 * Clone Thanos inside the `~/Repos` folder -
-  * For HTTPS - `git clone https://github.com/thanos-io/thanos.git`
+  * For HTTPS - `git clone https://github.com/oodle-ai/thanos.git`
   * For SSH - `git clone git@github.com:thanos-io/thanos.git`
 * Once installed, you can run `make help` inside Thanos folder for getting a list of helper commands which are provided for making development easy for you :)
 
@@ -115,7 +115,7 @@ It's key to get familiarized with the style guide and mechanics of Thanos, espec
 * When you run `make build` from Thanos repo root, code is compiled and a binary named `thanos` is created and built into your `$GOBIN` or `$GOPATH/bin`.
 * In case you are working on a component of Thanos, you would love it if you don’t have to set up the yaml configuration for Prometheus and other components, before you start running the component. This is a repetitive task, and the Thanos Community has provided commands/script for automating the running of components -
   * Run `make quickstart` for spinning up all components of Thanos quickly.
-  * If you want to run specific components instead of all, feel free to use and edit - [quickstart.sh](https://github.com/thanos-io/thanos/blob/b08c0ea62abfe4dcf1400da0e37598f0cd8fa8cf/scripts/quickstart.sh)
+  * If you want to run specific components instead of all, feel free to use and edit - [quickstart.sh](https://github.com/oodle-ai/thanos/blob/b08c0ea62abfe4dcf1400da0e37598f0cd8fa8cf/scripts/quickstart.sh)
 
 ### Pull Request Process
 
@@ -129,7 +129,7 @@ $ mkdir -p $GOPATH/src/github.com/thanos-io
 $ cd $GOPATH/src/github.com/thanos-io
 $ git clone https://github.com/<your_github_id>/thanos.git
 $ cd thanos
-$ git remote add upstream https://github.com/thanos-io/thanos.git
+$ git remote add upstream https://github.com/oodle-ai/thanos.git
 $ git remote update
 $ git merge upstream/main
 $ make build
@@ -227,7 +227,7 @@ You have to commit the changes to `go.mod` and `go.sum` before submitting the pu
 At some point during development it is useful, in addition to running unit or e2e tests, to run and play with Thanos components manually. While you can run any component manually by crafting specific flags for a test setup, there are already some nice tools and scripts available. Consider the following methods:
 
 * `make quickstart`: this command spins up a simple setup of all Thanos components.
-* `make test-e2e`: the e2e tests cover most of the setups and functionality Thanos offers. It's extremely easy to add `time.Sleep(10* time.Minute)` at certain points in the tests (e.g for compactor [here](https://github.com/thanos-io/thanos/blob/8f492a9f073f819019dd9f044e346a1e1fa730bc/test/e2e/compact_test.go#L379)). This way when you run `make test-e2e`, the test will sleep for some time, allowing you to connect to the setup manually using the port printed in the logs. For example:
+* `make test-e2e`: the e2e tests cover most of the setups and functionality Thanos offers. It's extremely easy to add `time.Sleep(10* time.Minute)` at certain points in the tests (e.g for compactor [here](https://github.com/oodle-ai/thanos/blob/8f492a9f073f819019dd9f044e346a1e1fa730bc/test/e2e/compact_test.go#L379)). This way when you run `make test-e2e`, the test will sleep for some time, allowing you to connect to the setup manually using the port printed in the logs. For example:
 
 ```bash
 querier-1: level=info name=querier-1 ts=2020-04-01T12:53:56.101029491Z caller=http.go:56 service=http/server component=query msg="listening for requests and metrics" address=:80

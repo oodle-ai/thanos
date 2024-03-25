@@ -14,7 +14,7 @@ import (
 	"github.com/minio/sha256-simd"
 	"github.com/pkg/errors"
 
-	"github.com/thanos-io/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/pkg/runutil"
 )
 
 // HashFunc indicates what type of hash it is.

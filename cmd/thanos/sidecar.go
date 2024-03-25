@@ -29,29 +29,29 @@ import (
 	"github.com/thanos-io/objstore/client"
 	objstoretracing "github.com/thanos-io/objstore/tracing/opentracing"
 
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/clientconfig"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/exemplars"
-	"github.com/thanos-io/thanos/pkg/extkingpin"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/info"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/logging"
-	meta "github.com/thanos-io/thanos/pkg/metadata"
-	thanosmodel "github.com/thanos-io/thanos/pkg/model"
-	"github.com/thanos-io/thanos/pkg/prober"
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/reloader"
-	"github.com/thanos-io/thanos/pkg/rules"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	grpcserver "github.com/thanos-io/thanos/pkg/server/grpc"
-	httpserver "github.com/thanos-io/thanos/pkg/server/http"
-	"github.com/thanos-io/thanos/pkg/shipper"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/targets"
-	"github.com/thanos-io/thanos/pkg/tls"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/clientconfig"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/exemplars"
+	"github.com/oodle-ai/thanos/pkg/extkingpin"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/info"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/logging"
+	meta "github.com/oodle-ai/thanos/pkg/metadata"
+	thanosmodel "github.com/oodle-ai/thanos/pkg/model"
+	"github.com/oodle-ai/thanos/pkg/prober"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/reloader"
+	"github.com/oodle-ai/thanos/pkg/rules"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	grpcserver "github.com/oodle-ai/thanos/pkg/server/grpc"
+	httpserver "github.com/oodle-ai/thanos/pkg/server/http"
+	"github.com/oodle-ai/thanos/pkg/shipper"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/targets"
+	"github.com/oodle-ai/thanos/pkg/tls"
 )
 
 func registerSidecar(app *extkingpin.App) {
@@ -277,7 +277,7 @@ func runSidecar(
 
 		infoSrv := info.NewInfoServer(
 			component.Sidecar.String(),
-			info.WithLabelSetFunc(func() []labelpb.ZLabelSet {
+			info.WithLabelSetFunc(func() []*labelpb.ZLabelSet {
 				return promStore.LabelSet()
 			}),
 			info.WithStoreInfoFunc(func() *infopb.StoreInfo {

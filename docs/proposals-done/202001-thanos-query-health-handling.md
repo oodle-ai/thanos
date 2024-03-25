@@ -8,10 +8,10 @@ menu: proposals-done
 
 ### Related Tickets
 
-* https://github.com/thanos-io/thanos/issues/1651 (Response caching for Thanos)
-* https://github.com/thanos-io/thanos/pull/2072 (query: add 'sticky' nodes)
+* https://github.com/oodle-ai/thanos/issues/1651 (Response caching for Thanos)
+* https://github.com/oodle-ai/thanos/pull/2072 (query: add 'sticky' nodes)
 * https://github.com/cortexproject/cortex/pull/1974 (frontend: implement cache control)
-* https://github.com/thanos-io/thanos/pull/1984 (api/v1: add cache-control header)
+* https://github.com/oodle-ai/thanos/pull/1984 (api/v1: add cache-control header)
 
 ## Summary
 

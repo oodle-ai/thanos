@@ -6,6 +6,7 @@ package rules
 import (
 	"context"
 	"fmt"
+	"google.golang.org/protobuf/types/known/timestamppb"
 	"io"
 	"os"
 	"path/filepath"
@@ -22,12 +23,12 @@ import (
 	"github.com/prometheus/prometheus/rules"
 	"gopkg.in/yaml.v3"
 
-	"github.com/thanos-io/thanos/pkg/errutil"
-	"github.com/thanos-io/thanos/pkg/extprom"
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/errutil"
+	"github.com/oodle-ai/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 const tmpRuleDir = ".tmp-rules"
@@ -46,7 +47,7 @@ func (g Group) toProto() *rulespb.RuleGroup {
 		Limit:                   int64(g.Limit()),
 		PartialResponseStrategy: g.PartialResponseStrategy,
 		// UTC needed due to https://github.com/gogo/protobuf/issues/519.
-		LastEvaluation:            g.GetLastEvaluation().UTC(),
+		LastEvaluation:            timestamppb.New(g.GetLastEvaluation().UTC()),
 		EvaluationDurationSeconds: g.GetEvaluationTime().Seconds(),
 	}
 
@@ -65,26 +66,26 @@ func (g Group) toProto() *rulespb.RuleGroup {
 					Query:                     rule.Query().String(),
 					DurationSeconds:           rule.HoldDuration().Seconds(),
 					KeepFiringForSeconds:      rule.KeepFiringFor().Seconds(),
-					Labels:                    labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(rule.Labels())},
-					Annotations:               labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(rule.Annotations())},
+					Labels:                    &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(rule.Labels())},
+					Annotations:               &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(rule.Annotations())},
 					Alerts:                    ActiveAlertsToProto(g.PartialResponseStrategy, rule),
 					Health:                    string(rule.Health()),
 					LastError:                 lastError,
 					EvaluationDurationSeconds: rule.GetEvaluationDuration().Seconds(),
 					// UTC needed due to https://github.com/gogo/protobuf/issues/519.
-					LastEvaluation: rule.GetEvaluationTimestamp().UTC(),
+					LastEvaluation: timestamppb.New(rule.GetEvaluationTimestamp().UTC()),
 				}}})
 		case *rules.RecordingRule:
 			ret.Rules = append(ret.Rules, &rulespb.Rule{
 				Result: &rulespb.Rule_Recording{Recording: &rulespb.RecordingRule{
 					Name:                      rule.Name(),
 					Query:                     rule.Query().String(),
-					Labels:                    labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(rule.Labels())},
+					Labels:                    &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(rule.Labels())},
 					Health:                    string(rule.Health()),
 					LastError:                 lastError,
 					EvaluationDurationSeconds: rule.GetEvaluationDuration().Seconds(),
 					// UTC needed due to https://github.com/gogo/protobuf/issues/519.
-					LastEvaluation: rule.GetEvaluationTimestamp().UTC(),
+					LastEvaluation: timestamppb.New(rule.GetEvaluationTimestamp().UTC()),
 				}}})
 		default:
 			// We cannot do much, let's panic, API will recover.
@@ -102,10 +103,10 @@ func ActiveAlertsToProto(s storepb.PartialResponseStrategy, a *rules.AlertingRul
 		activeAt := ruleAlert.ActiveAt.UTC()
 		ret[i] = &rulespb.AlertInstance{
 			PartialResponseStrategy: s,
-			Labels:                  labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(ruleAlert.Labels)},
-			Annotations:             labelpb.ZLabelSet{Labels: labelpb.ZLabelsFromPromLabels(ruleAlert.Annotations)},
+			Labels:                  &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(ruleAlert.Labels)},
+			Annotations:             &labelpb.ZLabelSet{Labels: labelpb.ProtobufLabelsFromPromLabels(ruleAlert.Annotations)},
 			State:                   rulespb.AlertState(ruleAlert.State),
-			ActiveAt:                &activeAt,
+			ActiveAt:                timestamppb.New(activeAt),
 			Value:                   strconv.FormatFloat(ruleAlert.Value, 'e', -1, 64),
 		}
 	}
@@ -115,6 +116,7 @@ func ActiveAlertsToProto(s storepb.PartialResponseStrategy, a *rules.AlertingRul
 // Manager is a partial response strategy and proto compatible Manager.
 // Manager also implements rulespb.Rules gRPC service.
 type Manager struct {
+	rulespb.UnimplementedRulesServer
 	workDir string
 	mgrs    map[storepb.PartialResponseStrategy]*rules.Manager
 	extLset labels.Labels
@@ -402,8 +404,6 @@ func (m *Manager) Rules(r *rulespb.RulesRequest, s rulespb.Rules_RulesServer) (e
 
 	pgs := make([]*rulespb.RuleGroup, 0, len(groups))
 	for _, g := range groups {
-		// UTC needed due to https://github.com/gogo/protobuf/issues/519.
-		g.LastEvaluation = g.LastEvaluation.UTC()
 		if r.Type == rulespb.RulesRequest_ALL {
 			pgs = append(pgs, g)
 			continue

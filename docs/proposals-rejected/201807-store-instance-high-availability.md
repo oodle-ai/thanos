@@ -26,11 +26,11 @@ Thanos supports deduplication of metrics retrieved from multiple Prometheus serv
 
 When retrieving data from Thanos bucket store instances, however, the desired behaviour is different; we want Thanos use the first successful response it receives, on the assumption that all bucket store instances that communicate with the same bucket have access to the same data.
 
-To support the desired behaviour for bucket store instances while still allowing for deduplication, we propose to expand the [InfoResponse Protobuf](https://github.com/thanos-io/thanos/blob/b67aa3a709062be97215045f7488df67a9af2c66/pkg/store/storepb/rpc.proto#L28-L32) used by the Store API by adding two fields:
+To support the desired behaviour for bucket store instances while still allowing for deduplication, we propose to expand the [InfoResponse Protobuf](https://github.com/oodle-ai/thanos/blob/b67aa3a709062be97215045f7488df67a9af2c66/pkg/store/storepb/rpc.proto#L28-L32) used by the Store API by adding two fields:
 
 - a string identifier that can be used to group store instances
 
-- an enum representing the [peer type as defined in the cluster package](https://github.com/thanos-io/thanos/blob/673614d9310f3f90fdb4585ca6201496ff92c697/pkg/cluster/cluster.go#L51-L64)
+- an enum representing the [peer type as defined in the cluster package](https://github.com/oodle-ai/thanos/blob/673614d9310f3f90fdb4585ca6201496ff92c697/pkg/cluster/cluster.go#L51-L64)
 
 For example;
 
@@ -39,7 +39,7 @@ For example;
 +++ after	2018-07-02 15:49:13.000000000 +0100
 @@ -1,5 +1,6 @@
  message InfoResponse {
-   repeated Label labels = 1 [(gogoproto.nullable) = false];
+   repeated Label labels = 1;
    int64 min_time        = 2;
    int64 max_time        = 3;
 +  string store_group_id = 4;

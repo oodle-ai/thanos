@@ -16,10 +16,10 @@ import (
 	"github.com/weaveworks/common/httpgrpc"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/internal/cortex/cortexpb"
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	queryv1 "github.com/thanos-io/thanos/pkg/api/query"
-	"github.com/thanos-io/thanos/pkg/compact"
+	"github.com/oodle-ai/thanos/internal/cortex/cortexpb"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	queryv1 "github.com/oodle-ai/thanos/pkg/api/query"
+	"github.com/oodle-ai/thanos/pkg/compact"
 )
 
 func TestQueryInstantCodec_DecodeRequest(t *testing.T) {

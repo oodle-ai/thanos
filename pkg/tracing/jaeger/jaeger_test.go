@@ -10,9 +10,9 @@ import (
 	"testing"
 
 	"github.com/efficientgo/core/testutil"
+	"github.com/oodle-ai/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/tracing/migration"
 	"github.com/opentracing/opentracing-go"
-	"github.com/thanos-io/thanos/pkg/tracing"
-	"github.com/thanos-io/thanos/pkg/tracing/migration"
 
 	"github.com/go-kit/log"
 	"go.opentelemetry.io/otel/attribute"

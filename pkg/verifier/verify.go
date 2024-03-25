@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block"
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"

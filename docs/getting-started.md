@@ -22,7 +22,7 @@ Thanos aims for a simple deployment and maintenance model. The only dependencies
 
 ## Get Thanos!
 
-You can find the latest Thanos release [here](https://github.com/thanos-io/thanos/releases).
+You can find the latest Thanos release [here](https://github.com/oodle-ai/thanos/releases).
 
 Main should be stable and usable. Every commit to main builds docker image named `main-<data>-<sha>` in [quay.io/thanos/thanos](https://quay.io/repository/thanos/thanos) and [thanosio/thanos dockerhub (mirror)](https://hub.docker.com/r/thanosio/thanos)
 
@@ -59,7 +59,7 @@ Contributions are very welcome! See our [CONTRIBUTING.md](../CONTRIBUTING.md) fo
 Thanos is an open source project and we value and welcome new contributors and members of the community. Here are ways to get in touch with the community:
 
 * Slack: [#thanos](https://slack.cncf.io/)
-* Issue Tracker: [GitHub Issues](https://github.com/thanos-io/thanos/issues)
+* Issue Tracker: [GitHub Issues](https://github.com/oodle-ai/thanos/issues)
 
 ## Maintainers
 
@@ -84,7 +84,7 @@ If you want to add yourself to this list, let us know!
 
 ## Operating
 
-See up to date [jsonnet mixins](https://github.com/thanos-io/thanos/tree/main/mixin/README.md) We also have example Grafana dashboards [here](https://github.com/thanos-io/thanos/blob/main/examples/dashboards/dashboards.md) and some [alerts](https://github.com/thanos-io/thanos/blob/main/examples/alerts/alerts.md) to get you started.
+See up to date [jsonnet mixins](https://github.com/oodle-ai/thanos/tree/main/mixin/README.md) We also have example Grafana dashboards [here](https://github.com/oodle-ai/thanos/blob/main/examples/dashboards/dashboards.md) and some [alerts](https://github.com/oodle-ai/thanos/blob/main/examples/alerts/alerts.md) to get you started.
 
 ## Talks
 

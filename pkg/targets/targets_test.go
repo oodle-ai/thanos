@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/targets/targetspb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/targets/targetspb"
 )
 
 func TestDedupTargets(t *testing.T) {

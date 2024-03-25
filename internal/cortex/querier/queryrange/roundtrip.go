@@ -35,11 +35,11 @@ import (
 	"github.com/weaveworks/common/httpgrpc"
 	"github.com/weaveworks/common/user"
 
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
-	"github.com/thanos-io/thanos/internal/cortex/querier"
-	"github.com/thanos-io/thanos/internal/cortex/tenant"
-	"github.com/thanos-io/thanos/internal/cortex/util"
-	"github.com/thanos-io/thanos/internal/cortex/util/flagext"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/querier"
+	"github.com/oodle-ai/thanos/internal/cortex/tenant"
+	"github.com/oodle-ai/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/util/flagext"
 )
 
 const day = 24 * time.Hour

@@ -17,8 +17,8 @@ GREP=$(which ggrep 2>/dev/null || which grep)
 # Exported for use in .mdox.prev-release.yaml
 export OUTPUT_CONTENT_DIR="${WEBSITE_DIR}/docs-pre-processed"
 
-git remote add upstream https://github.com/thanos-io/thanos.git
-git remote add origin https://github.com/thanos-io/thanos.git
+git remote add upstream https://github.com/oodle-ai/thanos.git
+git remote add origin https://github.com/oodle-ai/thanos.git
 git remote -v
 git fetch origin
 

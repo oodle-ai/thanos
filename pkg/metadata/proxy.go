@@ -15,13 +15,14 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/thanos-io/thanos/pkg/metadata/metadatapb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	"github.com/thanos-io/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/metadata/metadatapb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/tracing"
 )
 
 // Proxy implements metadatapb.Metadata gRPC that fanouts requests to given metadatapb.Metadata and deduplication on the way.
 type Proxy struct {
+	metadatapb.UnimplementedMetadataServer
 	logger   log.Logger
 	metadata func() []metadatapb.MetadataClient
 }

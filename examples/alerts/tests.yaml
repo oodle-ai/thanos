@@ -33,7 +33,7 @@ tests:
         pod: prometheus-1
       exp_annotations:
         description: 'Thanos Sidecar thanos-sidecar-1 is unhealthy.'
-        runbook_url: 'https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
+        runbook_url: 'https://github.com/oodle-ai/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
         summary: 'Thanos Sidecar cannot access Prometheus, even though Prometheus seems healthy and has reloaded WAL.'
   - eval_time: 11m
     alertname: ThanosSidecarNoConnectionToStartedPrometheus
@@ -46,7 +46,7 @@ tests:
         pod: prometheus-1
       exp_annotations:
         description: 'Thanos Sidecar thanos-sidecar-1 is unhealthy.'
-        runbook_url: 'https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
+        runbook_url: 'https://github.com/oodle-ai/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
         summary: 'Thanos Sidecar cannot access Prometheus, even though Prometheus seems healthy and has reloaded WAL.'
   - eval_time: 12m
     alertname: ThanosSidecarNoConnectionToStartedPrometheus
@@ -59,7 +59,7 @@ tests:
         pod: prometheus-1
       exp_annotations:
         description: 'Thanos Sidecar thanos-sidecar-1 is unhealthy.'
-        runbook_url: 'https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
+        runbook_url: 'https://github.com/oodle-ai/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
         summary: 'Thanos Sidecar cannot access Prometheus, even though Prometheus seems healthy and has reloaded WAL.'
   - eval_time: 20m
     alertname: ThanosSidecarNoConnectionToStartedPrometheus
@@ -72,7 +72,7 @@ tests:
         pod: prometheus-0
       exp_annotations:
         description: 'Thanos Sidecar thanos-sidecar-0 is unhealthy.'
-        runbook_url: 'https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
+        runbook_url: 'https://github.com/oodle-ai/thanos/tree/main/mixin/runbook.md#alert-name-thanossidecarnoconnectiontostartedprometheus'
         summary: 'Thanos Sidecar cannot access Prometheus, even though Prometheus seems healthy and has reloaded WAL.'
 
 - interval: 1m
@@ -101,7 +101,7 @@ tests:
           instance: thanos-ruler-0
         exp_annotations:
           description: 'Thanos Rule thanos-ruler-0 did not perform any rule evaluations in the past 10 minutes.'
-          runbook_url: 'https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanosnoruleevaluations'
+          runbook_url: 'https://github.com/oodle-ai/thanos/tree/main/mixin/runbook.md#alert-name-thanosnoruleevaluations'
           summary: 'Thanos Rule did not perform any rule evaluations.'
       - exp_labels:
           severity: critical
@@ -109,5 +109,5 @@ tests:
           instance: thanos-ruler-1
         exp_annotations:
           description: 'Thanos Rule thanos-ruler-1 did not perform any rule evaluations in the past 10 minutes.'
-          runbook_url: 'https://github.com/thanos-io/thanos/tree/main/mixin/runbook.md#alert-name-thanosnoruleevaluations'
+          runbook_url: 'https://github.com/oodle-ai/thanos/tree/main/mixin/runbook.md#alert-name-thanosnoruleevaluations'
           summary: 'Thanos Rule did not perform any rule evaluations.'

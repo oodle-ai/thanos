@@ -11,7 +11,7 @@ import (
 	"github.com/prometheus/prometheus/tsdb/chunkenc"
 	"github.com/prometheus/prometheus/tsdb/chunks"
 
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
 )
 
 // NewChunkSeriesMerger merges several chunk series into one.

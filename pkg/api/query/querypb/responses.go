@@ -6,7 +6,7 @@ package querypb
 import (
 	"strings"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb/prompb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb/prompb"
 )
 
 func NewQueryResponse(series *prompb.TimeSeries) *QueryResponse {

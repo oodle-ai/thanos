@@ -22,10 +22,10 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/compact/downsample"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/compact/downsample"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 type erroringBucket struct {
@@ -107,7 +107,7 @@ func (b *erroringBucket) Name() string {
 
 // Ensures that downsampleBucket() stops its work properly
 // after an error occurs with some blocks in the backlog.
-// Testing for https://github.com/thanos-io/thanos/issues/4960.
+// Testing for https://github.com/oodle-ai/thanos/issues/4960.
 func TestRegression4960_Deadlock(t *testing.T) {
 	logger := log.NewLogfmtLogger(os.Stderr)
 	dir := t.TempDir()

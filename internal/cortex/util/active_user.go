@@ -10,7 +10,7 @@ import (
 
 	"go.uber.org/atomic"
 
-	"github.com/thanos-io/thanos/internal/cortex/util/services"
+	"github.com/oodle-ai/thanos/internal/cortex/util/services"
 )
 
 // ActiveUsers keeps track of latest user's activity timestamp,

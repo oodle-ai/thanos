@@ -27,10 +27,10 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 
-	"github.com/thanos-io/thanos/pkg/promclient"
-	"github.com/thanos-io/thanos/pkg/receive"
-	"github.com/thanos-io/thanos/pkg/runutil"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
+	"github.com/oodle-ai/thanos/pkg/promclient"
+	"github.com/oodle-ai/thanos/pkg/receive"
+	"github.com/oodle-ai/thanos/pkg/runutil"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 )
 
 type DebugTransport struct{}
@@ -135,7 +135,7 @@ func TestReceive(t *testing.T) {
 
 		testutil.Ok(t, e2e.StartAndWaitReady(r1, r2, r3))
 
-		// These static metrics help reproduce issue https://github.com/thanos-io/thanos/issues/6257 in Receive.
+		// These static metrics help reproduce issue https://github.com/oodle-ai/thanos/issues/6257 in Receive.
 		metrics := []byte(`
 # HELP test_metric A test metric
 # TYPE test_metric counter
@@ -241,7 +241,7 @@ test_metric{a="2", b="2"} 1`)
 			},
 		})
 
-		// This is a regression test for the bug outlined in https://github.com/thanos-io/thanos/issues/6257.
+		// This is a regression test for the bug outlined in https://github.com/oodle-ai/thanos/issues/6257.
 		instantQuery(t, ctx, qStatic.Endpoint("http"), func() string {
 			return "test_metric"
 		}, time.Now, promclient.QueryOptions{

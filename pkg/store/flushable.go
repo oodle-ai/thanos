@@ -7,8 +7,8 @@ import (
 	"github.com/prometheus/prometheus/model/labels"
 	"golang.org/x/exp/slices"
 
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 type sortingStrategy uint64
@@ -70,8 +70,8 @@ func (r *resortingServer) Send(response *storepb.SeriesResponse) error {
 func (r *resortingServer) Flush() error {
 	slices.SortFunc(r.series, func(a, b *storepb.Series) int {
 		return labels.Compare(
-			labelpb.ZLabelsToPromLabels(a.Labels),
-			labelpb.ZLabelsToPromLabels(b.Labels),
+			labelpb.ProtobufLabelsToPromLabels(a.Labels),
+			labelpb.ProtobufLabelsToPromLabels(b.Labels),
 		)
 	})
 	for _, response := range r.series {

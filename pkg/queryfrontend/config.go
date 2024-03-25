@@ -14,15 +14,15 @@ import (
 	prommodel "github.com/prometheus/common/model"
 	"gopkg.in/yaml.v2"
 
-	cortexcache "github.com/thanos-io/thanos/internal/cortex/chunk/cache"
-	"github.com/thanos-io/thanos/internal/cortex/frontend/transport"
-	"github.com/thanos-io/thanos/internal/cortex/querier"
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	"github.com/thanos-io/thanos/internal/cortex/util/flagext"
-	cortexvalidation "github.com/thanos-io/thanos/internal/cortex/util/validation"
-	"github.com/thanos-io/thanos/pkg/cacheutil"
-	"github.com/thanos-io/thanos/pkg/exthttp"
-	"github.com/thanos-io/thanos/pkg/model"
+	cortexcache "github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/frontend/transport"
+	"github.com/oodle-ai/thanos/internal/cortex/querier"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	"github.com/oodle-ai/thanos/internal/cortex/util/flagext"
+	cortexvalidation "github.com/oodle-ai/thanos/internal/cortex/util/validation"
+	"github.com/oodle-ai/thanos/pkg/cacheutil"
+	"github.com/oodle-ai/thanos/pkg/exthttp"
+	"github.com/oodle-ai/thanos/pkg/model"
 )
 
 type ResponseCacheProvider string

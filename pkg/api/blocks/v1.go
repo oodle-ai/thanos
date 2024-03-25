@@ -17,11 +17,11 @@ import (
 	"github.com/prometheus/common/route"
 	"github.com/thanos-io/objstore"
 
-	"github.com/thanos-io/thanos/pkg/api"
-	"github.com/thanos-io/thanos/pkg/block"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	extpromhttp "github.com/thanos-io/thanos/pkg/extprom/http"
-	"github.com/thanos-io/thanos/pkg/logging"
+	"github.com/oodle-ai/thanos/pkg/api"
+	"github.com/oodle-ai/thanos/pkg/block"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	extpromhttp "github.com/oodle-ai/thanos/pkg/extprom/http"
+	"github.com/oodle-ai/thanos/pkg/logging"
 )
 
 // BlocksAPI is a very simple API used by Thanos Block Viewer.

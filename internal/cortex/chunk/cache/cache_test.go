@@ -14,7 +14,7 @@ import (
 	"github.com/go-kit/log"
 	"github.com/stretchr/testify/require"
 
-	"github.com/thanos-io/thanos/internal/cortex/chunk/cache"
+	"github.com/oodle-ai/thanos/internal/cortex/chunk/cache"
 )
 
 func fillCache(t *testing.T, cache cache.Cache) ([]string, [][]byte) {

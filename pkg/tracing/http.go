@@ -12,9 +12,9 @@ import (
 
 	"github.com/go-kit/log"
 	"github.com/go-kit/log/level"
+	"github.com/oodle-ai/thanos/pkg/tracing/migration"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
-	"github.com/thanos-io/thanos/pkg/tracing/migration"
 )
 
 // HTTPMiddleware returns an HTTP handler that injects the given tracer and starts a new server span.

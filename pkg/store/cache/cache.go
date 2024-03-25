@@ -16,7 +16,7 @@ import (
 	"github.com/prometheus/prometheus/storage"
 	"golang.org/x/crypto/blake2b"
 
-	"github.com/thanos-io/thanos/pkg/tenancy"
+	"github.com/oodle-ai/thanos/pkg/tenancy"
 )
 
 const (

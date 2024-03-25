@@ -16,20 +16,20 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	"github.com/oodle-ai/thanos/pkg/store"
 	"github.com/prometheus/prometheus/model/labels"
-	"github.com/thanos-io/thanos/pkg/store"
 
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
 	"github.com/efficientgo/core/testutil"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/info/infopb"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 	"github.com/pkg/errors"
 	promtestutil "github.com/prometheus/client_golang/prometheus/testutil"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/info/infopb"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
 )
 
 var testGRPCOpts = []grpc.DialOption{
@@ -919,7 +919,7 @@ func TestEndpointSetUpdate_AvailabilityScenarios(t *testing.T) {
 				return []labelpb.ZLabelSet{}
 			},
 		},
-		// Regression tests against https://github.com/thanos-io/thanos/issues/1632: From v0.8.0 stores advertise labels.
+		// Regression tests against https://github.com/oodle-ai/thanos/issues/1632: From v0.8.0 stores advertise labels.
 		// If the object storage handled by store gateway has only one sidecar we used to hitting issue.
 		{
 			InfoResponse: storeGWInfo,
@@ -1638,7 +1638,7 @@ func assertRegisteredAPIs(t *testing.T, expectedAPIs *APIs, er *endpointRef) {
 	testutil.Equals(t, expectedAPIs.exemplars, er.HasExemplarsAPI())
 }
 
-// Regression test for: https://github.com/thanos-io/thanos/issues/4766.
+// Regression test for: https://github.com/oodle-ai/thanos/issues/4766.
 func TestDeadlockLocking(t *testing.T) {
 	t.Parallel()
 

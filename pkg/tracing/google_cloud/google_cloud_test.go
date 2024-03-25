@@ -11,10 +11,10 @@ import (
 	"testing"
 
 	"github.com/go-kit/log"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/tracing"
+	"github.com/oodle-ai/thanos/pkg/tracing/migration"
 	"github.com/opentracing/opentracing-go"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/tracing"
-	"github.com/thanos-io/thanos/pkg/tracing/migration"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/sdk/trace/tracetest"
 )

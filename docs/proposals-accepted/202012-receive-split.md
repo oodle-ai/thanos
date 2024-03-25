@@ -7,9 +7,9 @@ menu: proposals-accepted
 
 ### Related Tickets
 
-* Hashring improvements: https://github.com/thanos-io/thanos/issues/3141
-* Previous proposal implementations: https://github.com/thanos-io/thanos/pull/3845, https://github.com/thanos-io/thanos/pull/3580
-* Distribution idea: https://github.com/thanos-io/thanos/pull/2675
+* Hashring improvements: https://github.com/oodle-ai/thanos/issues/3141
+* Previous proposal implementations: https://github.com/oodle-ai/thanos/pull/3845, https://github.com/oodle-ai/thanos/pull/3580
+* Distribution idea: https://github.com/oodle-ai/thanos/pull/2675
 
 ### Summary
 

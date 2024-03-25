@@ -22,11 +22,11 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/efficientgo/core/testutil"
+	tracingclient "github.com/oodle-ai/thanos/pkg/tracing/client"
+	"github.com/oodle-ai/thanos/pkg/tracing/jaeger"
+	"github.com/oodle-ai/thanos/test/e2e/e2ethanos"
 	"github.com/thanos-io/objstore/client"
 	"github.com/thanos-io/objstore/providers/s3"
-	tracingclient "github.com/thanos-io/thanos/pkg/tracing/client"
-	"github.com/thanos-io/thanos/pkg/tracing/jaeger"
-	"github.com/thanos-io/thanos/test/e2e/e2ethanos"
 )
 
 const (
@@ -55,7 +55,7 @@ func exec(cmd string, args ...string) error {
 // available to store and Prometheus instances.
 //
 // You can choose different profiles by setting the BLOCK_PROFILE environment variable.
-// Available profiles can be found at https://github.com/thanos-io/thanosbench/blob/master/pkg/blockgen/profiles.go#L28
+// Available profiles can be found at https://github.com/oodle-ai/thanosbench/blob/master/pkg/blockgen/profiles.go#L28
 func createData() (perr error) {
 	profile := os.Getenv("BLOCK_PROFILE")
 	if profile == "" {

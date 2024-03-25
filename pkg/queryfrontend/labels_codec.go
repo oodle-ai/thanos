@@ -21,11 +21,11 @@ import (
 	"github.com/prometheus/prometheus/model/timestamp"
 	"github.com/weaveworks/common/httpgrpc"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	cortexutil "github.com/thanos-io/thanos/internal/cortex/util"
-	"github.com/thanos-io/thanos/internal/cortex/util/spanlogger"
-	queryv1 "github.com/thanos-io/thanos/pkg/api/query"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	cortexutil "github.com/oodle-ai/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/util/spanlogger"
+	queryv1 "github.com/oodle-ai/thanos/pkg/api/query"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
 )
 
 var (
@@ -227,7 +227,7 @@ func (c labelsCodec) DecodeResponse(ctx context.Context, r *http.Response, req q
 			return nil, httpgrpc.Errorf(http.StatusInternalServerError, "error decoding response: %v", err)
 		}
 		for h, hv := range r.Header {
-			resp.Headers = append(resp.Headers, &ResponseHeader{Name: h, Values: hv})
+			resp.RespHeaders = append(resp.RespHeaders, &ResponseHeader{Name: h, Values: hv})
 		}
 		return &resp, nil
 	case *ThanosSeriesRequest:
@@ -236,7 +236,7 @@ func (c labelsCodec) DecodeResponse(ctx context.Context, r *http.Response, req q
 			return nil, httpgrpc.Errorf(http.StatusInternalServerError, "error decoding response: %v", err)
 		}
 		for h, hv := range r.Header {
-			resp.Headers = append(resp.Headers, &ResponseHeader{Name: h, Values: hv})
+			resp.RespHeaders = append(resp.RespHeaders, &ResponseHeader{Name: h, Values: hv})
 		}
 		return &resp, nil
 	default:

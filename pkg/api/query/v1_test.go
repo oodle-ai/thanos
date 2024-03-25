@@ -32,6 +32,19 @@ import (
 
 	"github.com/efficientgo/core/testutil"
 	"github.com/go-kit/log"
+	baseAPI "github.com/oodle-ai/thanos/pkg/api"
+	"github.com/oodle-ai/thanos/pkg/compact"
+	"github.com/oodle-ai/thanos/pkg/component"
+	"github.com/oodle-ai/thanos/pkg/gate"
+	"github.com/oodle-ai/thanos/pkg/query"
+	"github.com/oodle-ai/thanos/pkg/rules/rulespb"
+	"github.com/oodle-ai/thanos/pkg/store"
+	"github.com/oodle-ai/thanos/pkg/store/labelpb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
+	storetestutil "github.com/oodle-ai/thanos/pkg/store/storepb/testutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/testutil/testpromcompatibility"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/common/route"
@@ -49,19 +62,6 @@ import (
 	promgate "github.com/prometheus/prometheus/util/gate"
 	"github.com/prometheus/prometheus/util/stats"
 	"github.com/thanos-io/promql-engine/engine"
-	baseAPI "github.com/thanos-io/thanos/pkg/api"
-	"github.com/thanos-io/thanos/pkg/compact"
-	"github.com/thanos-io/thanos/pkg/component"
-	"github.com/thanos-io/thanos/pkg/gate"
-	"github.com/thanos-io/thanos/pkg/query"
-	"github.com/thanos-io/thanos/pkg/rules/rulespb"
-	"github.com/thanos-io/thanos/pkg/store"
-	"github.com/thanos-io/thanos/pkg/store/labelpb"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
-	storetestutil "github.com/thanos-io/thanos/pkg/store/storepb/testutil"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
-	"github.com/thanos-io/thanos/pkg/testutil/testpromcompatibility"
 )
 
 func TestMain(m *testing.M) {
@@ -1825,7 +1825,7 @@ func TestRulesHandler(t *testing.T) {
 		testpromcompatibility.RecordingRule{
 			Name:           all[0].GetRecording().Name,
 			Query:          all[0].GetRecording().Query,
-			Labels:         labelpb.ZLabelsToPromLabels(all[0].GetRecording().Labels.Labels),
+			Labels:         labelpb.ProtobufLabelsToPromLabels(all[0].GetRecording().Labels.Labels),
 			Health:         rules.RuleHealth(all[0].GetRecording().Health),
 			LastError:      all[0].GetRecording().LastError,
 			LastEvaluation: all[0].GetRecording().LastEvaluation,
@@ -1835,7 +1835,7 @@ func TestRulesHandler(t *testing.T) {
 		testpromcompatibility.RecordingRule{
 			Name:           all[1].GetRecording().Name,
 			Query:          all[1].GetRecording().Query,
-			Labels:         labelpb.ZLabelsToPromLabels(all[1].GetRecording().Labels.Labels),
+			Labels:         labelpb.ProtobufLabelsToPromLabels(all[1].GetRecording().Labels.Labels),
 			Health:         rules.RuleHealth(all[1].GetRecording().Health),
 			LastError:      all[1].GetRecording().LastError,
 			LastEvaluation: all[1].GetRecording().LastEvaluation,
@@ -1846,26 +1846,26 @@ func TestRulesHandler(t *testing.T) {
 			State:          strings.ToLower(all[2].GetAlert().State.String()),
 			Name:           all[2].GetAlert().Name,
 			Query:          all[2].GetAlert().Query,
-			Labels:         labelpb.ZLabelsToPromLabels(all[2].GetAlert().Labels.Labels),
+			Labels:         labelpb.ProtobufLabelsToPromLabels(all[2].GetAlert().Labels.Labels),
 			Health:         rules.RuleHealth(all[2].GetAlert().Health),
 			LastError:      all[2].GetAlert().LastError,
 			LastEvaluation: all[2].GetAlert().LastEvaluation,
 			EvaluationTime: all[2].GetAlert().EvaluationDurationSeconds,
 			Duration:       all[2].GetAlert().DurationSeconds,
 			KeepFiringFor:  all[2].GetAlert().KeepFiringForSeconds,
-			Annotations:    labelpb.ZLabelsToPromLabels(all[2].GetAlert().Annotations.Labels),
+			Annotations:    labelpb.ProtobufLabelsToPromLabels(all[2].GetAlert().Annotations.Labels),
 			Alerts: []*testpromcompatibility.Alert{
 				{
-					Labels:                  labelpb.ZLabelsToPromLabels(all[2].GetAlert().Alerts[0].Labels.Labels),
-					Annotations:             labelpb.ZLabelsToPromLabels(all[2].GetAlert().Alerts[0].Annotations.Labels),
+					Labels:                  labelpb.ProtobufLabelsToPromLabels(all[2].GetAlert().Alerts[0].Labels.Labels),
+					Annotations:             labelpb.ProtobufLabelsToPromLabels(all[2].GetAlert().Alerts[0].Annotations.Labels),
 					State:                   strings.ToLower(all[2].GetAlert().Alerts[0].State.String()),
 					ActiveAt:                all[2].GetAlert().Alerts[0].ActiveAt,
 					Value:                   all[2].GetAlert().Alerts[0].Value,
 					PartialResponseStrategy: all[2].GetAlert().Alerts[0].PartialResponseStrategy.String(),
 				},
 				{
-					Labels:                  labelpb.ZLabelsToPromLabels(all[2].GetAlert().Alerts[1].Labels.Labels),
-					Annotations:             labelpb.ZLabelsToPromLabels(all[2].GetAlert().Alerts[1].Annotations.Labels),
+					Labels:                  labelpb.ProtobufLabelsToPromLabels(all[2].GetAlert().Alerts[1].Labels.Labels),
+					Annotations:             labelpb.ProtobufLabelsToPromLabels(all[2].GetAlert().Alerts[1].Annotations.Labels),
 					State:                   strings.ToLower(all[2].GetAlert().Alerts[1].State.String()),
 					ActiveAt:                all[2].GetAlert().Alerts[1].ActiveAt,
 					Value:                   all[2].GetAlert().Alerts[1].Value,
@@ -1878,7 +1878,7 @@ func TestRulesHandler(t *testing.T) {
 			State:          strings.ToLower(all[3].GetAlert().State.String()),
 			Name:           all[3].GetAlert().Name,
 			Query:          all[3].GetAlert().Query,
-			Labels:         labelpb.ZLabelsToPromLabels(all[3].GetAlert().Labels.Labels),
+			Labels:         labelpb.ProtobufLabelsToPromLabels(all[3].GetAlert().Labels.Labels),
 			Health:         rules.RuleHealth(all[2].GetAlert().Health),
 			LastError:      all[3].GetAlert().LastError,
 			LastEvaluation: all[3].GetAlert().LastEvaluation,
@@ -1893,7 +1893,7 @@ func TestRulesHandler(t *testing.T) {
 			State:          strings.ToLower(all[4].GetAlert().State.String()),
 			Name:           all[4].GetAlert().Name,
 			Query:          all[4].GetAlert().Query,
-			Labels:         labelpb.ZLabelsToPromLabels(all[4].GetAlert().Labels.Labels),
+			Labels:         labelpb.ProtobufLabelsToPromLabels(all[4].GetAlert().Labels.Labels),
 			Health:         rules.RuleHealth(all[2].GetAlert().Health),
 			LastError:      all[4].GetAlert().LastError,
 			LastEvaluation: all[4].GetAlert().LastEvaluation,

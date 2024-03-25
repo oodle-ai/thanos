@@ -8,9 +8,9 @@ menu: proposals-accepted
 
 ## 1 Related links/tickets
 
-* https://github.com/thanos-io/thanos/pull/5250
-* https://github.com/thanos-io/thanos/pull/4917
-* https://github.com/thanos-io/thanos/pull/5350
+* https://github.com/oodle-ai/thanos/pull/5250
+* https://github.com/oodle-ai/thanos/pull/4917
+* https://github.com/oodle-ai/thanos/pull/5350
 * https://github.com/thanos-community/promql-engine/issues/25
 
 ## 2 Why
@@ -69,7 +69,7 @@ type RemoteEngine interface {
 }
 ```
 
-The implementation of the `RemoteEngine` will be provided by Thanos itself and will use the gRPC Query API added in [https://github.com/thanos-io/thanos/pull/5250](https://github.com/thanos-io/thanos/pull/5250).
+The implementation of the `RemoteEngine` will be provided by Thanos itself and will use the gRPC Query API added in [https://github.com/oodle-ai/thanos/pull/5250](https://github.com/oodle-ai/thanos/pull/5250).
 
 Keeping PromQL execution in Query components allows for deduplication between Prometheus pairs to happen before series are aggregated.
 
@@ -175,7 +175,7 @@ This approach can also be used to create Querier shards against Store Gateways, 
 
 ## 7 Alternatives
 
-A viable alternative to the proposed method is to add support for Query Pushdown in the Thanos Querier. By extracting better as described in https://github.com/thanos-io/thanos/issues/5984, we can decide to execute a query in a local Querier, similar to how the sidecar does that against Prometheus.
+A viable alternative to the proposed method is to add support for Query Pushdown in the Thanos Querier. By extracting better as described in https://github.com/oodle-ai/thanos/issues/5984, we can decide to execute a query in a local Querier, similar to how the sidecar does that against Prometheus.
 
 Even though this approach might be faster to implement, it might not be the best long-term solution due to several reasons. To some extent, Query Pushdown misuses the `Series` API and the Querier requesting series is not aware that the query was actually executed. This can be problematic for distributing something like `count(metric)` since the distributed version should end up as:
 

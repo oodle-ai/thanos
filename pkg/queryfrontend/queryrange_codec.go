@@ -19,11 +19,11 @@ import (
 	"github.com/prometheus/prometheus/promql/parser"
 	"github.com/weaveworks/common/httpgrpc"
 
-	"github.com/thanos-io/thanos/internal/cortex/querier/queryrange"
-	cortexutil "github.com/thanos-io/thanos/internal/cortex/util"
+	"github.com/oodle-ai/thanos/internal/cortex/querier/queryrange"
+	cortexutil "github.com/oodle-ai/thanos/internal/cortex/util"
 
-	queryv1 "github.com/thanos-io/thanos/pkg/api/query"
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	queryv1 "github.com/oodle-ai/thanos/pkg/api/query"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 const (

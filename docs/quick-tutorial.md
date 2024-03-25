@@ -84,7 +84,7 @@ If you are not interested in backing up any data, the `--objstore.config-file` f
 
 ### Store API
 
-The Sidecar component implements and exposes a gRPC *[Store API](https://github.com/thanos-io/thanos/blob/main/pkg/store/storepb/rpc.proto#L27)*. This implementation allows you to query the metric data stored in Prometheus.
+The Sidecar component implements and exposes a gRPC *[Store API](https://github.com/oodle-ai/thanos/blob/main/pkg/store/storepb/rpc.proto#L27)*. This implementation allows you to query the metric data stored in Prometheus.
 
 Let's extend the Sidecar from the previous section to connect to a Prometheus server, and expose the Store API:
 

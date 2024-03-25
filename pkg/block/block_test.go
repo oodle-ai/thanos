@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/thanos-io/thanos/pkg/extprom"
+	"github.com/oodle-ai/thanos/pkg/extprom"
 
 	"github.com/go-kit/log"
 	"github.com/oklog/ulid"
@@ -27,9 +27,9 @@ import (
 	"github.com/thanos-io/objstore"
 
 	"github.com/efficientgo/core/testutil"
-	"github.com/thanos-io/thanos/pkg/block/metadata"
-	"github.com/thanos-io/thanos/pkg/testutil/custom"
-	"github.com/thanos-io/thanos/pkg/testutil/e2eutil"
+	"github.com/oodle-ai/thanos/pkg/block/metadata"
+	"github.com/oodle-ai/thanos/pkg/testutil/custom"
+	"github.com/oodle-ai/thanos/pkg/testutil/e2eutil"
 )
 
 func TestIsBlockDir(t *testing.T) {

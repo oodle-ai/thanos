@@ -12,7 +12,7 @@ import (
 	"github.com/prometheus/prometheus/tsdb/chunkenc"
 	"github.com/prometheus/prometheus/util/annotations"
 
-	"github.com/thanos-io/thanos/pkg/store/storepb"
+	"github.com/oodle-ai/thanos/pkg/store/storepb"
 )
 
 type dedupSeriesSet struct {
@@ -48,7 +48,7 @@ type overlapSplitSet struct {
 
 	currLabels labels.Labels
 	currI      int
-	replicas   [][]storepb.AggrChunk
+	replicas   [][]*storepb.AggrChunk
 }
 
 func (o *overlapSplitSet) Next() bool {
@@ -70,7 +70,7 @@ func (o *overlapSplitSet) Next() bool {
 		return false
 	}
 
-	var chunks []storepb.AggrChunk
+	var chunks []*storepb.AggrChunk
 	o.currLabels, chunks = o.set.At()
 	if len(chunks) == 0 {
 		return true
@@ -87,12 +87,12 @@ chunksLoop:
 				continue chunksLoop
 			}
 		}
-		o.replicas = append(o.replicas, []storepb.AggrChunk{chunks[i]}) // Not found, add to a new "fake" series.
+		o.replicas = append(o.replicas, []*storepb.AggrChunk{chunks[i]}) // Not found, add to a new "fake" series.
 	}
 	return true
 }
 
-func (o *overlapSplitSet) At() (labels.Labels, []storepb.AggrChunk) {
+func (o *overlapSplitSet) At() (labels.Labels, []*storepb.AggrChunk) {
 	return o.currLabels, o.replicas[o.currI]
 }
 
@@ -244,9 +244,9 @@ func (it noopAdjustableSeriesIterator) adjustAtValue(float64) {}
 // We mitigate this by taking allowing invoking AdjustAtValue which adjust the value in case of last value being larger than current at.
 // (Counter cannot go down)
 //
-// This is to mitigate https://github.com/thanos-io/thanos/issues/2401.
+// This is to mitigate https://github.com/oodle-ai/thanos/issues/2401.
 // TODO(bwplotka): Find better deduplication algorithm that does not require knowledge if the given
-// series is counter or not: https://github.com/thanos-io/thanos/issues/2547.
+// series is counter or not: https://github.com/oodle-ai/thanos/issues/2547.
 type counterErrAdjustSeriesIterator struct {
 	chunkenc.Iterator
 
@@ -272,7 +272,7 @@ type dedupSeriesIterator struct {
 	aval, bval chunkenc.ValueType
 
 	// TODO(bwplotka): Don't base on LastT, but on detected scrape interval. This will allow us to be more
-	// responsive to gaps: https://github.com/thanos-io/thanos/issues/981, let's do it in next PR.
+	// responsive to gaps: https://github.com/oodle-ai/thanos/issues/981, let's do it in next PR.
 	lastT    int64
 	lastIter chunkenc.Iterator
 

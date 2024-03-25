@@ -209,7 +209,7 @@ local utils = import '../lib/utils.libsonnet';
         )
       )
       .addRow(
-        // TODO(https://github.com/thanos-io/thanos/issues/3926)
+        // TODO(https://github.com/oodle-ai/thanos/issues/3926)
         g.row('WRITE - gRPC (Unary)')
         .addPanel(
           g.panel('Rate', 'Shows rate of handled Unary gRPC requests from queriers.') +
@@ -225,7 +225,7 @@ local utils = import '../lib/utils.libsonnet';
         )
       )
       .addRow(
-        // TODO(https://github.com/thanos-io/thanos/issues/3926)
+        // TODO(https://github.com/oodle-ai/thanos/issues/3926)
         g.row('READ - gRPC (Unary)')
         .addPanel(
           g.panel('Rate', 'Shows rate of handled Unary gRPC requests from queriers.') +
@@ -241,7 +241,7 @@ local utils = import '../lib/utils.libsonnet';
         )
       )
       .addRow(
-        // TODO(https://github.com/thanos-io/thanos/issues/3926)
+        // TODO(https://github.com/oodle-ai/thanos/issues/3926)
         g.row('READ - gRPC (Stream)')
         .addPanel(
           g.panel('Rate', 'Shows rate of handled Streamed gRPC requests from queriers.') +

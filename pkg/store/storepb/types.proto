@@ -6,6 +6,7 @@ package thanos;
 
 option go_package = "github.com/oodle-ai/thanos/pkg/store/storepb";
 
+import "github.com/planetscale/vtprotobuf/vtproto/ext.proto";
 import "store/labelpb/types.proto";
 
 message Chunk {
@@ -20,6 +21,7 @@ message Chunk {
 }
 
 message Series {
+  option (vtproto.mempool) = true;
   repeated Label labels      = 1;
   repeated AggrChunk chunks  = 2;
 }

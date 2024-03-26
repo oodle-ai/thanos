@@ -6,11 +6,12 @@ package storepb
 
 import (
 	fmt "fmt"
-	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	labelpb "github.com/oodle-ai/thanos/pkg/store/labelpb"
+	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	proto "google.golang.org/protobuf/proto"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -48,7 +49,7 @@ func (m *Series) CloneVT() *Series {
 	if m == nil {
 		return (*Series)(nil)
 	}
-	r := new(Series)
+	r := SeriesFromVTPool()
 	if rhs := m.Labels; rhs != nil {
 		tmpContainer := make([]*labelpb.Label, len(rhs))
 		for k, v := range rhs {
@@ -781,6 +782,36 @@ func (m *LabelMatcher) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+var vtprotoPool_Series = sync.Pool{
+	New: func() interface{} {
+		return &Series{}
+	},
+}
+
+func (m *Series) ResetVT() {
+	if m != nil {
+		for _, mm := range m.Labels {
+			mm.Reset()
+		}
+		f0 := m.Labels[:0]
+		for _, mm := range m.Chunks {
+			mm.Reset()
+		}
+		f1 := m.Chunks[:0]
+		m.Reset()
+		m.Labels = f0
+		m.Chunks = f1
+	}
+}
+func (m *Series) ReturnToVTPool() {
+	if m != nil {
+		m.ResetVT()
+		vtprotoPool_Series.Put(m)
+	}
+}
+func SeriesFromVTPool() *Series {
+	return vtprotoPool_Series.Get().(*Series)
+}
 func (m *Chunk) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -1065,7 +1096,14 @@ func (m *Series) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Labels = append(m.Labels, &labelpb.Label{})
+			if len(m.Labels) == cap(m.Labels) {
+				m.Labels = append(m.Labels, &labelpb.Label{})
+			} else {
+				m.Labels = m.Labels[:len(m.Labels)+1]
+				if m.Labels[len(m.Labels)-1] == nil {
+					m.Labels[len(m.Labels)-1] = &labelpb.Label{}
+				}
+			}
 			if err := m.Labels[len(m.Labels)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1099,7 +1137,14 @@ func (m *Series) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Chunks = append(m.Chunks, &AggrChunk{})
+			if len(m.Chunks) == cap(m.Chunks) {
+				m.Chunks = append(m.Chunks, &AggrChunk{})
+			} else {
+				m.Chunks = m.Chunks[:len(m.Chunks)+1]
+				if m.Chunks[len(m.Chunks)-1] == nil {
+					m.Chunks[len(m.Chunks)-1] = &AggrChunk{}
+				}
+			}
 			if err := m.Chunks[len(m.Chunks)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1743,7 +1788,14 @@ func (m *Series) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Labels = append(m.Labels, &labelpb.Label{})
+			if len(m.Labels) == cap(m.Labels) {
+				m.Labels = append(m.Labels, &labelpb.Label{})
+			} else {
+				m.Labels = m.Labels[:len(m.Labels)+1]
+				if m.Labels[len(m.Labels)-1] == nil {
+					m.Labels[len(m.Labels)-1] = &labelpb.Label{}
+				}
+			}
 			if err := m.Labels[len(m.Labels)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1777,7 +1829,14 @@ func (m *Series) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Chunks = append(m.Chunks, &AggrChunk{})
+			if len(m.Chunks) == cap(m.Chunks) {
+				m.Chunks = append(m.Chunks, &AggrChunk{})
+			} else {
+				m.Chunks = m.Chunks[:len(m.Chunks)+1]
+				if m.Chunks[len(m.Chunks)-1] == nil {
+					m.Chunks[len(m.Chunks)-1] = &AggrChunk{}
+				}
+			}
 			if err := m.Chunks[len(m.Chunks)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

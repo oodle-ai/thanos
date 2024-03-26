@@ -23,6 +23,7 @@ mkdir -p /tmp/protobin/
 PATH=${PATH}:/tmp/protobin
 
 GOOGLE_PROTO="$(go list  -f '{{.Dir}}' -m github.com/golang/protobuf@v1.3.2)"
+VT_PROTO="$(go list  -f '{{.Dir}}' -m github.com/planetscale/vtprotobuf\@v0.6.0)"
 
 DIRS="store/storepb/ store/storepb/prompb/ store/labelpb rules/rulespb targets/targetspb store/hintspb queryfrontend metadata/metadatapb exemplars/exemplarspb info/infopb api/query/querypb"
 echo "generating code"
@@ -34,6 +35,8 @@ for dir in ${DIRS}; do
     --go-vtproto_out=. --plugin protoc-gen-go-vtproto="${PROTOC_GEN_GO_VTPROTO_BIN}" \
     -I=. \
     -I="${GOOGLE_PROTO}" \
+    -I="${VT_PROTO}"/include \
+    -I="/usr/local/include" \
     ${dir}/*.proto
 
   pushd ${dir}

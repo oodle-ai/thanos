@@ -6,15 +6,19 @@ package thanos;
 
 option go_package = "github.com/oodle-ai/thanos/pkg/store/labelpb";
 
+import "github.com/planetscale/vtprotobuf/vtproto/ext.proto";
+
 message Label {
     string name  = 1;
     string value = 2;
 }
 
 message LabelSet {
+    option (vtproto.mempool) = true;
     repeated Label labels = 1;
 }
 
 message ZLabelSet {
+    option (vtproto.mempool) = true;
     repeated Label labels = 1;
 }

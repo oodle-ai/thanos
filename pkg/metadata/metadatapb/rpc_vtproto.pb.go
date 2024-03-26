@@ -7,8 +7,8 @@ package metadatapb
 import (
 	context "context"
 	fmt "fmt"
-	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	storepb "github.com/oodle-ai/thanos/pkg/store/storepb"
+	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

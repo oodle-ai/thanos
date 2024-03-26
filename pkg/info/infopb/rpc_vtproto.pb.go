@@ -7,8 +7,8 @@ package infopb
 import (
 	context "context"
 	fmt "fmt"
-	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	labelpb "github.com/oodle-ai/thanos/pkg/store/labelpb"
+	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

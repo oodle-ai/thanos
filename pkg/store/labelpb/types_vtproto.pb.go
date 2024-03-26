@@ -10,6 +10,7 @@ import (
 	proto "google.golang.org/protobuf/proto"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -42,7 +43,7 @@ func (m *LabelSet) CloneVT() *LabelSet {
 	if m == nil {
 		return (*LabelSet)(nil)
 	}
-	r := new(LabelSet)
+	r := LabelSetFromVTPool()
 	if rhs := m.Labels; rhs != nil {
 		tmpContainer := make([]*Label, len(rhs))
 		for k, v := range rhs {
@@ -65,7 +66,7 @@ func (m *ZLabelSet) CloneVT() *ZLabelSet {
 	if m == nil {
 		return (*ZLabelSet)(nil)
 	}
-	r := new(ZLabelSet)
+	r := ZLabelSetFromVTPool()
 	if rhs := m.Labels; rhs != nil {
 		tmpContainer := make([]*Label, len(rhs))
 		for k, v := range rhs {
@@ -446,6 +447,57 @@ func (m *ZLabelSet) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+var vtprotoPool_LabelSet = sync.Pool{
+	New: func() interface{} {
+		return &LabelSet{}
+	},
+}
+
+func (m *LabelSet) ResetVT() {
+	if m != nil {
+		for _, mm := range m.Labels {
+			mm.Reset()
+		}
+		f0 := m.Labels[:0]
+		m.Reset()
+		m.Labels = f0
+	}
+}
+func (m *LabelSet) ReturnToVTPool() {
+	if m != nil {
+		m.ResetVT()
+		vtprotoPool_LabelSet.Put(m)
+	}
+}
+func LabelSetFromVTPool() *LabelSet {
+	return vtprotoPool_LabelSet.Get().(*LabelSet)
+}
+
+var vtprotoPool_ZLabelSet = sync.Pool{
+	New: func() interface{} {
+		return &ZLabelSet{}
+	},
+}
+
+func (m *ZLabelSet) ResetVT() {
+	if m != nil {
+		for _, mm := range m.Labels {
+			mm.Reset()
+		}
+		f0 := m.Labels[:0]
+		m.Reset()
+		m.Labels = f0
+	}
+}
+func (m *ZLabelSet) ReturnToVTPool() {
+	if m != nil {
+		m.ResetVT()
+		vtprotoPool_ZLabelSet.Put(m)
+	}
+}
+func ZLabelSetFromVTPool() *ZLabelSet {
+	return vtprotoPool_ZLabelSet.Get().(*ZLabelSet)
+}
 func (m *Label) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -669,7 +721,14 @@ func (m *LabelSet) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Labels = append(m.Labels, &Label{})
+			if len(m.Labels) == cap(m.Labels) {
+				m.Labels = append(m.Labels, &Label{})
+			} else {
+				m.Labels = m.Labels[:len(m.Labels)+1]
+				if m.Labels[len(m.Labels)-1] == nil {
+					m.Labels[len(m.Labels)-1] = &Label{}
+				}
+			}
 			if err := m.Labels[len(m.Labels)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -754,7 +813,14 @@ func (m *ZLabelSet) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Labels = append(m.Labels, &Label{})
+			if len(m.Labels) == cap(m.Labels) {
+				m.Labels = append(m.Labels, &Label{})
+			} else {
+				m.Labels = m.Labels[:len(m.Labels)+1]
+				if m.Labels[len(m.Labels)-1] == nil {
+					m.Labels[len(m.Labels)-1] = &Label{}
+				}
+			}
 			if err := m.Labels[len(m.Labels)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -962,7 +1028,14 @@ func (m *LabelSet) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Labels = append(m.Labels, &Label{})
+			if len(m.Labels) == cap(m.Labels) {
+				m.Labels = append(m.Labels, &Label{})
+			} else {
+				m.Labels = m.Labels[:len(m.Labels)+1]
+				if m.Labels[len(m.Labels)-1] == nil {
+					m.Labels[len(m.Labels)-1] = &Label{}
+				}
+			}
 			if err := m.Labels[len(m.Labels)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1047,7 +1120,14 @@ func (m *ZLabelSet) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Labels = append(m.Labels, &Label{})
+			if len(m.Labels) == cap(m.Labels) {
+				m.Labels = append(m.Labels, &Label{})
+			} else {
+				m.Labels = m.Labels[:len(m.Labels)+1]
+				if m.Labels[len(m.Labels)-1] == nil {
+					m.Labels[len(m.Labels)-1] = &Label{}
+				}
+			}
 			if err := m.Labels[len(m.Labels)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

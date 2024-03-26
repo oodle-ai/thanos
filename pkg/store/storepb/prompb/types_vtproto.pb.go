@@ -7,8 +7,8 @@ package prompb
 import (
 	binary "encoding/binary"
 	fmt "fmt"
-	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	labelpb "github.com/oodle-ai/thanos/pkg/store/labelpb"
+	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	proto "google.golang.org/protobuf/proto"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"

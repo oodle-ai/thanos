@@ -7,9 +7,9 @@ package hintspb
 import (
 	fmt "fmt"
 	duration "github.com/golang/protobuf/ptypes/duration"
+	storepb "github.com/oodle-ai/thanos/pkg/store/storepb"
 	protohelpers "github.com/planetscale/vtprotobuf/protohelpers"
 	durationpb "github.com/planetscale/vtprotobuf/types/known/durationpb"
-	storepb "github.com/oodle-ai/thanos/pkg/store/storepb"
 	proto "google.golang.org/protobuf/proto"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"

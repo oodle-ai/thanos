@@ -255,36 +255,20 @@ func (r *remoteQuery) Exec(ctx context.Context) *promql.Result {
 			builder = labels.NewScratchBuilder(8)
 		)
 		for {
-			msg, err := qry.Recv()
-			if err == io.EOF {
-				break
-			}
+			err = r.InstantQueryAppendResult(qry, &builder, &result)
 			if err != nil {
+				if err == io.EOF {
+					break
+				}
+
 				return &promql.Result{Err: err}
-			}
-
-			if warn := msg.GetWarnings(); warn != "" {
-				return &promql.Result{Err: errors.New(warn)}
-			}
-
-			ts := msg.GetTimeseries()
-			builder.Reset()
-			for _, l := range ts.Labels {
-				builder.Add(strings.Clone(l.Name), strings.Clone(l.Value))
-			}
-			// Point might have a different timestamp, force it to the evaluation
-			// timestamp as that is when we ran the evaluation.
-			// See https://github.com/prometheus/prometheus/blob/b727e69b7601b069ded5c34348dca41b80988f4b/promql/engine.go#L693-L699
-			if len(ts.Histograms) > 0 {
-				result = append(result, promql.Sample{Metric: builder.Labels(), H: prompb.FromProtoHistogram(ts.Histograms[0]), T: r.start.UnixMilli()})
-			} else {
-				result = append(result, promql.Sample{Metric: builder.Labels(), F: ts.Samples[0].Value, T: r.start.UnixMilli()})
 			}
 		}
 
 		return &promql.Result{Value: result}
 	}
 
+	// Range query
 	request := &querypb.QueryRangeRequest{
 		Query:                 r.plan.String(),
 		StartTimeSeconds:      r.start.Unix(),
@@ -309,49 +293,85 @@ func (r *remoteQuery) Exec(ctx context.Context) *promql.Result {
 		builder  = labels.NewScratchBuilder(8)
 	)
 	for {
-		msg, err := qry.Recv()
-		if err == io.EOF {
-			break
-		}
+		err = r.RangeQueryAppendResult(qry, &builder, &result, &warnings)
 		if err != nil {
+			if err == io.EOF {
+				break
+			}
 			return &promql.Result{Err: err}
 		}
-
-		if warn := msg.GetWarnings(); warn != "" {
-			warnings.Add(errors.New(warn))
-			continue
-		}
-
-		ts := msg.GetTimeseries()
-		if ts == nil {
-			continue
-		}
-		builder.Reset()
-		for _, l := range ts.Labels {
-			builder.Add(strings.Clone(l.Name), strings.Clone(l.Value))
-		}
-		series := promql.Series{
-			Metric:     builder.Labels(),
-			Floats:     make([]promql.FPoint, 0, len(ts.Samples)),
-			Histograms: make([]promql.HPoint, 0, len(ts.Histograms)),
-		}
-		for _, s := range ts.Samples {
-			series.Floats = append(series.Floats, promql.FPoint{
-				T: s.Timestamp,
-				F: s.Value,
-			})
-		}
-		for _, hp := range ts.Histograms {
-			series.Histograms = append(series.Histograms, promql.HPoint{
-				T: hp.Timestamp,
-				H: prompb.FloatHistogramProtoToFloatHistogram(hp),
-			})
-		}
-		result = append(result, series)
 	}
 	level.Debug(r.logger).Log("msg", "Executed query", "query", r.plan, "time", time.Since(start))
 
 	return &promql.Result{Value: result, Warnings: warnings}
+}
+
+func (r *remoteQuery) InstantQueryAppendResult(qry querypb.Query_QueryClient, builder *labels.ScratchBuilder, result *promql.Vector) error {
+	msg, err := qry.Recv()
+	defer msg.ReturnToVTPool()
+	if err != nil {
+		return err
+	}
+
+	if warn := msg.GetWarnings(); warn != "" {
+		return errors.New(warn)
+	}
+
+	ts := msg.GetTimeseries()
+	builder.Reset()
+	for _, l := range ts.Labels {
+		builder.Add(strings.Clone(l.Name), strings.Clone(l.Value))
+	}
+	// Point might have a different timestamp, force it to the evaluation
+	// timestamp as that is when we ran the evaluation.
+	// See https://github.com/prometheus/prometheus/blob/b727e69b7601b069ded5c34348dca41b80988f4b/promql/engine.go#L693-L699
+	if len(ts.Histograms) > 0 {
+		*result = append(*result, promql.Sample{Metric: builder.Labels(), H: prompb.FromProtoHistogram(ts.Histograms[0]), T: r.start.UnixMilli()})
+	} else {
+		*result = append(*result, promql.Sample{Metric: builder.Labels(), F: ts.Samples[0].Value, T: r.start.UnixMilli()})
+	}
+	return nil
+}
+
+func (r *remoteQuery) RangeQueryAppendResult(qry querypb.Query_QueryRangeClient, builder *labels.ScratchBuilder, result *promql.Matrix, warnings *annotations.Annotations) error {
+	msg, err := qry.Recv()
+	defer msg.ReturnToVTPool()
+	if err != nil {
+		return err
+	}
+
+	if warn := msg.GetWarnings(); warn != "" {
+		warnings.Add(errors.New(warn))
+		return nil
+	}
+
+	ts := msg.GetTimeseries()
+	if ts == nil {
+		return nil
+	}
+	builder.Reset()
+	for _, l := range ts.Labels {
+		builder.Add(strings.Clone(l.Name), strings.Clone(l.Value))
+	}
+	series := promql.Series{
+		Metric:     builder.Labels(),
+		Floats:     make([]promql.FPoint, 0, len(ts.Samples)),
+		Histograms: make([]promql.HPoint, 0, len(ts.Histograms)),
+	}
+	for _, s := range ts.Samples {
+		series.Floats = append(series.Floats, promql.FPoint{
+			T: s.Timestamp,
+			F: s.Value,
+		})
+	}
+	for _, hp := range ts.Histograms {
+		series.Histograms = append(series.Histograms, promql.HPoint{
+			T: hp.Timestamp,
+			H: prompb.FloatHistogramProtoToFloatHistogram(hp),
+		})
+	}
+	*result = append(*result, series)
+	return nil
 }
 
 func (r *remoteQuery) Close() { r.Cancel() }

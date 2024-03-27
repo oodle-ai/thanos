@@ -16,6 +16,7 @@ import (
 	proto "google.golang.org/protobuf/proto"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -91,7 +92,7 @@ func (m *QueryResponse) CloneVT() *QueryResponse {
 	if m == nil {
 		return (*QueryResponse)(nil)
 	}
-	r := new(QueryResponse)
+	r := QueryResponseFromVTPool()
 	if m.Result != nil {
 		r.Result = m.Result.(interface{ CloneVT() isQueryResponse_Result }).CloneVT()
 	}
@@ -174,7 +175,7 @@ func (m *QueryRangeResponse) CloneVT() *QueryRangeResponse {
 	if m == nil {
 		return (*QueryRangeResponse)(nil)
 	}
-	r := new(QueryRangeResponse)
+	r := QueryRangeResponseFromVTPool()
 	if m.Result != nil {
 		r.Result = m.Result.(interface {
 			CloneVT() isQueryRangeResponse_Result
@@ -592,7 +593,7 @@ type queryQueryClient struct {
 }
 
 func (x *queryQueryClient) Recv() (*QueryResponse, error) {
-	m := new(QueryResponse)
+	m := QueryResponseFromVTPool()
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -624,7 +625,7 @@ type queryQueryRangeClient struct {
 }
 
 func (x *queryQueryRangeClient) Recv() (*QueryRangeResponse, error) {
-	m := new(QueryRangeResponse)
+	m := QueryRangeResponseFromVTPool()
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1698,6 +1699,48 @@ func (m *QueryRangeResponse_Timeseries) MarshalToSizedBufferVTStrict(dAtA []byte
 		dAtA[i] = 0x12
 	}
 	return len(dAtA) - i, nil
+}
+
+var vtprotoPool_QueryResponse = sync.Pool{
+	New: func() interface{} {
+		return &QueryResponse{}
+	},
+}
+
+func (m *QueryResponse) ResetVT() {
+	if m != nil {
+		m.Reset()
+	}
+}
+func (m *QueryResponse) ReturnToVTPool() {
+	if m != nil {
+		m.ResetVT()
+		vtprotoPool_QueryResponse.Put(m)
+	}
+}
+func QueryResponseFromVTPool() *QueryResponse {
+	return vtprotoPool_QueryResponse.Get().(*QueryResponse)
+}
+
+var vtprotoPool_QueryRangeResponse = sync.Pool{
+	New: func() interface{} {
+		return &QueryRangeResponse{}
+	},
+}
+
+func (m *QueryRangeResponse) ResetVT() {
+	if m != nil {
+		m.Reset()
+	}
+}
+func (m *QueryRangeResponse) ReturnToVTPool() {
+	if m != nil {
+		m.ResetVT()
+		vtprotoPool_QueryRangeResponse.Put(m)
+	}
+}
+func QueryRangeResponseFromVTPool() *QueryRangeResponse {
+	return vtprotoPool_QueryRangeResponse.Get().(*QueryRangeResponse)
 }
 func (m *QueryRequest) SizeVT() (n int) {
 	if m == nil {

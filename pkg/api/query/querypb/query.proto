@@ -6,6 +6,7 @@ package thanos;
 
 option go_package = "github.com/oodle-ai/thanos/pkg/api/query/querypb";
 
+import "github.com/planetscale/vtprotobuf/vtproto/ext.proto";
 import "store/storepb/types.proto";
 import "store/storepb/rpc.proto";
 import "store/storepb/prompb/types.proto";
@@ -44,6 +45,7 @@ message StoreMatchers {
 }
 
 message QueryResponse {
+  option (vtproto.mempool) = true;
   oneof result {
     /// warnings are additional messages coming from the PromQL engine.
     string warnings = 1;
@@ -79,6 +81,7 @@ message QueryRangeRequest {
 }
 
 message QueryRangeResponse {
+  option (vtproto.mempool) = true;
   oneof result {
     /// warnings are additional messages coming from the PromQL engine.
     string warnings = 1;

@@ -37,6 +37,7 @@ for dir in ${DIRS}; do
     -I="${GOOGLE_PROTO}" \
     -I="${VT_PROTO}"/include \
     -I="/usr/local/include" \
+    -I="/opt/homebrew/include" \
     ${dir}/*.proto
 
   pushd ${dir}

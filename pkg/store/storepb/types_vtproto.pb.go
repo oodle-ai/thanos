@@ -782,7 +782,7 @@ func (m *LabelMatcher) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-var vtprotoPool_Series = sync.Pool{
+var VtprotoPool_Series = sync.Pool{
 	New: func() interface{} {
 		return &Series{}
 	},
@@ -806,11 +806,11 @@ func (m *Series) ResetVT() {
 func (m *Series) ReturnToVTPool() {
 	if m != nil {
 		m.ResetVT()
-		vtprotoPool_Series.Put(m)
+		VtprotoPool_Series.Put(m)
 	}
 }
 func SeriesFromVTPool() *Series {
-	return vtprotoPool_Series.Get().(*Series)
+	return VtprotoPool_Series.Get().(*Series)
 }
 func (m *Chunk) SizeVT() (n int) {
 	if m == nil {

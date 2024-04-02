@@ -44,6 +44,10 @@ for dir in ${DIRS}; do
   ${GOIMPORTS_BIN} -w *.pb.go
   popd
 done
+
+# Make VTProto sync.Pool public.
+find . -name \*_vtproto.pb.go | xargs -I{} sed -i '' -e 's/vtprotoPool_\([[:alnum:]_]*\)/VtprotoPool_\1/g' {}
+
 popd
 
 cp -rf pkg/github.com/oodle-ai/thanos/* ./

@@ -447,7 +447,7 @@ func (m *ZLabelSet) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-var vtprotoPool_LabelSet = sync.Pool{
+var VtprotoPool_LabelSet = sync.Pool{
 	New: func() interface{} {
 		return &LabelSet{}
 	},
@@ -466,14 +466,14 @@ func (m *LabelSet) ResetVT() {
 func (m *LabelSet) ReturnToVTPool() {
 	if m != nil {
 		m.ResetVT()
-		vtprotoPool_LabelSet.Put(m)
+		VtprotoPool_LabelSet.Put(m)
 	}
 }
 func LabelSetFromVTPool() *LabelSet {
-	return vtprotoPool_LabelSet.Get().(*LabelSet)
+	return VtprotoPool_LabelSet.Get().(*LabelSet)
 }
 
-var vtprotoPool_ZLabelSet = sync.Pool{
+var VtprotoPool_ZLabelSet = sync.Pool{
 	New: func() interface{} {
 		return &ZLabelSet{}
 	},
@@ -492,11 +492,11 @@ func (m *ZLabelSet) ResetVT() {
 func (m *ZLabelSet) ReturnToVTPool() {
 	if m != nil {
 		m.ResetVT()
-		vtprotoPool_ZLabelSet.Put(m)
+		VtprotoPool_ZLabelSet.Put(m)
 	}
 }
 func ZLabelSetFromVTPool() *ZLabelSet {
-	return vtprotoPool_ZLabelSet.Get().(*ZLabelSet)
+	return VtprotoPool_ZLabelSet.Get().(*ZLabelSet)
 }
 func (m *Label) SizeVT() (n int) {
 	if m == nil {

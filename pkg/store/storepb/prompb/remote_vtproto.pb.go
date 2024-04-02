@@ -10,6 +10,7 @@ import (
 	proto "google.golang.org/protobuf/proto"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	io "io"
+	sync "sync"
 )
 
 const (
@@ -23,7 +24,7 @@ func (m *WriteRequest) CloneVT() *WriteRequest {
 	if m == nil {
 		return (*WriteRequest)(nil)
 	}
-	r := new(WriteRequest)
+	r := WriteRequestFromVTPool()
 	if rhs := m.Timeseries; rhs != nil {
 		tmpContainer := make([]*TimeSeries, len(rhs))
 		for k, v := range rhs {
@@ -1065,6 +1066,36 @@ func (m *ChunkedReadResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
+var vtprotoPool_WriteRequest = sync.Pool{
+	New: func() interface{} {
+		return &WriteRequest{}
+	},
+}
+
+func (m *WriteRequest) ResetVT() {
+	if m != nil {
+		for _, mm := range m.Timeseries {
+			mm.ResetVT()
+		}
+		f0 := m.Timeseries[:0]
+		for _, mm := range m.Metadata {
+			mm.Reset()
+		}
+		f1 := m.Metadata[:0]
+		m.Reset()
+		m.Timeseries = f0
+		m.Metadata = f1
+	}
+}
+func (m *WriteRequest) ReturnToVTPool() {
+	if m != nil {
+		m.ResetVT()
+		vtprotoPool_WriteRequest.Put(m)
+	}
+}
+func WriteRequestFromVTPool() *WriteRequest {
+	return vtprotoPool_WriteRequest.Get().(*WriteRequest)
+}
 func (m *WriteRequest) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -1245,7 +1276,14 @@ func (m *WriteRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Timeseries = append(m.Timeseries, &TimeSeries{})
+			if len(m.Timeseries) == cap(m.Timeseries) {
+				m.Timeseries = append(m.Timeseries, &TimeSeries{})
+			} else {
+				m.Timeseries = m.Timeseries[:len(m.Timeseries)+1]
+				if m.Timeseries[len(m.Timeseries)-1] == nil {
+					m.Timeseries[len(m.Timeseries)-1] = &TimeSeries{}
+				}
+			}
 			if err := m.Timeseries[len(m.Timeseries)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1279,7 +1317,14 @@ func (m *WriteRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Metadata = append(m.Metadata, &MetricMetadata{})
+			if len(m.Metadata) == cap(m.Metadata) {
+				m.Metadata = append(m.Metadata, &MetricMetadata{})
+			} else {
+				m.Metadata = m.Metadata[:len(m.Metadata)+1]
+				if m.Metadata[len(m.Metadata)-1] == nil {
+					m.Metadata[len(m.Metadata)-1] = &MetricMetadata{}
+				}
+			}
 			if err := m.Metadata[len(m.Metadata)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1951,7 +1996,14 @@ func (m *WriteRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Timeseries = append(m.Timeseries, &TimeSeries{})
+			if len(m.Timeseries) == cap(m.Timeseries) {
+				m.Timeseries = append(m.Timeseries, &TimeSeries{})
+			} else {
+				m.Timeseries = m.Timeseries[:len(m.Timeseries)+1]
+				if m.Timeseries[len(m.Timeseries)-1] == nil {
+					m.Timeseries[len(m.Timeseries)-1] = &TimeSeries{}
+				}
+			}
 			if err := m.Timeseries[len(m.Timeseries)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -1985,7 +2037,14 @@ func (m *WriteRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Metadata = append(m.Metadata, &MetricMetadata{})
+			if len(m.Metadata) == cap(m.Metadata) {
+				m.Metadata = append(m.Metadata, &MetricMetadata{})
+			} else {
+				m.Metadata = m.Metadata[:len(m.Metadata)+1]
+				if m.Metadata[len(m.Metadata)-1] == nil {
+					m.Metadata[len(m.Metadata)-1] = &MetricMetadata{}
+				}
+			}
 			if err := m.Metadata[len(m.Metadata)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

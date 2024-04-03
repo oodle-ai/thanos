@@ -19,9 +19,11 @@ package prometheus_copy;
 
 option go_package = "github.com/oodle-ai/thanos/pkg/store/storepb/prompb";
 
+import "github.com/planetscale/vtprotobuf/vtproto/ext.proto";
 import "store/storepb/prompb/types.proto";
 
 message WriteRequest {
+  option (vtproto.mempool) = true;
   repeated TimeSeries timeseries = 1;
   // Cortex uses this field to determine the source of the write request.
   // We reserve it to avoid any compatibility issues.

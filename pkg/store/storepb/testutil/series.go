@@ -18,7 +18,9 @@ import (
 	"github.com/cespare/xxhash"
 	"github.com/efficientgo/core/testutil"
 	"github.com/go-kit/log"
-	"github.com/gogo/protobuf/types"
+
+	any "google.golang.org/protobuf/types/known/anypb"
+
 	"github.com/oklog/ulid"
 	"github.com/prometheus/prometheus/model/histogram"
 	"github.com/prometheus/prometheus/model/labels"
@@ -166,7 +168,7 @@ func ReadSeriesFromBlock(t testing.TB, h tsdb.BlockReader, extLabels labels.Labe
 				c.MaxTime = c.MinTime + int64(chEnc.NumSamples()) - 1
 			}
 
-			expected[len(expected)-1].Chunks = append(expected[len(expected)-1].Chunks, storepb.AggrChunk{
+			expected[len(expected)-1].Chunks = append(expected[len(expected)-1].Chunks, &storepb.AggrChunk{
 				MinTime: c.MinTime,
 				MaxTime: c.MaxTime,
 				Raw: &storepb.Chunk{
@@ -267,7 +269,7 @@ type SeriesServer struct {
 
 	SeriesSet []*storepb.Series
 	Warnings  []string
-	HintsSet  []*types.Any
+	HintsSet  []*any.Any
 
 	Size int64
 }
@@ -277,7 +279,7 @@ func NewSeriesServer(ctx context.Context) *SeriesServer {
 }
 
 func (s *SeriesServer) Send(r *storepb.SeriesResponse) error {
-	s.Size += int64(r.Size())
+	s.Size += int64(r.SizeVT())
 
 	if r.GetWarning() != "" {
 		s.Warnings = append(s.Warnings, r.GetWarning())
@@ -382,7 +384,7 @@ func TestServerSeries(t testutil.TB, store storepb.StoreServer, cases ...*Series
 					var actualHints []hintspb.SeriesResponseHints
 					for _, anyHints := range srv.HintsSet {
 						hints := hintspb.SeriesResponseHints{}
-						testutil.Ok(t, types.UnmarshalAny(anyHints, &hints))
+						testutil.Ok(t, anyHints.UnmarshalTo(&hints))
 						actualHints = append(actualHints, hints)
 					}
 					testutil.Equals(t, len(c.ExpectedHints), len(actualHints))

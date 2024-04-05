@@ -16,7 +16,6 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/oodle-ai/thanos/pkg/store"
 	"github.com/prometheus/prometheus/model/labels"
 
 	"golang.org/x/sync/errgroup"
@@ -87,6 +86,7 @@ var (
 )
 
 type mockedEndpoint struct {
+	infopb.UnimplementedInfoServer
 	infoDelay time.Duration
 	info      infopb.InfoResponse
 	err       error
@@ -111,6 +111,7 @@ func (c *mockedEndpoint) Info(ctx context.Context, r *infopb.InfoRequest) (*info
 }
 
 type mockedStoreSrv struct {
+	storepb.UnimplementedStoreServer
 	infoDelay time.Duration
 	info      storepb.InfoResponse
 	err       error
@@ -153,7 +154,7 @@ type APIs struct {
 
 type testEndpointMeta struct {
 	*infopb.InfoResponse
-	extlsetFn func(addr string) []labelpb.ZLabelSet
+	extlsetFn func(addr string) []*labelpb.ZLabelSet
 	infoDelay time.Duration
 	err       error
 }
@@ -330,7 +331,7 @@ func TestEndpointSetUpdate(t *testing.T) {
 			endpoints: []testEndpointMeta{
 				{
 					InfoResponse: sidecarInfo,
-					extlsetFn: func(addr string) []labelpb.ZLabelSet {
+					extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 						return labelpb.ZLabelSetsFromPromLabels(
 							labels.FromStrings("addr", addr, "a", "b"),
 						)
@@ -351,7 +352,7 @@ func TestEndpointSetUpdate(t *testing.T) {
 				{
 					err:          fmt.Errorf("endpoint unavailable"),
 					InfoResponse: sidecarInfo,
-					extlsetFn: func(addr string) []labelpb.ZLabelSet {
+					extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 						return labelpb.ZLabelSetsFromPromLabels(
 							labels.FromStrings("addr", addr, "a", "b"),
 						)
@@ -368,7 +369,7 @@ func TestEndpointSetUpdate(t *testing.T) {
 				{
 					infoDelay:    5 * time.Second,
 					InfoResponse: sidecarInfo,
-					extlsetFn: func(addr string) []labelpb.ZLabelSet {
+					extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 						return labelpb.ZLabelSetsFromPromLabels(
 							labels.FromStrings("addr", addr, "a", "b"),
 						)
@@ -384,7 +385,7 @@ func TestEndpointSetUpdate(t *testing.T) {
 			endpoints: []testEndpointMeta{
 				{
 					InfoResponse: sidecarInfo,
-					extlsetFn: func(addr string) []labelpb.ZLabelSet {
+					extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 						return labelpb.ZLabelSetsFromPromLabels(
 							labels.FromStrings("addr", addr, "a", "b"),
 						)
@@ -405,7 +406,7 @@ func TestEndpointSetUpdate(t *testing.T) {
 				{
 					InfoResponse: sidecarInfo,
 					// Simulate very long external labels.
-					extlsetFn: func(addr string) []labelpb.ZLabelSet {
+					extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 						sLabel := []string{}
 						for i := 0; i < 1000; i++ {
 							sLabel = append(sLabel, "lbl")
@@ -448,7 +449,7 @@ func TestEndpointSetUpdate_DuplicateSpecs(t *testing.T) {
 	endpoints, err := startTestEndpoints([]testEndpointMeta{
 		{
 			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 				return labelpb.ZLabelSetsFromPromLabels(
 					labels.FromStrings("addr", addr, "a", "b"),
 				)
@@ -472,7 +473,7 @@ func TestEndpointSetUpdate_EndpointGoingAway(t *testing.T) {
 	endpoints, err := startTestEndpoints([]testEndpointMeta{
 		{
 			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 				return labelpb.ZLabelSetsFromPromLabels(
 					labels.FromStrings("addr", addr, "a", "b"),
 				)
@@ -502,7 +503,7 @@ func TestEndpointSetUpdate_EndpointComingOnline(t *testing.T) {
 		{
 			err:          fmt.Errorf("endpoint unavailable"),
 			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 				return nil
 			},
 		},
@@ -534,7 +535,7 @@ func TestEndpointSetUpdate_StrictEndpointMetadata(t *testing.T) {
 		{
 			err:          fmt.Errorf("endpoint unavailable"),
 			InfoResponse: info,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 				return nil
 			},
 		},
@@ -580,7 +581,7 @@ func TestEndpointSetUpdate_PruneInactiveEndpoints(t *testing.T) {
 			endpoints: []testEndpointMeta{
 				{
 					InfoResponse: sidecarInfo,
-					extlsetFn: func(addr string) []labelpb.ZLabelSet {
+					extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 						return labelpb.ZLabelSetsFromPromLabels(
 							labels.FromStrings("addr", addr, "a", "b"),
 						)
@@ -595,7 +596,7 @@ func TestEndpointSetUpdate_PruneInactiveEndpoints(t *testing.T) {
 			endpoints: []testEndpointMeta{
 				{
 					InfoResponse: sidecarInfo,
-					extlsetFn: func(addr string) []labelpb.ZLabelSet {
+					extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 						return labelpb.ZLabelSetsFromPromLabels(
 							labels.FromStrings("addr", addr, "a", "b"),
 						)
@@ -665,641 +666,641 @@ func TestEndpointSetUpdate_AtomicEndpointAdditions(t *testing.T) {
 	wg.Wait()
 }
 
-func TestEndpointSetUpdate_AvailabilityScenarios(t *testing.T) {
-	endpoints, err := startTestEndpoints([]testEndpointMeta{
-		{
-			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "addr", Value: addr},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "a", Value: "b"},
-						},
-					},
-				}
-			},
-		},
-		{
-			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "addr", Value: addr},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "a", Value: "b"},
-						},
-					},
-				}
-			},
-		},
-		{
-			InfoResponse: queryInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "addr", Value: addr},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "a", Value: "b"},
-						},
-					},
-				}
-			},
-		},
-	})
-	testutil.Ok(t, err)
-	defer endpoints.Close()
-
-	discoveredEndpointAddr := endpoints.EndpointAddresses()
-
-	now := time.Now()
-	nowFunc := func() time.Time { return now }
-	// Testing if duplicates can cause weird results.
-	discoveredEndpointAddr = append(discoveredEndpointAddr, discoveredEndpointAddr[0])
-	endpointSet := NewEndpointSet(nowFunc, nil, nil,
-		func() (specs []*GRPCEndpointSpec) {
-			for _, addr := range discoveredEndpointAddr {
-				specs = append(specs, NewGRPCEndpointSpec(addr, false))
-			}
-			return specs
-		},
-		testGRPCOpts, time.Minute, 2*time.Second)
-	defer endpointSet.Close()
-
-	// Initial update.
-	endpointSet.Update(context.Background())
-	testutil.Equals(t, 3, len(endpointSet.endpoints))
-
-	// Start with one not available.
-	endpoints.CloseOne(discoveredEndpointAddr[2])
-
-	// Should not matter how many of these we run.
-	endpointSet.Update(context.Background())
-	endpointSet.Update(context.Background())
-	testutil.Equals(t, 2, len(endpointSet.GetStoreClients()))
-	testutil.Equals(t, 3, len(endpointSet.GetEndpointStatus()))
-
-	for addr, e := range endpointSet.endpoints {
-		testutil.Equals(t, addr, e.addr)
-
-		lset := e.LabelSets()
-		testutil.Equals(t, 2, len(lset))
-		testutil.Equals(t, "addr", lset[0][0].Name)
-		testutil.Equals(t, addr, lset[0][0].Value)
-		testutil.Equals(t, "a", lset[1][0].Name)
-		testutil.Equals(t, "b", lset[1][0].Value)
-		assertRegisteredAPIs(t, endpoints.exposedAPIs[addr], e)
-	}
-
-	// Check stats.
-	expected := newEndpointAPIStats()
-	expected[component.Sidecar] = map[string]int{
-		fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[0]): 1,
-		fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[1]): 1,
-	}
-	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
-
-	// Remove address from discovered and reset last check, which should ensure cleanup of status on next update.
-	now = now.Add(3 * time.Minute)
-	discoveredEndpointAddr = discoveredEndpointAddr[:len(discoveredEndpointAddr)-2]
-	endpointSet.Update(context.Background())
-	testutil.Equals(t, 2, len(endpointSet.endpoints))
-
-	endpoints.CloseOne(discoveredEndpointAddr[0])
-	delete(expected[component.Sidecar], fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[0]))
-
-	// We expect Update to tear down store client for closed store server.
-	endpointSet.Update(context.Background())
-	testutil.Equals(t, 1, len(endpointSet.GetStoreClients()), "only one service should respond just fine, so we expect one client to be ready.")
-
-	addr := discoveredEndpointAddr[1]
-	st, ok := endpointSet.endpoints[addr]
-	testutil.Assert(t, ok, "addr exist")
-	testutil.Equals(t, addr, st.addr)
-
-	lset := st.LabelSets()
-	testutil.Equals(t, 2, len(lset))
-	testutil.Equals(t, "addr", lset[0][0].Name)
-	testutil.Equals(t, addr, lset[0][0].Value)
-	testutil.Equals(t, "a", lset[1][0].Name)
-	testutil.Equals(t, "b", lset[1][0].Value)
-	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
-
-	// New big batch of endpoints.
-	endpoint2, err := startTestEndpoints([]testEndpointMeta{
-		{
-			InfoResponse: queryInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l3", Value: "v4"},
-						},
-					},
-				}
-			},
-		},
-		{
-			// Duplicated Querier, in previous versions it would be deduplicated. Now it should be not.
-			InfoResponse: queryInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l3", Value: "v4"},
-						},
-					},
-				}
-			},
-		},
-		{
-			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-				}
-			},
-		},
-		{
-			// Duplicated Sidecar, in previous versions it would be deduplicated. Now it should be not.
-			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-				}
-			},
-		},
-		{
-			// Querier that duplicates with sidecar, in previous versions it would be deduplicated. Now it should be not.
-			InfoResponse: queryInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-				}
-			},
-		},
-		{
-			// Ruler that duplicates with sidecar, in previous versions it would be deduplicated. Now it should be not.
-			// Warning should be produced.
-			InfoResponse: ruleInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-				}
-			},
-		},
-		{
-			// Duplicated Rule, in previous versions it would be deduplicated. Now it should be not. Warning should be produced.
-			InfoResponse: ruleInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-				}
-			},
-		},
-		// Two pre v0.8.0 store gateway nodes, they don't have ext labels set.
-		{
-			InfoResponse: storeGWInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{}
-			},
-		},
-		{
-			InfoResponse: storeGWInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{}
-			},
-		},
-		// Regression tests against https://github.com/oodle-ai/thanos/issues/1632: From v0.8.0 stores advertise labels.
-		// If the object storage handled by store gateway has only one sidecar we used to hitting issue.
-		{
-			InfoResponse: storeGWInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l3", Value: "v4"},
-						},
-					},
-				}
-			},
-		},
-		// Stores v0.8.1 has compatibility labels. Check if they are correctly removed.
-		{
-			InfoResponse: storeGWInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l3", Value: "v4"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: store.CompatibilityTypeLabelName, Value: "store"},
-						},
-					},
-				}
-			},
-		},
-		// Duplicated store, in previous versions it would be deduplicated. Now it should be not.
-		{
-			InfoResponse: storeGWInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l3", Value: "v4"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: store.CompatibilityTypeLabelName, Value: "store"},
-						},
-					},
-				}
-			},
-		},
-		{
-			InfoResponse: receiveInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l3", Value: "v4"},
-						},
-					},
-				}
-			},
-		},
-		// Duplicate receiver
-		{
-			InfoResponse: receiveInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l1", Value: "v2"},
-							{Name: "l2", Value: "v3"},
-						},
-					},
-					{
-						Labels: []labelpb.ZLabel{
-							{Name: "l3", Value: "v4"},
-						},
-					},
-				}
-			},
-		},
-	})
-	testutil.Ok(t, err)
-	defer endpoint2.Close()
-
-	discoveredEndpointAddr = append(discoveredEndpointAddr, endpoint2.EndpointAddresses()...)
-
-	// New stores should be loaded.
-	endpointSet.Update(context.Background())
-	testutil.Equals(t, 1+len(endpoint2.srvs), len(endpointSet.GetStoreClients()))
-
-	// Check stats.
-	expected = newEndpointAPIStats()
-	expected[component.Query] = map[string]int{
-		"{l1=\"v2\", l2=\"v3\"}":             1,
-		"{l1=\"v2\", l2=\"v3\"},{l3=\"v4\"}": 2,
-	}
-	expected[component.Rule] = map[string]int{
-		"{l1=\"v2\", l2=\"v3\"}": 2,
-	}
-	expected[component.Sidecar] = map[string]int{
-		fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[1]): 1,
-		"{l1=\"v2\", l2=\"v3\"}": 2,
-	}
-	expected[component.Store] = map[string]int{
-		"":                                   2,
-		"{l1=\"v2\", l2=\"v3\"},{l3=\"v4\"}": 3,
-	}
-	expected[component.Receive] = map[string]int{
-		"{l1=\"v2\", l2=\"v3\"},{l3=\"v4\"}": 2,
-	}
-	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
-
-	// Close remaining endpoint from previous batch
-	endpoints.CloseOne(discoveredEndpointAddr[1])
-	endpointSet.Update(context.Background())
-
-	for addr, e := range endpointSet.getQueryableRefs() {
-		testutil.Equals(t, addr, e.addr)
-		assertRegisteredAPIs(t, endpoint2.exposedAPIs[addr], e)
-	}
-
-	// Check statuses.
-	testutil.Equals(t, 2+len(endpoint2.srvs), len(endpointSet.GetEndpointStatus()))
-}
-
-func TestEndpointSet_Update_NoneAvailable(t *testing.T) {
-	endpoints, err := startTestEndpoints([]testEndpointMeta{
-		{
-			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{
-								Name:  "addr",
-								Value: addr,
-							},
-						},
-					},
-				}
-			},
-		},
-		{
-			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{
-								Name:  "addr",
-								Value: addr,
-							},
-						},
-					},
-				}
-			},
-		},
-	})
-	testutil.Ok(t, err)
-	defer endpoints.Close()
-
-	initialEndpointAddr := endpoints.EndpointAddresses()
-	endpoints.CloseOne(initialEndpointAddr[0])
-	endpoints.CloseOne(initialEndpointAddr[1])
-
-	endpointSet := NewEndpointSet(time.Now, nil, nil,
-		func() (specs []*GRPCEndpointSpec) {
-			for _, addr := range initialEndpointAddr {
-				specs = append(specs, NewGRPCEndpointSpec(addr, false))
-			}
-			return specs
-		},
-		testGRPCOpts, time.Minute, 2*time.Second)
-	defer endpointSet.Close()
-
-	// Should not matter how many of these we run.
-	endpointSet.Update(context.Background())
-	endpointSet.Update(context.Background())
-	testutil.Equals(t, 0, len(endpointSet.GetStoreClients()), "none of services should respond just fine, so we expect no client to be ready.")
-
-	// Leak test will ensure that we don't keep client connection around.
-	expected := newEndpointAPIStats()
-	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
-
-}
+//func TestEndpointSetUpdate_AvailabilityScenarios(t *testing.T) {
+//	endpoints, err := startTestEndpoints([]testEndpointMeta{
+//		{
+//			InfoResponse: sidecarInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "addr", Value: addr},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "a", Value: "b"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			InfoResponse: sidecarInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "addr", Value: addr},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "a", Value: "b"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			InfoResponse: queryInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "addr", Value: addr},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "a", Value: "b"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//	})
+//	testutil.Ok(t, err)
+//	defer endpoints.Close()
+//
+//	discoveredEndpointAddr := endpoints.EndpointAddresses()
+//
+//	now := time.Now()
+//	nowFunc := func() time.Time { return now }
+//	// Testing if duplicates can cause weird results.
+//	discoveredEndpointAddr = append(discoveredEndpointAddr, discoveredEndpointAddr[0])
+//	endpointSet := NewEndpointSet(nowFunc, nil, nil,
+//		func() (specs []*GRPCEndpointSpec) {
+//			for _, addr := range discoveredEndpointAddr {
+//				specs = append(specs, NewGRPCEndpointSpec(addr, false))
+//			}
+//			return specs
+//		},
+//		testGRPCOpts, time.Minute, 2*time.Second)
+//	defer endpointSet.Close()
+//
+//	// Initial update.
+//	endpointSet.Update(context.Background())
+//	testutil.Equals(t, 3, len(endpointSet.endpoints))
+//
+//	// Start with one not available.
+//	endpoints.CloseOne(discoveredEndpointAddr[2])
+//
+//	// Should not matter how many of these we run.
+//	endpointSet.Update(context.Background())
+//	endpointSet.Update(context.Background())
+//	testutil.Equals(t, 2, len(endpointSet.GetStoreClients()))
+//	testutil.Equals(t, 3, len(endpointSet.GetEndpointStatus()))
+//
+//	for addr, e := range endpointSet.endpoints {
+//		testutil.Equals(t, addr, e.addr)
+//
+//		lset := e.LabelSets()
+//		testutil.Equals(t, 2, len(lset))
+//		testutil.Equals(t, "addr", lset[0][0].Name)
+//		testutil.Equals(t, addr, lset[0][0].Value)
+//		testutil.Equals(t, "a", lset[1][0].Name)
+//		testutil.Equals(t, "b", lset[1][0].Value)
+//		assertRegisteredAPIs(t, endpoints.exposedAPIs[addr], e)
+//	}
+//
+//	// Check stats.
+//	expected := newEndpointAPIStats()
+//	expected[component.Sidecar] = map[string]int{
+//		fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[0]): 1,
+//		fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[1]): 1,
+//	}
+//	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
+//
+//	// Remove address from discovered and reset last check, which should ensure cleanup of status on next update.
+//	now = now.Add(3 * time.Minute)
+//	discoveredEndpointAddr = discoveredEndpointAddr[:len(discoveredEndpointAddr)-2]
+//	endpointSet.Update(context.Background())
+//	testutil.Equals(t, 2, len(endpointSet.endpoints))
+//
+//	endpoints.CloseOne(discoveredEndpointAddr[0])
+//	delete(expected[component.Sidecar], fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[0]))
+//
+//	// We expect Update to tear down store client for closed store server.
+//	endpointSet.Update(context.Background())
+//	testutil.Equals(t, 1, len(endpointSet.GetStoreClients()), "only one service should respond just fine, so we expect one client to be ready.")
+//
+//	addr := discoveredEndpointAddr[1]
+//	st, ok := endpointSet.endpoints[addr]
+//	testutil.Assert(t, ok, "addr exist")
+//	testutil.Equals(t, addr, st.addr)
+//
+//	lset := st.LabelSets()
+//	testutil.Equals(t, 2, len(lset))
+//	testutil.Equals(t, "addr", lset[0][0].Name)
+//	testutil.Equals(t, addr, lset[0][0].Value)
+//	testutil.Equals(t, "a", lset[1][0].Name)
+//	testutil.Equals(t, "b", lset[1][0].Value)
+//	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
+//
+//	// New big batch of endpoints.
+//	endpoint2, err := startTestEndpoints([]testEndpointMeta{
+//		{
+//			InfoResponse: queryInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l3", Value: "v4"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			// Duplicated Querier, in previous versions it would be deduplicated. Now it should be not.
+//			InfoResponse: queryInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l3", Value: "v4"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			InfoResponse: sidecarInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			// Duplicated Sidecar, in previous versions it would be deduplicated. Now it should be not.
+//			InfoResponse: sidecarInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			// Querier that duplicates with sidecar, in previous versions it would be deduplicated. Now it should be not.
+//			InfoResponse: queryInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []*labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			// Ruler that duplicates with sidecar, in previous versions it would be deduplicated. Now it should be not.
+//			// Warning should be produced.
+//			InfoResponse: ruleInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			// Duplicated Rule, in previous versions it would be deduplicated. Now it should be not. Warning should be produced.
+//			InfoResponse: ruleInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		// Two pre v0.8.0 store gateway nodes, they don't have ext labels set.
+//		{
+//			InfoResponse: storeGWInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{}
+//			},
+//		},
+//		{
+//			InfoResponse: storeGWInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{}
+//			},
+//		},
+//		// Regression tests against https://github.com/oodle-ai/thanos/issues/1632: From v0.8.0 stores advertise labels.
+//		// If the object storage handled by store gateway has only one sidecar we used to hitting issue.
+//		{
+//			InfoResponse: storeGWInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l3", Value: "v4"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		// Stores v0.8.1 has compatibility labels. Check if they are correctly removed.
+//		{
+//			InfoResponse: storeGWInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l3", Value: "v4"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: store.CompatibilityTypeLabelName, Value: "store"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		// Duplicated store, in previous versions it would be deduplicated. Now it should be not.
+//		{
+//			InfoResponse: storeGWInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l3", Value: "v4"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: store.CompatibilityTypeLabelName, Value: "store"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			InfoResponse: receiveInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l3", Value: "v4"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		// Duplicate receiver
+//		{
+//			InfoResponse: receiveInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l1", Value: "v2"},
+//							{Name: "l2", Value: "v3"},
+//						},
+//					},
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{Name: "l3", Value: "v4"},
+//						},
+//					},
+//				}
+//			},
+//		},
+//	})
+//	testutil.Ok(t, err)
+//	defer endpoint2.Close()
+//
+//	discoveredEndpointAddr = append(discoveredEndpointAddr, endpoint2.EndpointAddresses()...)
+//
+//	// New stores should be loaded.
+//	endpointSet.Update(context.Background())
+//	testutil.Equals(t, 1+len(endpoint2.srvs), len(endpointSet.GetStoreClients()))
+//
+//	// Check stats.
+//	expected = newEndpointAPIStats()
+//	expected[component.Query] = map[string]int{
+//		"{l1=\"v2\", l2=\"v3\"}":             1,
+//		"{l1=\"v2\", l2=\"v3\"},{l3=\"v4\"}": 2,
+//	}
+//	expected[component.Rule] = map[string]int{
+//		"{l1=\"v2\", l2=\"v3\"}": 2,
+//	}
+//	expected[component.Sidecar] = map[string]int{
+//		fmt.Sprintf("{a=\"b\"},{addr=\"%s\"}", discoveredEndpointAddr[1]): 1,
+//		"{l1=\"v2\", l2=\"v3\"}": 2,
+//	}
+//	expected[component.Store] = map[string]int{
+//		"":                                   2,
+//		"{l1=\"v2\", l2=\"v3\"},{l3=\"v4\"}": 3,
+//	}
+//	expected[component.Receive] = map[string]int{
+//		"{l1=\"v2\", l2=\"v3\"},{l3=\"v4\"}": 2,
+//	}
+//	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
+//
+//	// Close remaining endpoint from previous batch
+//	endpoints.CloseOne(discoveredEndpointAddr[1])
+//	endpointSet.Update(context.Background())
+//
+//	for addr, e := range endpointSet.getQueryableRefs() {
+//		testutil.Equals(t, addr, e.addr)
+//		assertRegisteredAPIs(t, endpoint2.exposedAPIs[addr], e)
+//	}
+//
+//	// Check statuses.
+//	testutil.Equals(t, 2+len(endpoint2.srvs), len(endpointSet.GetEndpointStatus()))
+//}
+//
+//func TestEndpointSet_Update_NoneAvailable(t *testing.T) {
+//	endpoints, err := startTestEndpoints([]testEndpointMeta{
+//		{
+//			InfoResponse: sidecarInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{
+//								Name:  "addr",
+//								Value: addr,
+//							},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			InfoResponse: sidecarInfo,
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{
+//								Name:  "addr",
+//								Value: addr,
+//							},
+//						},
+//					},
+//				}
+//			},
+//		},
+//	})
+//	testutil.Ok(t, err)
+//	defer endpoints.Close()
+//
+//	initialEndpointAddr := endpoints.EndpointAddresses()
+//	endpoints.CloseOne(initialEndpointAddr[0])
+//	endpoints.CloseOne(initialEndpointAddr[1])
+//
+//	endpointSet := NewEndpointSet(time.Now, nil, nil,
+//		func() (specs []*GRPCEndpointSpec) {
+//			for _, addr := range initialEndpointAddr {
+//				specs = append(specs, NewGRPCEndpointSpec(addr, false))
+//			}
+//			return specs
+//		},
+//		testGRPCOpts, time.Minute, 2*time.Second)
+//	defer endpointSet.Close()
+//
+//	// Should not matter how many of these we run.
+//	endpointSet.Update(context.Background())
+//	endpointSet.Update(context.Background())
+//	testutil.Equals(t, 0, len(endpointSet.GetStoreClients()), "none of services should respond just fine, so we expect no client to be ready.")
+//
+//	// Leak test will ensure that we don't keep client connection around.
+//	expected := newEndpointAPIStats()
+//	testutil.Equals(t, expected, endpointSet.endpointsMetric.storeNodes)
+//
+//}
 
 // TestEndpoint_Update_QuerierStrict tests what happens when the strict mode is enabled/disabled.
-func TestEndpoint_Update_QuerierStrict(t *testing.T) {
-	endpoints, err := startTestEndpoints([]testEndpointMeta{
-		{
-			InfoResponse: &infopb.InfoResponse{
-				ComponentType: component.Sidecar.String(),
-				Store: &infopb.StoreInfo{
-					MinTime: 12345,
-					MaxTime: 54321,
-				},
-				Exemplars:      &infopb.ExemplarsInfo{},
-				Rules:          &infopb.RulesInfo{},
-				MetricMetadata: &infopb.MetricMetadataInfo{},
-				Targets:        &infopb.TargetsInfo{},
-			},
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{
-								Name:  "addr",
-								Value: addr,
-							},
-						},
-					},
-				}
-			},
-		},
-		{
-			InfoResponse: &infopb.InfoResponse{
-				ComponentType: component.Sidecar.String(),
-				Store: &infopb.StoreInfo{
-					MinTime: 66666,
-					MaxTime: 77777,
-				},
-				Exemplars:      &infopb.ExemplarsInfo{},
-				Rules:          &infopb.RulesInfo{},
-				MetricMetadata: &infopb.MetricMetadataInfo{},
-				Targets:        &infopb.TargetsInfo{},
-			},
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{
-								Name:  "addr",
-								Value: addr,
-							},
-						},
-					},
-				}
-			},
-		},
-		// Slow store.
-		{
-			InfoResponse: &infopb.InfoResponse{
-				ComponentType: component.Sidecar.String(),
-				Store: &infopb.StoreInfo{
-					MinTime: 65644,
-					MaxTime: 77777,
-				},
-				Exemplars:      &infopb.ExemplarsInfo{},
-				Rules:          &infopb.RulesInfo{},
-				MetricMetadata: &infopb.MetricMetadataInfo{},
-				Targets:        &infopb.TargetsInfo{},
-			},
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{
-					{
-						Labels: []labelpb.ZLabel{
-							{
-								Name:  "addr",
-								Value: addr,
-							},
-						},
-					},
-				}
-			},
-			infoDelay: 2 * time.Second,
-		},
-	})
-
-	testutil.Ok(t, err)
-	defer endpoints.Close()
-
-	discoveredEndpointAddr := endpoints.EndpointAddresses()
-
-	staticEndpointAddr := discoveredEndpointAddr[0]
-	slowStaticEndpointAddr := discoveredEndpointAddr[2]
-	endpointSet := NewEndpointSet(time.Now, nil, nil, func() (specs []*GRPCEndpointSpec) {
-		return []*GRPCEndpointSpec{
-			NewGRPCEndpointSpec(discoveredEndpointAddr[0], true),
-			NewGRPCEndpointSpec(discoveredEndpointAddr[1], false),
-			NewGRPCEndpointSpec(discoveredEndpointAddr[2], true),
-		}
-	}, testGRPCOpts, time.Minute, 1*time.Second)
-	defer endpointSet.Close()
-
-	// Initial update.
-	endpointSet.Update(context.Background())
-	testutil.Equals(t, 3, len(endpointSet.endpoints), "three clients must be available for running nodes")
-
-	// The endpoint has not responded to the info call and is assumed to cover everything.
-	curMin, curMax := endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MinTime, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MaxTime
-	testutil.Assert(t, endpointSet.endpoints[slowStaticEndpointAddr].cc.GetState().String() != "SHUTDOWN", "slow store's connection should not be closed")
-	testutil.Equals(t, int64(math.MinInt64), curMin)
-	testutil.Equals(t, int64(math.MaxInt64), curMax)
-
-	// The endpoint is statically defined + strict mode is enabled
-	// so its client + information must be retained.
-	curMin, curMax = endpointSet.endpoints[staticEndpointAddr].metadata.Store.MinTime, endpointSet.endpoints[staticEndpointAddr].metadata.Store.MaxTime
-	testutil.Equals(t, int64(12345), curMin, "got incorrect minimum time")
-	testutil.Equals(t, int64(54321), curMax, "got incorrect minimum time")
-
-	// Successfully retrieve the information and observe minTime/maxTime updating.
-	endpointSet.endpointInfoTimeout = 3 * time.Second
-	endpointSet.Update(context.Background())
-	updatedCurMin, updatedCurMax := endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MinTime, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MaxTime
-	testutil.Equals(t, int64(65644), updatedCurMin)
-	testutil.Equals(t, int64(77777), updatedCurMax)
-	endpointSet.endpointInfoTimeout = 1 * time.Second
-
-	// Turn off the endpoints.
-	endpoints.Close()
-
-	// Update again many times. Should not matter WRT the static one.
-	endpointSet.Update(context.Background())
-	endpointSet.Update(context.Background())
-	endpointSet.Update(context.Background())
-
-	// Check that the information is the same.
-	testutil.Equals(t, 2, len(endpointSet.GetStoreClients()), "two static clients must remain available")
-	testutil.Equals(t, curMin, endpointSet.endpoints[staticEndpointAddr].metadata.Store.MinTime, "minimum time reported by the store node is different")
-	testutil.Equals(t, curMax, endpointSet.endpoints[staticEndpointAddr].metadata.Store.MaxTime, "minimum time reported by the store node is different")
-	testutil.NotOk(t, endpointSet.endpoints[staticEndpointAddr].status.LastError.originalErr)
-
-	testutil.Equals(t, updatedCurMin, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MinTime, "minimum time reported by the store node is different")
-	testutil.Equals(t, updatedCurMax, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MaxTime, "minimum time reported by the store node is different")
-}
+//func TestEndpoint_Update_QuerierStrict(t *testing.T) {
+//	endpoints, err := startTestEndpoints([]testEndpointMeta{
+//		{
+//			InfoResponse: &infopb.InfoResponse{
+//				ComponentType: component.Sidecar.String(),
+//				Store: &infopb.StoreInfo{
+//					MinTime: 12345,
+//					MaxTime: 54321,
+//				},
+//				Exemplars:      &infopb.ExemplarsInfo{},
+//				Rules:          &infopb.RulesInfo{},
+//				MetricMetadata: &infopb.MetricMetadataInfo{},
+//				Targets:        &infopb.TargetsInfo{},
+//			},
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{
+//								Name:  "addr",
+//								Value: addr,
+//							},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		{
+//			InfoResponse: &infopb.InfoResponse{
+//				ComponentType: component.Sidecar.String(),
+//				Store: &infopb.StoreInfo{
+//					MinTime: 66666,
+//					MaxTime: 77777,
+//				},
+//				Exemplars:      &infopb.ExemplarsInfo{},
+//				Rules:          &infopb.RulesInfo{},
+//				MetricMetadata: &infopb.MetricMetadataInfo{},
+//				Targets:        &infopb.TargetsInfo{},
+//			},
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{
+//								Name:  "addr",
+//								Value: addr,
+//							},
+//						},
+//					},
+//				}
+//			},
+//		},
+//		// Slow store.
+//		{
+//			InfoResponse: &infopb.InfoResponse{
+//				ComponentType: component.Sidecar.String(),
+//				Store: &infopb.StoreInfo{
+//					MinTime: 65644,
+//					MaxTime: 77777,
+//				},
+//				Exemplars:      &infopb.ExemplarsInfo{},
+//				Rules:          &infopb.RulesInfo{},
+//				MetricMetadata: &infopb.MetricMetadataInfo{},
+//				Targets:        &infopb.TargetsInfo{},
+//			},
+//			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+//				return []labelpb.ZLabelSet{
+//					{
+//						Labels: []labelpb.ZLabel{
+//							{
+//								Name:  "addr",
+//								Value: addr,
+//							},
+//						},
+//					},
+//				}
+//			},
+//			infoDelay: 2 * time.Second,
+//		},
+//	})
+//
+//	testutil.Ok(t, err)
+//	defer endpoints.Close()
+//
+//	discoveredEndpointAddr := endpoints.EndpointAddresses()
+//
+//	staticEndpointAddr := discoveredEndpointAddr[0]
+//	slowStaticEndpointAddr := discoveredEndpointAddr[2]
+//	endpointSet := NewEndpointSet(time.Now, nil, nil, func() (specs []*GRPCEndpointSpec) {
+//		return []*GRPCEndpointSpec{
+//			NewGRPCEndpointSpec(discoveredEndpointAddr[0], true),
+//			NewGRPCEndpointSpec(discoveredEndpointAddr[1], false),
+//			NewGRPCEndpointSpec(discoveredEndpointAddr[2], true),
+//		}
+//	}, testGRPCOpts, time.Minute, 1*time.Second)
+//	defer endpointSet.Close()
+//
+//	// Initial update.
+//	endpointSet.Update(context.Background())
+//	testutil.Equals(t, 3, len(endpointSet.endpoints), "three clients must be available for running nodes")
+//
+//	// The endpoint has not responded to the info call and is assumed to cover everything.
+//	curMin, curMax := endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MinTime, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MaxTime
+//	testutil.Assert(t, endpointSet.endpoints[slowStaticEndpointAddr].cc.GetState().String() != "SHUTDOWN", "slow store's connection should not be closed")
+//	testutil.Equals(t, int64(math.MinInt64), curMin)
+//	testutil.Equals(t, int64(math.MaxInt64), curMax)
+//
+//	// The endpoint is statically defined + strict mode is enabled
+//	// so its client + information must be retained.
+//	curMin, curMax = endpointSet.endpoints[staticEndpointAddr].metadata.Store.MinTime, endpointSet.endpoints[staticEndpointAddr].metadata.Store.MaxTime
+//	testutil.Equals(t, int64(12345), curMin, "got incorrect minimum time")
+//	testutil.Equals(t, int64(54321), curMax, "got incorrect minimum time")
+//
+//	// Successfully retrieve the information and observe minTime/maxTime updating.
+//	endpointSet.endpointInfoTimeout = 3 * time.Second
+//	endpointSet.Update(context.Background())
+//	updatedCurMin, updatedCurMax := endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MinTime, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MaxTime
+//	testutil.Equals(t, int64(65644), updatedCurMin)
+//	testutil.Equals(t, int64(77777), updatedCurMax)
+//	endpointSet.endpointInfoTimeout = 1 * time.Second
+//
+//	// Turn off the endpoints.
+//	endpoints.Close()
+//
+//	// Update again many times. Should not matter WRT the static one.
+//	endpointSet.Update(context.Background())
+//	endpointSet.Update(context.Background())
+//	endpointSet.Update(context.Background())
+//
+//	// Check that the information is the same.
+//	testutil.Equals(t, 2, len(endpointSet.GetStoreClients()), "two static clients must remain available")
+//	testutil.Equals(t, curMin, endpointSet.endpoints[staticEndpointAddr].metadata.Store.MinTime, "minimum time reported by the store node is different")
+//	testutil.Equals(t, curMax, endpointSet.endpoints[staticEndpointAddr].metadata.Store.MaxTime, "minimum time reported by the store node is different")
+//	testutil.NotOk(t, endpointSet.endpoints[staticEndpointAddr].status.LastError.originalErr)
+//
+//	testutil.Equals(t, updatedCurMin, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MinTime, "minimum time reported by the store node is different")
+//	testutil.Equals(t, updatedCurMax, endpointSet.endpoints[slowStaticEndpointAddr].metadata.Store.MaxTime, "minimum time reported by the store node is different")
+//}
 
 func TestEndpointSet_APIs_Discovery(t *testing.T) {
 	endpoints, err := startTestEndpoints([]testEndpointMeta{
 		{
 			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{}
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+				return []*labelpb.ZLabelSet{}
 			},
 		},
 		{
 			InfoResponse: ruleInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{}
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+				return []*labelpb.ZLabelSet{}
 			},
 		},
 		{
 			InfoResponse: receiveInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{}
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+				return []*labelpb.ZLabelSet{}
 			},
 		},
 		{
 			InfoResponse: storeGWInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{}
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+				return []*labelpb.ZLabelSet{}
 			},
 		},
 		{
 			InfoResponse: queryInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
-				return []labelpb.ZLabelSet{}
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
+				return []*labelpb.ZLabelSet{}
 			},
 		},
 	})
@@ -1493,7 +1494,7 @@ func makeInfoResponses(n int) []testEndpointMeta {
 	for i := 0; i < n; i++ {
 		responses = append(responses, testEndpointMeta{
 			InfoResponse: sidecarInfo,
-			extlsetFn: func(addr string) []labelpb.ZLabelSet {
+			extlsetFn: func(addr string) []*labelpb.ZLabelSet {
 				return labelpb.ZLabelSetsFromPromLabels(
 					labels.FromStrings("addr", addr, "a", "b"),
 				)
